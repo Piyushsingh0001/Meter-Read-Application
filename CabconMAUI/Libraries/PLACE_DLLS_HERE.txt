@@ -1,0 +1,2 @@
+Place DLMSLIB.dll, SerialCommunication.dll, Utilities.dll here when available.
+See CabconMAUI.csproj comments for activation steps.

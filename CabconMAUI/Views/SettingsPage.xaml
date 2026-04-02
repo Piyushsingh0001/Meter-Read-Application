@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="CabconMAUI.Views.SettingsPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="Settings"
+             BackgroundColor="{StaticResource PageBackground}"
+             Shell.NavBarIsVisible="True">
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsVisible="True" />
+    </Shell.BackButtonBehavior>
+
+    <Grid RowDefinitions="Auto,*,Auto" Padding="14" RowSpacing="12">
+        <!-- Top tabs (Shell-safe) -->
+        <Grid Grid.Row="0" ColumnDefinitions="*,*,*,*" ColumnSpacing="8">
+            <Button Text="Port Settings"
+                    Command="{Binding SelectTabCommand}"
+                    CommandParameter="0"
+                    Style="{StaticResource OutlineButton}"
+                    HeightRequest="44"
+                    Padding="10,0">
+                <Button.Triggers>
+                    <DataTrigger TargetType="Button" Binding="{Binding SelectedTab}" Value="0">
+                        <Setter Property="BackgroundColor" Value="{StaticResource Primary}"/>
+                        <Setter Property="TextColor" Value="White"/>
+                        <Setter Property="BorderColor" Value="{StaticResource Primary}"/>
+                    </DataTrigger>
+                </Button.Triggers>
+            </Button>
+            <Button Grid.Column="1"
+                    Text="HDLC Settings"
+                    Command="{Binding SelectTabCommand}"
+                    CommandParameter="1"
+                    Style="{StaticResource OutlineButton}"
+                    HeightRequest="44"
+                    Padding="10,0">
+                <Button.Triggers>
+                    <DataTrigger TargetType="Button" Binding="{Binding SelectedTab}" Value="1">
+                        <Setter Property="BackgroundColor" Value="{StaticResource Primary}"/>
+                        <Setter Property="TextColor" Value="White"/>
+                        <Setter Property="BorderColor" Value="{StaticResource Primary}"/>
+                    </DataTrigger>
+                </Button.Triggers>
+            </Button>
+            <Button Grid.Column="2"
+                    Text="Association"
+                    Command="{Binding SelectTabCommand}"
+                    CommandParameter="2"
+                    Style="{StaticResource OutlineButton}"
+                    HeightRequest="44"
+                    Padding="10,0">
+                <Button.Triggers>
+                    <DataTrigger TargetType="Button" Binding="{Binding SelectedTab}" Value="2">
+                        <Setter Property="BackgroundColor" Value="{StaticResource Primary}"/>
+                        <Setter Property="TextColor" Value="White"/>
+                        <Setter Property="BorderColor" Value="{StaticResource Primary}"/>
+                    </DataTrigger>
+                </Button.Triggers>
+            </Button>
+            <Button Grid.Column="3"
+                    Text="Conformance"
+                    Command="{Binding SelectTabCommand}"
+                    CommandParameter="3"
+                    Style="{StaticResource OutlineButton}"
+                    HeightRequest="44"
+                    Padding="10,0">
+                <Button.Triggers>
+                    <DataTrigger TargetType="Button" Binding="{Binding SelectedTab}" Value="3">
+                        <Setter Property="BackgroundColor" Value="{StaticResource Primary}"/>
+                        <Setter Property="TextColor" Value="White"/>
+                        <Setter Property="BorderColor" Value="{StaticResource Primary}"/>
+                    </DataTrigger>
+                </Button.Triggers>
+            </Button>
+        </Grid>
+
+        <!-- Content panels -->
+        <Grid Grid.Row="1">
+            <!-- PORT -->
+            <Grid IsVisible="False">
+                <Grid.Triggers>
+                    <DataTrigger TargetType="Grid" Binding="{Binding SelectedTab}" Value="0">
+                        <Setter Property="IsVisible" Value="True"/>
+                    </DataTrigger>
+                </Grid.Triggers>
+                <Grid RowDefinitions="*,Auto">
+                    <ScrollView Grid.Row="0">
+                        <Border BackgroundColor="White" StrokeShape="RoundRectangle 14" Stroke="{StaticResource CardBorder}" Padding="16">
+                            <VerticalStackLayout Spacing="12">
+                                <Label Text="Serial Port Setting" Style="{StaticResource SectionHeader}"/>
+
+                                <!-- Label + input side-by-side rows -->
+                                <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"
+                                      ColumnDefinitions="*,2*"
+                                      ColumnSpacing="14"
+                                      RowSpacing="10">
+                                    <Label Grid.Row="0" Grid.Column="0" Text="Communication Port" Style="{StaticResource FieldLabel}" VerticalOptions="Center"/>
+                                    <Border Grid.Row="0" Grid.Column="1" Style="{StaticResource InputBorder}">
+                                        <Picker ItemsSource="{Binding CommPortOptions}" SelectedItem="{Binding CommunicationPort}" Style="{StaticResource PickerStyle}" Title="Select port"/>
+                                    </Border>
+
+                                    <Label Grid.Row="1" Grid.Column="0" Text="Communication Baud Rate" Style="{StaticResource FieldLabel}" VerticalOptions="Center"/>
+                                    <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource InputBorder}">
+                                        <Picker ItemsSource="{Binding BaudRateOptions}" SelectedItem="{Binding CommandBaudRate}" Style="{StaticResource PickerStyle}" Title="Select baud"/>
+                                    </Border>
+
+                                    <Label Grid.Row="2" Grid.Column="0" Text="Signon Baud Rate (For NON-DLMS)" Style="{StaticResource FieldLabel}" VerticalOptions="Center"/>
+                                    <Border Grid.Row="2" Grid.Column="1" Style="{StaticResource InputBorder}">
+                                        <Picker ItemsSource="{Binding BaudRateOptions}" SelectedItem="{Binding SignOnBaudRate}" Style="{StaticResource PickerStyle}" Title="Select signon baud"/>
+                                    </Border>
+
+                                    <Label Grid.Row="3" Grid.Column="0" Text="Data Bits" Style="{StaticResource FieldLabel}" VerticalOptions="Center"/>
+                                    <Border Grid.Row="3" Grid.Column="1" Style="{StaticResource InputBorder}">
+                                        <Picker ItemsSource="{Binding DataBitsOptions}" SelectedItem="{Binding DataBits}" Style="{StaticResource PickerStyle}" Title="Select data bits"/>
+                                    </Border>
+
+                                    <Label Grid.Row="4" Grid.Column="0" Text="Parity" Style="{StaticResource FieldLabel}" VerticalOptions="Center"/>
+                                    <Border Grid.Row="4" Grid.Column="1" Style="{StaticResource InputBorder}">
+                                        <Picker ItemsSource="{Binding ParityOptions}" SelectedItem="{Binding Parity}" Style="{StaticResource PickerStyle}" Title="Select parity"/>
+                                    </Border>
+
+                                    <Label Grid.Row="5" Grid.Column="0" Text="Stop Bits" Style="{StaticResource FieldLabel}" VerticalOptions="Center"/>
+                                    <Border Grid.Row="5" Grid.Column="1" Style="{StaticResource InputBorder}">
+                                        <Picker ItemsSource="{Binding StopBitsOptions}" SelectedItem="{Binding StopBits}" Style="{StaticResource PickerStyle}" Title="Select stop bits"/>
+                                    </Border>
+
+                                    <Label Grid.Row="6" Grid.Column="0" Text="Response Timeout (ms)" Style="{StaticResource FieldLabel}" VerticalOptions="Center"/>
+                                    <Border Grid.Row="6" Grid.Column="1" Style="{StaticResource InputBorder}">
+                                        <Entry Text="{Binding CommandTimeOut}" Keyboard="Numeric" Style="{StaticResource EntryStyle}" Placeholder="e.g. 3500"/>
+                                    </Border>
+
+                                    <Label Grid.Row="7" Grid.Column="0" Text="Inter Frame Timeout (ms)" Style="{StaticResource FieldLabel}" VerticalOptions="Center"/>
+                                    <Border Grid.Row="7" Grid.Column="1" Style="{StaticResource InputBorder}">
+                                        <Entry Text="{Binding InterframeTimeout}" Keyboard="Numeric" Style="{StaticResource EntryStyle}" Placeholder="e.g. 2500"/>
+                                    </Border>
+                                </Grid>
+                            </VerticalStackLayout>
+                        </Border>
+                    </ScrollView>
+                    <Grid Grid.Row="1" ColumnDefinitions="*,*" ColumnSpacing="10" Padding="0,12,0,0">
+                        <Button Text="Cancel" Command="{Binding CancelCommand}" Style="{StaticResource OutlineButton}"/>
+                        <Button Grid.Column="1" Text="OK" Command="{Binding SaveSettingsCommand}" Style="{StaticResource PrimaryButton}"/>
+                    </Grid>
+                </Grid>
+            </Grid>
+
+            <!-- HDLC -->
+            <Grid IsVisible="False">
+                <Grid.Triggers>
+                    <DataTrigger TargetType="Grid" Binding="{Binding SelectedTab}" Value="1">
+                        <Setter Property="IsVisible" Value="True"/>
+                    </DataTrigger>
+                </Grid.Triggers>
+                <Grid RowDefinitions="*,Auto">
+                    <ScrollView Grid.Row="0">
+                        <Border BackgroundColor="White" StrokeShape="RoundRectangle 14" Stroke="{StaticResource CardBorder}" Padding="16">
+                            <VerticalStackLayout Spacing="12">
+                                <Label Text="HDLC Settings" Style="{StaticResource SectionHeader}"/>
+
+                                <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto"
+                                      ColumnDefinitions="*,2*"
+                                      ColumnSpacing="14"
+                                      RowSpacing="10">
+                                    <Label Grid.Row="0" Grid.Column="0" Text="Information Size" Style="{StaticResource FieldLabel}" VerticalOptions="Center"/>
+                                    <Border Grid.Row="0" Grid.Column="1" Style="{StaticResource InputBorder}">
+                                        <Entry Text="{Binding InfoSize}" Keyboard="Numeric" Style="{StaticResource EntryStyle}" Placeholder="e.g. 128"/>
+                                    </Border>
+
+                                    <Label Grid.Row="1" Grid.Column="0" Text="Window Size" Style="{StaticResource FieldLabel}" VerticalOptions="Center"/>
+                                    <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource InputBorder}">
+                                        <Entry Text="{Binding WindowSize}" Keyboard="Numeric" Style="{StaticResource EntryStyle}" Placeholder="e.g. 1"/>
+                                    </Border>
+
+                                    <Label Grid.Row="2" Grid.Column="0" Text="HDLC Addressing Scheme" Style="{StaticResource FieldLabel}" VerticalOptions="Center"/>
+                                    <Border Grid.Row="2" Grid.Column="1" Style="{StaticResource InputBorder}">
+                                        <Entry Text="{Binding AddressingSchem}" Keyboard="Numeric" Style="{StaticResource EntryStyle}" Placeholder="e.g. 4"/>
+                                    </Border>
+
+                                    <Label Grid.Row="3" Grid.Column="0" Text="Server Physical ID" Style="{StaticResource FieldLabel}" VerticalOptions="Center"/>
+                                    <Border Grid.Row="3" Grid.Column="1" Style="{StaticResource InputBorder}">
+                                        <Entry Text="{Binding ServerPhysicalID}" Keyboard="Numeric" Style="{StaticResource EntryStyle}" Placeholder="e.g. 1"/>
+                                    </Border>
+
+                                    <Label Grid.Row="4" Grid.Column="0" Text="Cosem Buffer Size" Style="{StaticResource FieldLabel}" VerticalOptions="Center"/>
+                                    <Border Grid.Row="4" Grid.Column="1" Style="{StaticResource InputBorder}">
+                                        <Entry Text="{Binding CosemBufferSize}" Keyboard="Numeric" Style="{StaticResource EntryStyle}" Placeholder="e.g. 9999"/>
+                                    </Border>
+
+                                    <Label Grid.Row="5" Grid.Column="0" Text="DLL Buffer Size" Style="{StaticResource FieldLabel}" VerticalOptions="Center"/>
+                                    <Border Grid.Row="5" Grid.Column="1" Style="{StaticResource InputBorder}">
+                                        <Entry Text="{Binding DLLBufferSize}" Keyboard="Numeric" Style="{StaticResource EntryStyle}" Placeholder="e.g. 9999"/>
+                                    </Border>
+                                </Grid>
+                            </VerticalStackLayout>
+                        </Border>
+                    </ScrollView>
+                    <Grid Grid.Row="1" ColumnDefinitions="*,*" ColumnSpacing="10" Padding="0,12,0,0">
+                        <Button Text="Cancel" Command="{Binding CancelCommand}" Style="{StaticResource OutlineButton}"/>
+                        <Button Grid.Column="1" Text="OK" Command="{Binding SaveSettingsCommand}" Style="{StaticResource PrimaryButton}"/>
+                    </Grid>
+                </Grid>
+            </Grid>
+
+            <!-- Association -->
+            <Grid IsVisible="False">
+                <Grid.Triggers>
+                    <DataTrigger TargetType="Grid" Binding="{Binding SelectedTab}" Value="2">
+                        <Setter Property="IsVisible" Value="True"/>
+                    </DataTrigger>
+                </Grid.Triggers>
+                <Grid RowDefinitions="*,Auto">
+                    <ScrollView Grid.Row="0">
+                        <Border BackgroundColor="White" StrokeShape="RoundRectangle 14" Stroke="{StaticResource CardBorder}" Padding="16">
+                            <VerticalStackLayout Spacing="12">
+                                <Label Text="Association Settings" Style="{StaticResource SectionHeader}"/>
+
+                                <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"
+                                      ColumnDefinitions="*,2*"
+                                      ColumnSpacing="14"
+                                      RowSpacing="10">
+                                    <Label Grid.Row="0" Grid.Column="0" Text="Client Type" Style="{StaticResource FieldLabel}" VerticalOptions="Center"/>
+                                    <Border Grid.Row="0" Grid.Column="1" Style="{StaticResource InputBorder}">
+                                        <Entry Text="{Binding AssociationType}" Keyboard="Numeric" Style="{StaticResource EntryStyle}" Placeholder="e.g. FS"/>
+                                    </Border>
+
+                                    <Label Grid.Row="1" Grid.Column="0" Text="Client Pwd" Style="{StaticResource FieldLabel}" VerticalOptions="Center"/>
+                                    <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource InputBorder}">
+                                        <Entry Text="{Binding AppPwd}" IsPassword="True" Style="{StaticResource EntryStyle}" Placeholder="Password"/>
+                                    </Border>
+
+                                    <Label Grid.Row="2" Grid.Column="0" Text="Server Upper Address" Style="{StaticResource FieldLabel}" VerticalOptions="Center"/>
+                                    <Border Grid.Row="2" Grid.Column="1" Style="{StaticResource InputBorder}">
+                                        <Entry Text="{Binding ServerSAP}" Keyboard="Numeric" Style="{StaticResource EntryStyle}" Placeholder="e.g. 1"/>
+                                    </Border>
+
+                                    <Label Grid.Row="3" Grid.Column="0" Text="Server Lower Address" Style="{StaticResource FieldLabel}" VerticalOptions="Center"/>
+                                    <Border Grid.Row="3" Grid.Column="1" Style="{StaticResource InputBorder}">
+                                        <Entry Text="{Binding ServerLowerMacAddress}" Keyboard="Numeric" Style="{StaticResource EntryStyle}" Placeholder="e.g. 256"/>
+                                    </Border>
+
+                                    <Label Grid.Row="4" Grid.Column="0" Text="DLMS Version" Style="{StaticResource FieldLabel}" VerticalOptions="Center"/>
+                                    <Border Grid.Row="4" Grid.Column="1" Style="{StaticResource InputBorder}">
+                                        <Entry Text="{Binding DLMSVersion}" Keyboard="Numeric" Style="{StaticResource EntryStyle}" Placeholder="e.g. 6"/>
+                                    </Border>
+
+                                    <Label Grid.Row="5" Grid.Column="0" Text="Application Context" Style="{StaticResource FieldLabel}" VerticalOptions="Center"/>
+                                    <Border Grid.Row="5" Grid.Column="1" Style="{StaticResource InputBorder}">
+                                        <Entry Text="{Binding ApplicationContext}" Keyboard="Numeric" Style="{StaticResource EntryStyle}" Placeholder="e.g. 1"/>
+                                    </Border>
+
+                                    <Label Grid.Row="6" Grid.Column="0" Text="Authentication Level" Style="{StaticResource FieldLabel}" VerticalOptions="Center"/>
+                                    <Border Grid.Row="6" Grid.Column="1" Style="{StaticResource InputBorder}">
+                                        <Entry Text="{Binding SecurityMechanism}" Keyboard="Numeric" Style="{StaticResource EntryStyle}" Placeholder="e.g. Low"/>
+                                    </Border>
+
+                                    <Label Grid.Row="7" Grid.Column="0" Text="Password (ASCII)" Style="{StaticResource FieldLabel}" VerticalOptions="Center"/>
+                                    <Border Grid.Row="7" Grid.Column="1" Style="{StaticResource InputBorder}">
+                                        <Entry Text="{Binding Password}" Style="{StaticResource EntryStyle}" Placeholder="e.g. 00000000"/>
+                                    </Border>
+
+                                    <Label Grid.Row="8" Grid.Column="0" Text="Client Max PDU Size" Style="{StaticResource FieldLabel}" VerticalOptions="Center"/>
+                                    <Border Grid.Row="8" Grid.Column="1" Style="{StaticResource InputBorder}">
+                                        <Entry Text="{Binding PDUSize}" Keyboard="Numeric" Style="{StaticResource EntryStyle}" Placeholder="e.g. 9999"/>
+                                    </Border>
+
+                                    <Label Grid.Row="9" Grid.Column="0" Text="Client System Title" Style="{StaticResource FieldLabel}" VerticalOptions="Center"/>
+                                    <Border Grid.Row="9" Grid.Column="1" Style="{StaticResource InputBorder}">
+                                        <Entry Text="{Binding ClientSystemTitle}" Style="{StaticResource EntryStyle}" Placeholder="e.g. 12345678"/>
+                                    </Border>
+
+                                    <Label Grid.Row="10" Grid.Column="0" Text="Security Suit" Style="{StaticResource FieldLabel}" VerticalOptions="Center"/>
+                                    <Border Grid.Row="10" Grid.Column="1" Style="{StaticResource InputBorder}">
+                                        <Entry Text="{Binding Securitysuit}" Keyboard="Numeric" Style="{StaticResource EntryStyle}" Placeholder="e.g. 1"/>
+                                    </Border>
+
+                                    <Label Grid.Row="11" Grid.Column="0" Text="Global Encryption Key" Style="{StaticResource FieldLabel}" VerticalOptions="Center"/>
+                                    <Border Grid.Row="11" Grid.Column="1" Style="{StaticResource InputBorder}">
+                                        <Entry Text="{Binding GlobalEncryptionKey}" Style="{StaticResource EntryStyle}" Placeholder="Hex key"/>
+                                    </Border>
+
+                                    <Label Grid.Row="12" Grid.Column="0" Text="Authentication Key" Style="{StaticResource FieldLabel}" VerticalOptions="Center"/>
+                                    <Border Grid.Row="12" Grid.Column="1" Style="{StaticResource InputBorder}">
+                                        <Entry Text="{Binding AuthenticationKey}" Style="{StaticResource EntryStyle}" Placeholder="Hex key"/>
+                                    </Border>
+
+                                    <Label Grid.Row="13" Grid.Column="0" Text="Dedicated Key" Style="{StaticResource FieldLabel}" VerticalOptions="Center"/>
+                                    <Border Grid.Row="13" Grid.Column="1" Style="{StaticResource InputBorder}">
+                                        <Entry Text="{Binding DedicatedKey}" Keyboard="Numeric" Style="{StaticResource EntryStyle}" Placeholder="0 / 1"/>
+                                    </Border>
+                                </Grid>
+                            </VerticalStackLayout>
+                        </Border>
+                    </ScrollView>
+                    <Grid Grid.Row="1" ColumnDefinitions="*,*" ColumnSpacing="10" Padding="0,12,0,0">
+                        <Button Text="Cancel" Command="{Binding CancelCommand}" Style="{StaticResource OutlineButton}"/>
+                        <Button Grid.Column="1" Text="OK" Command="{Binding SaveSettingsCommand}" Style="{StaticResource PrimaryButton}"/>
+                    </Grid>
+                </Grid>
+            </Grid>
+
+            <!-- Conformance Block -->
+            <Grid IsVisible="False">
+                <Grid.Triggers>
+                    <DataTrigger TargetType="Grid" Binding="{Binding SelectedTab}" Value="3">
+                        <Setter Property="IsVisible" Value="True"/>
+                    </DataTrigger>
+                </Grid.Triggers>
+                <Grid RowDefinitions="*,Auto">
+                    <ScrollView Grid.Row="0">
+                        <Border BackgroundColor="White" StrokeShape="RoundRectangle 14" Stroke="{StaticResource CardBorder}" Padding="16">
+                            <VerticalStackLayout Spacing="12">
+                                <Label Text="Conformance Block" Style="{StaticResource SectionHeader}"/>
+                                <Grid RowDefinitions="Auto,Auto"
+                                      ColumnDefinitions="*,2*"
+                                      ColumnSpacing="14"
+                                      RowSpacing="10">
+                                    <Label Grid.Row="0" Grid.Column="0" Text="Conformance Block" Style="{StaticResource FieldLabel}" VerticalOptions="Center"/>
+                                    <Border Grid.Row="0" Grid.Column="1" Style="{StaticResource InputBorder}">
+                                        <Entry Text="{Binding ConformanceBlock}" Style="{StaticResource EntryStyle}" Placeholder="Enter conformance block"/>
+                                    </Border>
+                                    <Label Grid.Row="1" Grid.Column="0" Text="Access" Style="{StaticResource FieldLabel}" VerticalOptions="Center"/>
+                                    <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource InputBorder}">
+                                        <Entry Text="{Binding AssociationAccess}" Style="{StaticResource EntryStyle}" Placeholder="Optional"/>
+                                    </Border>
+                                </Grid>
+                            </VerticalStackLayout>
+                        </Border>
+                    </ScrollView>
+                    <Grid Grid.Row="1" ColumnDefinitions="*,*" ColumnSpacing="10" Padding="0,12,0,0">
+                        <Button Text="Cancel" Command="{Binding CancelCommand}" Style="{StaticResource OutlineButton}"/>
+                        <Button Grid.Column="1" Text="OK" Command="{Binding SaveSettingsCommand}" Style="{StaticResource PrimaryButton}"/>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Grid>
+
+        <!-- Status -->
+        <Label Grid.Row="2"
+               Text="{Binding StatusMessage}"
+               IsVisible="{Binding StatusMessage, Converter={StaticResource StringToBoolConverter}}"
+               TextColor="{Binding IsError, Converter={StaticResource BoolToErrorColorConverter}}"
+               FontSize="13"
+               HorizontalOptions="Center"/>
+    </Grid>
+</ContentPage>

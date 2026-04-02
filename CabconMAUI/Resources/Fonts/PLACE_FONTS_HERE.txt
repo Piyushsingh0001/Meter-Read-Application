@@ -1,0 +1,2 @@
+Place OpenSans-Regular.ttf and OpenSans-Semibold.ttf here.
+Download from: https://fonts.google.com/specimen/Open+Sans

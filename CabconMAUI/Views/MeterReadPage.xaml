@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="CabconMAUI.Views.MeterReadPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="Meter Reading" BackgroundColor="{StaticResource PageBackground}" Shell.NavBarIsVisible="True">
+    <ScrollView>
+        <VerticalStackLayout Padding="14" Spacing="12">
+            <!-- Top tabs -->
+            <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8">
+                <Button Text="Connect" Command="{Binding SelectReadTabCommand}" CommandParameter="0" Style="{StaticResource OutlineButton}" HeightRequest="42">
+                    <Button.Triggers>
+                        <DataTrigger TargetType="Button" Binding="{Binding SelectedReadTab}" Value="0">
+                            <Setter Property="BackgroundColor" Value="{StaticResource Primary}"/>
+                            <Setter Property="TextColor" Value="White"/>
+                            <Setter Property="BorderColor" Value="{StaticResource Primary}"/>
+                        </DataTrigger>
+                    </Button.Triggers>
+                </Button>
+                <Button Grid.Column="1" Text="Read Data" Command="{Binding SelectReadTabCommand}" CommandParameter="1" Style="{StaticResource OutlineButton}" HeightRequest="42">
+                    <Button.Triggers>
+                        <DataTrigger TargetType="Button" Binding="{Binding SelectedReadTab}" Value="1">
+                            <Setter Property="BackgroundColor" Value="{StaticResource Primary}"/>
+                            <Setter Property="TextColor" Value="White"/>
+                            <Setter Property="BorderColor" Value="{StaticResource Primary}"/>
+                        </DataTrigger>
+                    </Button.Triggers>
+                </Button>
+                <Button Grid.Column="2" Text="Export" Command="{Binding SelectReadTabCommand}" CommandParameter="2" Style="{StaticResource OutlineButton}" HeightRequest="42">
+                    <Button.Triggers>
+                        <DataTrigger TargetType="Button" Binding="{Binding SelectedReadTab}" Value="2">
+                            <Setter Property="BackgroundColor" Value="{StaticResource Primary}"/>
+                            <Setter Property="TextColor" Value="White"/>
+                            <Setter Property="BorderColor" Value="{StaticResource Primary}"/>
+                        </DataTrigger>
+                    </Button.Triggers>
+                </Button>
+            </Grid>
+
+            <!-- CONNECT TAB -->
+            <Border BackgroundColor="White" StrokeShape="RoundRectangle 16" Stroke="{StaticResource CardBorder}" Padding="16" IsVisible="False">
+                <Border.Triggers>
+                    <DataTrigger TargetType="Border" Binding="{Binding SelectedReadTab}" Value="0">
+                        <Setter Property="IsVisible" Value="True"/>
+                    </DataTrigger>
+                </Border.Triggers>
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="CONNECTION" Style="{StaticResource SectionHeader}"/>
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="Meter / Protocol" Style="{StaticResource FieldLabel}"/>
+                        <Border Style="{StaticResource InputBorder}"><Picker ItemsSource="{Binding ProtocolOptions}" SelectedItem="{Binding SelectedProtocol}" Style="{StaticResource PickerStyle}"/></Border>
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="Communication Mode" Style="{StaticResource FieldLabel}"/>
+                        <Border Style="{StaticResource InputBorder}"><Picker ItemsSource="{Binding TransportOptions}" SelectedItem="{Binding SelectedTransport}" Style="{StaticResource PickerStyle}"/></Border>
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="Port / Path" Style="{StaticResource FieldLabel}"/>
+                        <Border Style="{StaticResource InputBorder}"><Picker ItemsSource="{Binding PortOptions}" SelectedItem="{Binding SelectedPort}" Style="{StaticResource PickerStyle}"/></Border>
+                    </VerticalStackLayout>
+                    <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8" Margin="0,4,0,0">
+                        <Button Text="Connect" Command="{Binding ConnectCommand}" Style="{StaticResource PrimaryButton}" Grid.Column="0"/>
+                        <Button Text="Read Meter" Command="{Binding ReadMeterCommand}" Style="{StaticResource SuccessButton}" Grid.Column="1"/>
+                        <Button Text="Disconnect" Command="{Binding DisconnectCommand}" Style="{StaticResource DangerButton}" Grid.Column="2"/>
+                    </Grid>
+                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8" VerticalOptions="Center">
+                        <Ellipse Fill="{Binding ConnectionStatusColor}" WidthRequest="10" HeightRequest="10" VerticalOptions="Center" Grid.Column="0"/>
+                        <Label Text="{Binding StatusMessage}" TextColor="{Binding IsError, Converter={StaticResource BoolToErrorColorConverter}}" FontSize="12" VerticalOptions="Center" Grid.Column="1"/>
+                    </Grid>
+                    <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" Color="{StaticResource Primary}" HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- READ DATA TAB -->
+            <Border BackgroundColor="White" StrokeShape="RoundRectangle 16" Stroke="{StaticResource CardBorder}" Padding="16" IsVisible="False">
+                <Border.Triggers>
+                    <DataTrigger TargetType="Border" Binding="{Binding SelectedReadTab}" Value="1">
+                        <Setter Property="IsVisible" Value="True"/>
+                    </DataTrigger>
+                </Border.Triggers>
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="READ DATA WORKFLOW" Style="{StaticResource SectionHeader}"/>
+                    <Grid ColumnDefinitions="1.2*,2*" ColumnSpacing="10">
+                        <Border Grid.Column="0" Stroke="{StaticResource CardBorder}" StrokeShape="RoundRectangle 10" Padding="10">
+                            <VerticalStackLayout Spacing="8">
+                                <HorizontalStackLayout Spacing="8"><CheckBox IsChecked="{Binding InstantaneousSelected}" Color="{StaticResource Primary}"/><Label Text="Instantaneous Profile Readout" FontSize="13" VerticalOptions="Center"/></HorizontalStackLayout>
+                                <HorizontalStackLayout Spacing="8"><CheckBox IsChecked="{Binding BillingSelected}" Color="{StaticResource Primary}"/><Label Text="Billing Profile Readout" FontSize="13" VerticalOptions="Center"/></HorizontalStackLayout>
+                                <HorizontalStackLayout Spacing="8"><CheckBox IsChecked="{Binding TamperSelected}" Color="{StaticResource Primary}"/><Label Text="Tamper Profile Readout" FontSize="13" VerticalOptions="Center"/></HorizontalStackLayout>
+                                <HorizontalStackLayout Spacing="8"><CheckBox IsChecked="{Binding LoadSurveySelected}" Color="{StaticResource Primary}"/><Label Text="Load Profile Readout" FontSize="13" VerticalOptions="Center"/></HorizontalStackLayout>
+                                <HorizontalStackLayout Spacing="8"><CheckBox IsChecked="{Binding DailyProfileSelected}" Color="{StaticResource Primary}"/><Label Text="Daily Profile Readout" FontSize="13" VerticalOptions="Center"/></HorizontalStackLayout>
+                                <HorizontalStackLayout Spacing="8"><CheckBox IsChecked="{Binding NameplateSelected}" Color="{StaticResource Primary}"/><Label Text="Name Plate Profile Readout" FontSize="13" VerticalOptions="Center"/></HorizontalStackLayout>
+                                <HorizontalStackLayout Spacing="8"><CheckBox IsChecked="{Binding SelectAllFeatures}" Color="{StaticResource Primary}"/><Label Text="Select All" FontSize="13" FontAttributes="Bold" VerticalOptions="Center"/></HorizontalStackLayout>
+                            </VerticalStackLayout>
+                        </Border>
+                        <Border Grid.Column="1" Stroke="{StaticResource CardBorder}" StrokeShape="RoundRectangle 10" Padding="10">
+                            <VerticalStackLayout Spacing="8">
+                                <Label Text="Profile Mode" Style="{StaticResource FieldLabel}"/>
+                                <HorizontalStackLayout Spacing="12">
+                                    <RadioButton Content="Read Complete" IsChecked="{Binding ReadCompleteMode}"/>
+                                    <RadioButton Content="Read By Range" IsChecked="{Binding ReadByDateRangeMode}"/>
+                                    <RadioButton Content="Read By Entry" IsChecked="{Binding ReadByEntryRangeMode}"/>
+                                </HorizontalStackLayout>
+                                <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
+                                    <Border Style="{StaticResource InputBorder}"><DatePicker Date="{Binding RangeFrom}"/></Border>
+                                    <Border Grid.Column="1" Style="{StaticResource InputBorder}"><DatePicker Date="{Binding RangeTo}"/></Border>
+                                </Grid>
+                                <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
+                                    <Border Style="{StaticResource InputBorder}"><Entry Text="{Binding EntryFrom}" Keyboard="Numeric" Placeholder="Entry From" Style="{StaticResource EntryStyle}"/></Border>
+                                    <Border Grid.Column="1" Style="{StaticResource InputBorder}"><Entry Text="{Binding EntryTo}" Keyboard="Numeric" Placeholder="Entry To" Style="{StaticResource EntryStyle}"/></Border>
+                                </Grid>
+                                <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
+                                    <Button Text="Read Selected" Command="{Binding ReadSelectedCommand}" Style="{StaticResource SuccessButton}"/>
+                                    <Button Grid.Column="1" Text="Read All" Command="{Binding ReadAllCommand}" Style="{StaticResource PrimaryButton}"/>
+                                </Grid>
+                            </VerticalStackLayout>
+                        </Border>
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- EXPORT TAB -->
+            <Border BackgroundColor="White" StrokeShape="RoundRectangle 16" Stroke="{StaticResource CardBorder}" Padding="16" IsVisible="False">
+                <Border.Triggers>
+                    <DataTrigger TargetType="Border" Binding="{Binding SelectedReadTab}" Value="2">
+                        <Setter Property="IsVisible" Value="True"/>
+                    </DataTrigger>
+                </Border.Triggers>
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="EXPORT DATA" Style="{StaticResource SectionHeader}"/>
+                    <Label Text="Export parsed read data in required format." Style="{StaticResource ReadingLabel}"/>
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
+                        <Button Text="Export CSV" Command="{Binding ExportCsvCommand}" Style="{StaticResource SuccessButton}"/>
+                        <Button Grid.Column="1" Text="Export XML" Command="{Binding ExportXmlCommand}" Style="{StaticResource SuccessButton}"/>
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+            <!-- IDENTITY -->
+            <Border BackgroundColor="White" StrokeShape="RoundRectangle 16" Stroke="{StaticResource CardBorder}" Padding="16" IsVisible="{Binding HasData}">
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="METER IDENTITY" Style="{StaticResource SectionHeader}" Margin="0,0,0,6"/>
+                    <Grid ColumnDefinitions="*,*" Padding="0,5"><Label Text="Meter Number" Style="{StaticResource ReadingLabel}"/><Label Text="{Binding MeterNumber}" Style="{StaticResource ReadingValueAccent}" Grid.Column="1"/></Grid>
+                    <BoxView Style="{StaticResource Divider}"/>
+                    <Grid ColumnDefinitions="*,*" Padding="0,5"><Label Text="Meter Type" Style="{StaticResource ReadingLabel}"/><Label Text="{Binding MeterType}" Style="{StaticResource ReadingValue}" Grid.Column="1"/></Grid>
+                    <BoxView Style="{StaticResource Divider}"/>
+                    <Grid ColumnDefinitions="*,*" Padding="0,5"><Label Text="Meter Signature" Style="{StaticResource ReadingLabel}"/><Label Text="{Binding MeterSignature}" Style="{StaticResource ReadingValue}" Grid.Column="1"/></Grid>
+                </VerticalStackLayout>
+            </Border>
+            <!-- ENERGY -->
+            <Border BackgroundColor="White" StrokeShape="RoundRectangle 16" Stroke="{StaticResource CardBorder}" Padding="16" IsVisible="{Binding HasData}">
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="ENERGY" Style="{StaticResource SectionHeader}" Margin="0,0,0,6"/>
+                    <Grid ColumnDefinitions="*,*" Padding="0,5"><Label Text="Import (+A)" Style="{StaticResource ReadingLabel}"/><Label Text="{Binding EnergyImport}" Style="{StaticResource ReadingValueAccent}" Grid.Column="1"/></Grid>
+                    <BoxView Style="{StaticResource Divider}"/>
+                    <Grid ColumnDefinitions="*,*" Padding="0,5"><Label Text="Export (-A)" Style="{StaticResource ReadingLabel}"/><Label Text="{Binding EnergyExport}" Style="{StaticResource ReadingValue}" Grid.Column="1"/></Grid>
+                </VerticalStackLayout>
+            </Border>
+            <!-- VOLTAGE -->
+            <Border BackgroundColor="White" StrokeShape="RoundRectangle 16" Stroke="{StaticResource CardBorder}" Padding="16" IsVisible="{Binding HasData}">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="VOLTAGE" Style="{StaticResource SectionHeader}"/>
+                    <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8">
+                        <Border Style="{StaticResource MiniCard}" Grid.Column="0"><VerticalStackLayout Spacing="3"><Label Text="R Phase" Style="{StaticResource MiniCardLabel}"/><Label Text="{Binding VoltageR}" Style="{StaticResource MiniCardValue}"/></VerticalStackLayout></Border>
+                        <Border Style="{StaticResource MiniCard}" Grid.Column="1"><VerticalStackLayout Spacing="3"><Label Text="Y Phase" Style="{StaticResource MiniCardLabel}"/><Label Text="{Binding VoltageY}" Style="{StaticResource MiniCardValue}"/></VerticalStackLayout></Border>
+                        <Border Style="{StaticResource MiniCard}" Grid.Column="2"><VerticalStackLayout Spacing="3"><Label Text="B Phase" Style="{StaticResource MiniCardLabel}"/><Label Text="{Binding VoltageB}" Style="{StaticResource MiniCardValue}"/></VerticalStackLayout></Border>
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+            <!-- CURRENT -->
+            <Border BackgroundColor="White" StrokeShape="RoundRectangle 16" Stroke="{StaticResource CardBorder}" Padding="16" IsVisible="{Binding HasData}">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="CURRENT" Style="{StaticResource SectionHeader}"/>
+                    <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8">
+                        <Border Style="{StaticResource MiniCard}" Grid.Column="0"><VerticalStackLayout Spacing="3"><Label Text="R Phase" Style="{StaticResource MiniCardLabel}"/><Label Text="{Binding CurrentR}" Style="{StaticResource MiniCardValue}"/></VerticalStackLayout></Border>
+                        <Border Style="{StaticResource MiniCard}" Grid.Column="1"><VerticalStackLayout Spacing="3"><Label Text="Y Phase" Style="{StaticResource MiniCardLabel}"/><Label Text="{Binding CurrentY}" Style="{StaticResource MiniCardValue}"/></VerticalStackLayout></Border>
+                        <Border Style="{StaticResource MiniCard}" Grid.Column="2"><VerticalStackLayout Spacing="3"><Label Text="B Phase" Style="{StaticResource MiniCardLabel}"/><Label Text="{Binding CurrentB}" Style="{StaticResource MiniCardValue}"/></VerticalStackLayout></Border>
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+            <!-- POWER QUALITY -->
+            <Border BackgroundColor="White" StrokeShape="RoundRectangle 16" Stroke="{StaticResource CardBorder}" Padding="16" IsVisible="{Binding HasData}">
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="POWER QUALITY" Style="{StaticResource SectionHeader}" Margin="0,0,0,6"/>
+                    <Grid ColumnDefinitions="*,*" Padding="0,5"><Label Text="Power Factor" Style="{StaticResource ReadingLabel}"/><Label Text="{Binding PowerFactor}" Style="{StaticResource ReadingValue}" Grid.Column="1"/></Grid>
+                    <BoxView Style="{StaticResource Divider}"/>
+                    <Grid ColumnDefinitions="*,*" Padding="0,5"><Label Text="Frequency" Style="{StaticResource ReadingLabel}"/><Label Text="{Binding Frequency}" Style="{StaticResource ReadingValue}" Grid.Column="1"/></Grid>
+                    <BoxView Style="{StaticResource Divider}"/>
+                    <Grid ColumnDefinitions="*,*" Padding="0,5"><Label Text="Active Power" Style="{StaticResource ReadingLabel}"/><Label Text="{Binding ActivePower}" Style="{StaticResource ReadingValue}" Grid.Column="1"/></Grid>
+                    <BoxView Style="{StaticResource Divider}"/>
+                    <Grid ColumnDefinitions="*,*" Padding="0,5"><Label Text="Reactive Power" Style="{StaticResource ReadingLabel}"/><Label Text="{Binding ReactivePower}" Style="{StaticResource ReadingValue}" Grid.Column="1"/></Grid>
+                </VerticalStackLayout>
+            </Border>
+            <!-- CLOCK -->
+            <Border BackgroundColor="White" StrokeShape="RoundRectangle 16" Stroke="{StaticResource CardBorder}" Padding="16" IsVisible="{Binding HasData}">
+                <Grid ColumnDefinitions="*,*" Padding="0,2">
+                    <Label Text="Meter Clock (RTC)" Style="{StaticResource ReadingLabel}"/>
+                    <Label Text="{Binding Timestamp}" Style="{StaticResource ReadingValue}" Grid.Column="1"/>
+                </Grid>
+            </Border>
+            <!-- Empty state -->
+            <VerticalStackLayout IsVisible="{Binding HasData, Converter={StaticResource InvertBoolConverter}}" HorizontalOptions="Center" Spacing="10" Margin="0,20,0,0">
+                <Label Text="&#x1F4CA;" FontSize="48" HorizontalOptions="Center"/>
+                <Label Text="Connect to a meter, then tap Read Meter to view DLMS readings." FontSize="13" TextColor="{StaticResource TextSecondary}" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

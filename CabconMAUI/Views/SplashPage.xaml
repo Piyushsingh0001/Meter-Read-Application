@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="CabconMAUI.Views.SplashPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             BackgroundColor="{StaticResource Primary}"
+             Shell.NavBarIsVisible="False">
+    <Grid RowDefinitions="*,Auto,Auto,*">
+        <VerticalStackLayout Grid.Row="1" HorizontalOptions="Center" Spacing="16" Padding="40">
+            <Border BackgroundColor="White" StrokeShape="RoundRectangle 50"
+                    HeightRequest="100" WidthRequest="100" HorizontalOptions="Center">
+                <Label Text="&#x26A1;" FontSize="52" HorizontalOptions="Center" VerticalOptions="Center"/>
+            </Border>
+            <Label Text="Cabcon Meter Tool" FontSize="26" FontAttributes="Bold"
+                   TextColor="White" HorizontalOptions="Center"/>
+            <Label Text="DLMS / COSEM  · Cabcon Power Tool" FontSize="13"
+                   TextColor="#AACCEE" HorizontalOptions="Center"/>
+        </VerticalStackLayout>
+        <ActivityIndicator Grid.Row="2" IsRunning="True" Color="White"
+                           HeightRequest="36" WidthRequest="36" HorizontalOptions="Center" Margin="0,24,0,0"/>
+        <Label Grid.Row="3" Text="Cabcon  ·  v1.0" TextColor="#6699BB" FontSize="12"
+               HorizontalOptions="Center" VerticalOptions="End" Margin="0,0,0,32"/>
+    </Grid>
+</ContentPage>

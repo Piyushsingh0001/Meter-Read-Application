@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="CabconMAUI.Views.LoginPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="Login" BackgroundColor="{StaticResource PageBackground}"
+             Shell.NavBarIsVisible="False">
+    <ScrollView>
+        <VerticalStackLayout Padding="28,48,28,28" Spacing="0">
+            <Border BackgroundColor="{StaticResource Primary}" StrokeShape="RoundRectangle 36"
+                    HeightRequest="72" WidthRequest="72" HorizontalOptions="Center" Margin="0,0,0,16">
+                <Label Text="&#x26A1;" FontSize="38" HorizontalOptions="Center" VerticalOptions="Center"/>
+            </Border>
+            <Label Text="Cabcon Meter Tool" FontSize="22" FontAttributes="Bold"
+                   TextColor="{StaticResource Primary}" HorizontalOptions="Center"/>
+            <Label Text="Sign in with your credentials" FontSize="13"
+                   TextColor="{StaticResource TextSecondary}" HorizontalOptions="Center" Margin="0,4,0,28"/>
+            <Border BackgroundColor="White" StrokeShape="RoundRectangle 16"
+                    Stroke="{StaticResource CardBorder}" Padding="22">
+                <VerticalStackLayout Spacing="14">
+                    <!-- Meter Variant -->
+                    <Grid ColumnSpacing="8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Text="Meter Variant"
+           Style="{StaticResource FieldLabel}"
+           VerticalOptions="Center"/>
+
+                        <Border Grid.Column="1"
+            Style="{StaticResource InputBorder}">
+                            <Picker ItemsSource="{Binding MeterVariants}"
+                SelectedItem="{Binding SelectedMeterVariant}"
+                ItemDisplayBinding="{Binding Name}"
+                Title="Select meter variant"
+                HorizontalOptions="FillAndExpand"/>
+                        </Border>
+                    </Grid>
+
+                    <!-- User ID -->
+                    <Grid ColumnSpacing="45">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Text="User ID"
+           Style="{StaticResource FieldLabel}"
+           VerticalOptions="Center"/>
+
+                        <Border Grid.Column="1"
+            Style="{StaticResource InputBorder}">
+                            <Entry Text="{Binding UserId}"
+               Placeholder="Enter user ID"
+               Style="{StaticResource EntryStyle}"
+               ReturnType="Next"/>
+                        </Border>
+                    </Grid>
+
+                    <!-- Password -->
+                    <Grid ColumnSpacing="31">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Text="Password"
+           Style="{StaticResource FieldLabel}"
+           VerticalOptions="Center"/>
+
+                        <Border Grid.Column="1"
+            Style="{StaticResource InputBorder}">
+                            <Entry Text="{Binding Password}"
+               Placeholder="Enter password"
+               IsPassword="True"
+               Style="{StaticResource EntryStyle}"
+               ReturnType="Done"/>
+                        </Border>
+                    </Grid>
+                    <!-- Remember me -->
+                    <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                        <CheckBox IsChecked="{Binding RememberMe}" Color="{StaticResource Primary}"/>
+                        <Label Text="Remember me" FontSize="13" TextColor="{StaticResource TextSecondary}" VerticalOptions="Center"/>
+                    </HorizontalStackLayout>
+                    <Border BackgroundColor="{Binding IsError, Converter={StaticResource BoolToErrorBgConverter}}"
+                            StrokeShape="RoundRectangle 8" Padding="12,8"
+                            IsVisible="{Binding StatusMessage, Converter={StaticResource StringToBoolConverter}}">
+                        <Label Text="{Binding StatusMessage}"
+                               TextColor="{Binding IsError, Converter={StaticResource BoolToErrorColorConverter}}"
+                               FontSize="13" HorizontalOptions="Center"/>
+                    </Border>
+                    <Button Text="Login" Command="{Binding LoginCommand}"
+                            Style="{StaticResource PrimaryButton}" Margin="0,6,0,0"/>
+                    <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"
+                                       Color="{StaticResource Primary}" HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </Border>
+            <Label Text="{Binding AppVersion}" FontSize="11" TextColor="{StaticResource TextMuted}"
+                   HorizontalOptions="Center" Margin="0,20,0,0"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

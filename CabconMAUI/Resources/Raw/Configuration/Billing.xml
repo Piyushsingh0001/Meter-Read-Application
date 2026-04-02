@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Billing.xml mirrors desktop Configuration\Billing.xml -->
+<BillingScalar>
+    <DLMS><Class>01</Class><ObisCode>0000600100FF</ObisCode><Attribute>02</Attribute><Scale>1</Scale><Unit>-</Unit></DLMS>
+    <DLMS><Class>03</Class><ObisCode>0100010800FF</ObisCode><Attribute>02</Attribute><Scale>0.01</Scale><Unit>kWh</Unit></DLMS>
+    <DLMS><Class>08</Class><ObisCode>0000010000FF</ObisCode><Attribute>02</Attribute><Scale>1</Scale><Unit>-</Unit></DLMS>
+</BillingScalar>
