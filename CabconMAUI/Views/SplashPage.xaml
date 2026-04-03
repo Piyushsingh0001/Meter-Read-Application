@@ -6,9 +6,14 @@
              Shell.NavBarIsVisible="False">
     <Grid RowDefinitions="*,Auto,Auto,*">
         <VerticalStackLayout Grid.Row="1" HorizontalOptions="Center" Spacing="16" Padding="40">
-            <Border BackgroundColor="White" StrokeShape="RoundRectangle 50"
-                    HeightRequest="100" WidthRequest="100" HorizontalOptions="Center">
-                <Label Text="&#x26A1;" FontSize="52" HorizontalOptions="Center" VerticalOptions="Center"/>
+            <Border BackgroundColor="White" StrokeShape="RoundRectangle 50" HeightRequest="100" 
+                    WidthRequest="100" HorizontalOptions="Center" Stroke="{StaticResource CardBorder}">
+                <Border.Shadow>
+                    <Shadow Opacity="0.2" Radius="10" Offset="0,4"/>
+                </Border.Shadow>
+
+                <Image  Source="logo.svg" HeightRequest="60" WidthRequest="60"
+                 HorizontalOptions="Center" VerticalOptions="Center" Aspect="AspectFit"/>
             </Border>
             <Label Text="Cabcon Meter Tool" FontSize="26" FontAttributes="Bold"
                    TextColor="White" HorizontalOptions="Center"/>

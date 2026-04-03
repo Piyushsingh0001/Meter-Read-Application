@@ -6,9 +6,11 @@
              Shell.NavBarIsVisible="False">
     <ScrollView>
         <VerticalStackLayout Padding="28,48,28,28" Spacing="0">
-            <Border BackgroundColor="{StaticResource Primary}" StrokeShape="RoundRectangle 36"
-                    HeightRequest="72" WidthRequest="72" HorizontalOptions="Center" Margin="0,0,0,16">
-                <Label Text="&#x26A1;" FontSize="38" HorizontalOptions="Center" VerticalOptions="Center"/>
+            <Border BackgroundColor="white" StrokeShape="RoundRectangle 36" HeightRequest="72" 
+        WidthRequest="72" HorizontalOptions="Center" Margin="0,0,0,16">
+                <Image Source="logo.svg" HeightRequest="65" WidthRequest="65" HorizontalOptions="Center"
+            VerticalOptions="Center" Aspect="AspectFit"/>
+
             </Border>
             <Label Text="Cabcon Meter Tool" FontSize="22" FontAttributes="Bold"
                    TextColor="{StaticResource Primary}" HorizontalOptions="Center"/>

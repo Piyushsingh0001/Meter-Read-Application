@@ -7,14 +7,14 @@ namespace CabconMAUI.ViewModels;
 public partial class LoginViewModel : BaseViewModel
 {
     readonly IAuthService _auth; readonly ISettingsService _set; readonly INavigationService _nav;
-    [ObservableProperty][NotifyCanExecuteChangedFor(nameof(LoginCommand))] private string _userId=string.Empty;
-    [ObservableProperty][NotifyCanExecuteChangedFor(nameof(LoginCommand))] private string _password=string.Empty;
+    [ObservableProperty] private string _userId=string.Empty;
+    [ObservableProperty] private string _password=string.Empty;
     [ObservableProperty] private bool _rememberMe;
     [ObservableProperty] private string _appVersion="v1.0 — DLMS/COSEM";
     [ObservableProperty] private IReadOnlyList<MeterVariant> _meterVariants = MeterVariant.VisibleVariants;
-    [ObservableProperty] private MeterVariant _selectedMeterVariant = MeterVariant.VisibleVariants.FirstOrDefault();
+    [ObservableProperty] private MeterVariant? _selectedMeterVariant;
     public LoginViewModel(IAuthService a,ISettingsService s,INavigationService n){_auth=a;_set=s;_nav=n;if(_set.GetAppUserRememberMe()){UserId=_set.GetAppUser();Password=_set.GetAppPwd();RememberMe=true;}}
-    [RelayCommand(CanExecute=nameof(CanLogin))]
+    [RelayCommand]
     async Task LoginAsync()
     {
         if (IsBusy) return;
@@ -22,14 +22,19 @@ public partial class LoginViewModel : BaseViewModel
         ClearStatus();
         try
         {
-            if (SelectedMeterVariant == null)
+            if (SelectedMeterVariant is null)
             {
-                SetStatus("Please select Meter Variant", true);
+                SetStatus("Please select Meter Variant.", true);
                 return;
             }
-            if (string.IsNullOrWhiteSpace(UserId) || string.IsNullOrWhiteSpace(Password))
+            if (string.IsNullOrWhiteSpace(UserId))
             {
-                SetStatus("User ID and Password are required.", true);
+                SetStatus("Please enter User ID.", true);
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(Password))
+            {
+                SetStatus("Please enter Password.", true);
                 return;
             }
             _set.SetAppUserRememberMe(RememberMe);
@@ -48,10 +53,4 @@ public partial class LoginViewModel : BaseViewModel
             IsBusy = false;
         }
     }
-
-    bool CanLogin()
-        => SelectedMeterVariant != null
-        && !string.IsNullOrWhiteSpace(UserId)
-        && !string.IsNullOrWhiteSpace(Password)
-        && !IsBusy;
 }
