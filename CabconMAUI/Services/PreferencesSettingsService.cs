@@ -53,7 +53,7 @@ public class PreferencesSettingsService : ISettingsService
     public string Billing             {get=>S(nameof(Billing),"");                   set=>Set(nameof(Billing),value);}
     public string BillingVZ           {get=>S(nameof(BillingVZ),"");                 set=>Set(nameof(BillingVZ),value);}
     public string TamperXML           {get=>S(nameof(TamperXML),"");                 set=>Set(nameof(TamperXML),value);}
-    public string CommunicationPort   {get=>S(nameof(CommunicationPort),"");  set=>Set(nameof(CommunicationPort),value);}
+    public string CommunicationPort   {get=>S(nameof(CommunicationPort),"RJ Port");  set=>Set(nameof(CommunicationPort),value);}
     public string CommunicationMode   {get=>S(nameof(CommunicationMode),"Mode-E");   set=>Set(nameof(CommunicationMode),value);}
     public string ModemNumber         {get=>S(nameof(ModemNumber),"");               set=>Set(nameof(ModemNumber),value);}
     public string AppUser             {get=>S(nameof(AppUser),"dlmspt");             set=>Set(nameof(AppUser),value);}

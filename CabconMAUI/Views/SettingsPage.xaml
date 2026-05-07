@@ -94,12 +94,9 @@
                                       ColumnSpacing="14"
                                       RowSpacing="10">
                                     <Label Grid.Row="0" Grid.Column="0" Text="Communication Port" Style="{StaticResource FieldLabel}" VerticalOptions="Center"/>
-                                    <Grid Grid.Row="0" Grid.Column="1" ColumnDefinitions="*,Auto" ColumnSpacing="8">
-                                        <Border Grid.Column="0" Style="{StaticResource InputBorder}">
-                                            <Picker ItemsSource="{Binding CommPortOptions}" SelectedItem="{Binding CommunicationPort}" Style="{StaticResource PickerStyle}" Title="Select port"/>
-                                        </Border>
-                                        <Button Grid.Column="1" Text="Refresh" Command="{Binding RefreshPortsCommand}" Style="{StaticResource OutlineButton}" Padding="12,0"/>
-                                    </Grid>
+                                    <Border Grid.Row="0" Grid.Column="1" Style="{StaticResource InputBorder}">
+                                        <Picker ItemsSource="{Binding CommPortOptions}" SelectedItem="{Binding CommunicationPort}" Style="{StaticResource PickerStyle}" Title="Select port"/>
+                                    </Border>
 
                                     <Label Grid.Row="1" Grid.Column="0" Text="Communication Baud Rate" Style="{StaticResource FieldLabel}" VerticalOptions="Center"/>
                                     <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource InputBorder}">
@@ -170,12 +167,12 @@
 
                                     <Label Grid.Row="1" Grid.Column="0" Text="Window Size" Style="{StaticResource FieldLabel}" VerticalOptions="Center"/>
                                     <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource InputBorder}">
-                                        <Picker ItemsSource="{Binding WindowSizeOptions}" SelectedItem="{Binding WindowSizeOption}" Style="{StaticResource PickerStyle}" Title="Select window size"/>
+                                        <Entry Text="{Binding WindowSize}" Keyboard="Numeric" Style="{StaticResource EntryStyle}" Placeholder="e.g. 1"/>
                                     </Border>
 
                                     <Label Grid.Row="2" Grid.Column="0" Text="HDLC Addressing Scheme" Style="{StaticResource FieldLabel}" VerticalOptions="Center"/>
                                     <Border Grid.Row="2" Grid.Column="1" Style="{StaticResource InputBorder}">
-                                        <Picker ItemsSource="{Binding HdlcAddressingSchemeOptions}" SelectedItem="{Binding HdlcAddressingSchemeOption}" Style="{StaticResource PickerStyle}" Title="Select scheme"/>
+                                        <Entry Text="{Binding AddressingSchem}" Keyboard="Numeric" Style="{StaticResource EntryStyle}" Placeholder="e.g. 4"/>
                                     </Border>
 
                                     <Label Grid.Row="3" Grid.Column="0" Text="Server Physical ID" Style="{StaticResource FieldLabel}" VerticalOptions="Center"/>
@@ -222,7 +219,7 @@
                                       RowSpacing="10">
                                     <Label Grid.Row="0" Grid.Column="0" Text="Client Type" Style="{StaticResource FieldLabel}" VerticalOptions="Center"/>
                                     <Border Grid.Row="0" Grid.Column="1" Style="{StaticResource InputBorder}">
-                                        <Picker ItemsSource="{Binding ClientTypeOptions}" SelectedItem="{Binding ClientTypeOption}" Style="{StaticResource PickerStyle}" Title="Select client type"/>
+                                        <Entry Text="{Binding AssociationType}" Keyboard="Numeric" Style="{StaticResource EntryStyle}" Placeholder="e.g. FS"/>
                                     </Border>
 
                                     <Label Grid.Row="1" Grid.Column="0" Text="Client Pwd" Style="{StaticResource FieldLabel}" VerticalOptions="Center"/>
@@ -247,12 +244,12 @@
 
                                     <Label Grid.Row="5" Grid.Column="0" Text="Application Context" Style="{StaticResource FieldLabel}" VerticalOptions="Center"/>
                                     <Border Grid.Row="5" Grid.Column="1" Style="{StaticResource InputBorder}">
-                                        <Picker ItemsSource="{Binding ApplicationContextOptions}" SelectedItem="{Binding ApplicationContextOption}" Style="{StaticResource PickerStyle}" Title="Select application context"/>
+                                        <Entry Text="{Binding ApplicationContext}" Keyboard="Numeric" Style="{StaticResource EntryStyle}" Placeholder="e.g. 1"/>
                                     </Border>
 
                                     <Label Grid.Row="6" Grid.Column="0" Text="Authentication Level" Style="{StaticResource FieldLabel}" VerticalOptions="Center"/>
                                     <Border Grid.Row="6" Grid.Column="1" Style="{StaticResource InputBorder}">
-                                        <Picker ItemsSource="{Binding AuthenticationLevelOptions}" SelectedItem="{Binding AuthenticationLevelOption}" Style="{StaticResource PickerStyle}" Title="Select authentication level"/>
+                                        <Entry Text="{Binding SecurityMechanism}" Keyboard="Numeric" Style="{StaticResource EntryStyle}" Placeholder="e.g. Low"/>
                                     </Border>
 
                                     <Label Grid.Row="7" Grid.Column="0" Text="Password (ASCII)" Style="{StaticResource FieldLabel}" VerticalOptions="Center"/>
@@ -272,7 +269,7 @@
 
                                     <Label Grid.Row="10" Grid.Column="0" Text="Security Suit" Style="{StaticResource FieldLabel}" VerticalOptions="Center"/>
                                     <Border Grid.Row="10" Grid.Column="1" Style="{StaticResource InputBorder}">
-                                        <Picker ItemsSource="{Binding SecuritySuitOptions}" SelectedItem="{Binding SecuritySuitOption}" Style="{StaticResource PickerStyle}" Title="Select security suit"/>
+                                        <Entry Text="{Binding Securitysuit}" Keyboard="Numeric" Style="{StaticResource EntryStyle}" Placeholder="e.g. 1"/>
                                     </Border>
 
                                     <Label Grid.Row="11" Grid.Column="0" Text="Global Encryption Key" Style="{StaticResource FieldLabel}" VerticalOptions="Center"/>
@@ -287,7 +284,7 @@
 
                                     <Label Grid.Row="13" Grid.Column="0" Text="Dedicated Key" Style="{StaticResource FieldLabel}" VerticalOptions="Center"/>
                                     <Border Grid.Row="13" Grid.Column="1" Style="{StaticResource InputBorder}">
-                                        <Picker ItemsSource="{Binding DedicatedKeyOptions}" SelectedItem="{Binding DedicatedKeyOption}" Style="{StaticResource PickerStyle}" Title="Select dedicated key"/>
+                                        <Entry Text="{Binding DedicatedKey}" Keyboard="Numeric" Style="{StaticResource EntryStyle}" Placeholder="0 / 1"/>
                                     </Border>
                                 </Grid>
                             </VerticalStackLayout>
@@ -312,38 +309,19 @@
                         <Border BackgroundColor="White" StrokeShape="RoundRectangle 14" Stroke="{StaticResource CardBorder}" Padding="16">
                             <VerticalStackLayout Spacing="12">
                                 <Label Text="Conformance Block" Style="{StaticResource SectionHeader}"/>
-                                <Label Text="{Binding ConformanceBlockDisplay}" Style="{StaticResource FieldLabel}"/>
-                                <Border Stroke="{StaticResource CardBorder}" StrokeShape="RoundRectangle 10" Padding="14">
-                                    <VerticalStackLayout Spacing="12">
-                                        <Label Text="Proposed Conformance Block Settings" Style="{StaticResource FieldLabel}" TextColor="{StaticResource TextSecondary}"/>
-                                        <Grid ColumnDefinitions="*,*" ColumnSpacing="18">
-                                            <VerticalStackLayout BindableLayout.ItemsSource="{Binding LeftConformanceOptions}" Spacing="8">
-                                                <BindableLayout.ItemTemplate>
-                                                    <DataTemplate>
-                                                        <HorizontalStackLayout Spacing="10">
-                                                            <CheckBox IsChecked="{Binding IsChecked}" IsEnabled="False" Color="{StaticResource TextSecondary}"/>
-                                                            <Label Text="{Binding Label}" VerticalOptions="Center" TextColor="{StaticResource TextSecondary}"/>
-                                                        </HorizontalStackLayout>
-                                                    </DataTemplate>
-                                                </BindableLayout.ItemTemplate>
-                                            </VerticalStackLayout>
-                                            <VerticalStackLayout Grid.Column="1" BindableLayout.ItemsSource="{Binding RightConformanceOptions}" Spacing="8">
-                                                <BindableLayout.ItemTemplate>
-                                                    <DataTemplate>
-                                                        <HorizontalStackLayout Spacing="10">
-                                                            <CheckBox IsChecked="{Binding IsChecked}" IsEnabled="False" Color="{StaticResource TextSecondary}"/>
-                                                            <Label Text="{Binding Label}" VerticalOptions="Center" TextColor="{StaticResource TextSecondary}"/>
-                                                        </HorizontalStackLayout>
-                                                    </DataTemplate>
-                                                </BindableLayout.ItemTemplate>
-                                            </VerticalStackLayout>
-                                        </Grid>
-                                        <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
-                                            <CheckBox IsChecked="{Binding AllConformanceSelected}" IsEnabled="False" Color="{StaticResource TextSecondary}"/>
-                                            <Label Text="Select ALL" FontAttributes="Bold" VerticalOptions="Center" TextColor="{StaticResource TextSecondary}"/>
-                                        </HorizontalStackLayout>
-                                    </VerticalStackLayout>
-                                </Border>
+                                <Grid RowDefinitions="Auto,Auto"
+                                      ColumnDefinitions="*,2*"
+                                      ColumnSpacing="14"
+                                      RowSpacing="10">
+                                    <Label Grid.Row="0" Grid.Column="0" Text="Conformance Block" Style="{StaticResource FieldLabel}" VerticalOptions="Center"/>
+                                    <Border Grid.Row="0" Grid.Column="1" Style="{StaticResource InputBorder}">
+                                        <Entry Text="{Binding ConformanceBlock}" Style="{StaticResource EntryStyle}" Placeholder="Enter conformance block"/>
+                                    </Border>
+                                    <Label Grid.Row="1" Grid.Column="0" Text="Access" Style="{StaticResource FieldLabel}" VerticalOptions="Center"/>
+                                    <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource InputBorder}">
+                                        <Entry Text="{Binding AssociationAccess}" Style="{StaticResource EntryStyle}" Placeholder="Optional"/>
+                                    </Border>
+                                </Grid>
                             </VerticalStackLayout>
                         </Border>
                     </ScrollView>

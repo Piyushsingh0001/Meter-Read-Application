@@ -6,7 +6,6 @@ public interface IIecMeterService
     event EventHandler<StatusEventArgs> StatusUpdated;
     Task<bool>   ConnectToIECMeterAsync(int mode);
     Task<bool>   IECPhysicalLayerConnectAsync(bool isIECSettings);
-    Task<bool>   PerformSignOnAsync();
     Task<string> ReadDataBufferAsync(string label);
     Task<string> ReadProfileBufferAsync(string label,int events);
     Task<string> WriteProfileBufferAsync(string[] labels,List<string> data);

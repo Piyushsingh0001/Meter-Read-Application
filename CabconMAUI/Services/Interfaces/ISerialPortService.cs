@@ -9,12 +9,6 @@ public interface ISerialPortService
     bool fSendDataToPort(byte[] data,int length);
     bool fSendIrDADataToPort(byte[] data,int length);
     bool fSendIrDADataToPort_1P(byte[] data,int length);
-    void SetReceiveBuffer(byte[] data,int length);
-    int ASCIIHexToDecimalConversion(byte[] buf,int start,int len);
+    int  ASCIIHexToDecimalConversion(byte[] buf,int start,int len);
     IEnumerable<string> GetAvailablePorts();
-    bool ChangeBaudRate(int newBaudRate);
-    Task<bool> IecBaudRateNegotiationAsync();
-    Task<bool> ConnectAsync(string portName, int baudRate);
-    Task<bool> SendAsync(byte[] data);
-    Task<byte[]> ReceiveAsync(int maxBytes, TimeSpan timeout);
 }

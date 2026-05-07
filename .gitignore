@@ -1,0 +1,17 @@
+bin/
+obj/
+.vs/
+*.user
+*.suo
+*.cache
+*.log
+*.pdb
+*.mdb
+*.apk
+*.aab
+*.ipa
+*.dll
+*.exe
+*.msix
+*.appx
+*.appxbundle

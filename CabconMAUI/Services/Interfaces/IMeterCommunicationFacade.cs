@@ -5,7 +5,6 @@ namespace CabconMAUI.Services.Interfaces;
 public interface IMeterCommunicationFacade
 {
     Task<bool> ConnectToMeterAsync(MeterConnectRequest request);
-    Task<bool> ConnectAndAuthenticateAsync(MeterVariant selectedVariant);
     Task DisconnectAsync();
     Task<MeterReadResult> ReadAsync(MeterReadRequest request);
     Task<MeterReadResult> ReadSingleObjectAsync(byte[] obis, byte classId, byte attributeId);

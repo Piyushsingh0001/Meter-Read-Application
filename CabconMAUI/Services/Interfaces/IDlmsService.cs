@@ -22,7 +22,6 @@ public interface IDlmsService
     Task<int>  ReadDataBlockCommandAsync(byte[] obis,byte cls,byte att,byte acc,List<byte> desc);
     Task<int>  ReadDataBlockCommandCypheredAsync(byte[] obis,byte cls,byte att,byte acc,List<byte> desc);
     Task<byte[]?> Read3PHDLMSCalibCoeffAsync(byte[] cmd);
-    Task<byte[]> ReadLargeObjectAsync(byte[] obisCode);
     List<byte> GetByteByEntryValueType(long from,long to);
     List<byte> GetByteByEntryDateType(DateTime from,DateTime to);
     List<string> GetMeterTypeList(); string GetSelectedMeterType();

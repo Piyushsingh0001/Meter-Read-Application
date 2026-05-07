@@ -13,7 +13,7 @@ public partial class LoginViewModel : BaseViewModel
     [ObservableProperty] private string _appVersion="v1.0 — DLMS/COSEM";
     [ObservableProperty] private IReadOnlyList<MeterVariant> _meterVariants = MeterVariant.VisibleVariants;
     [ObservableProperty] private MeterVariant? _selectedMeterVariant;
-    public LoginViewModel(IAuthService a,ISettingsService s,INavigationService n){_auth=a;_set=s;_nav=n;if(_set.GetAppUserRememberMe()){UserId=_set.GetAppUser();Password=_set.GetAppPwd();RememberMe=true;}SelectedMeterVariant=MeterVariants.FirstOrDefault(variant=>(int)variant.Type==_set.GetMeterMode());}
+    public LoginViewModel(IAuthService a,ISettingsService s,INavigationService n){_auth=a;_set=s;_nav=n;if(_set.GetAppUserRememberMe()){UserId=_set.GetAppUser();Password=_set.GetAppPwd();RememberMe=true;}}
     [RelayCommand]
     async Task LoginAsync()
     {
@@ -40,11 +40,7 @@ public partial class LoginViewModel : BaseViewModel
             _set.SetAppUserRememberMe(RememberMe);
             bool ok = await _auth.LoginAsync(UserId, Password);
             if (ok)
-            {
-                _set.SetMeterMode((int)SelectedMeterVariant.Type);
-                _set.Save();
                 await _nav.NavigateToAsync(nameof(DashboardPage));
-            }
             else
                 SetStatus("Invalid User ID or Password.", true);
         }

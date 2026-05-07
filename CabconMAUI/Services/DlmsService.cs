@@ -82,7 +82,7 @@ public class DlmsService : IDlmsService
     public async Task<int> ReadAllTamperBlockFromMeterAsync(byte[] obis,byte cls,byte att,byte acc,List<byte> desc)=>_set.ApplicationContext==(byte)ApplicationContext.LogicalModeWithCiphering?await ReadDataBlockCommandCypheredAsync(obis,cls,att,acc,desc):await ReadDataBlockCommandAsync(obis,cls,att,acc,desc);
     public async Task<int> ReadDataCommandAsync(byte[] obis,byte cls,byte att)=>await Task.Run(()=>{try{BuildGetFrame(obis,cls,att);if(!_ser.fSendDataToPort(_cmd,_idx))return(int)ProgrammingCode.CosemConnectionFailed;_hdlc.fIncRecieve();if(!fCheckHDLCResponse(_ser.ReceiveBuffer))return(int)ProgrammingCode.CosemConnectionFailed;int r=_cosem.fCheckCOSEMResponseForGet(_ser.ReceiveBuffer);return r switch{0x01=>(int)ProgrammingCode.Success,0x0E=>(int)ProgrammingCode.DataUnavailable,0x02=>(int)ProgrammingCode.AccessDenied,0x03=>(int)ProgrammingCode.AccessDenied,_=>(int)ProgrammingCode.CosemConnectionFailed};}catch{return(int)ProgrammingCode.CosemConnectionFailed;}});
     public async Task<int> ReadDataCommandCypheredAsync(byte[] obis,byte cls,byte att)=>await Task.Run(()=>{try{BuildGetFrameCiphered(obis,cls,att);if(!_ser.fSendDataToPort(_cmd,_idx))return(int)ProgrammingCode.CosemConnectionFailed;int ivI=17;if(_ser.ReceiveBuffer[15]==0x81)ivI++;else if(_ser.ReceiveBuffer[15]==0x82)ivI+=2;byte[] gek=AesGcmCryptoService.HexToBytes(_set.GlobalEncryptionKey);byte[] ak=AesGcmCryptoService.HexToBytes(_set.AuthenticationKey);byte[] st=System.Text.Encoding.ASCII.GetBytes(_set.ClientSystemTitle);byte[] pt=_crypto.GetPlainTextFromCiphered(_ser.ReceiveBuffer,ivI,gek,ak,st);_hdlc.fIncRecieve();if(!fCheckHDLCResponse(_ser.ReceiveBuffer))return(int)ProgrammingCode.CosemConnectionFailed;if(pt.Length>0)Buffer.BlockCopy(pt,0,_ser.ReceiveBuffer,14,pt.Length);int r=_cosem.fCheckCOSEMResponseForGet(_ser.ReceiveBuffer);return r switch{0x01=>(int)ProgrammingCode.Success,0x0E=>(int)ProgrammingCode.DataUnavailable,0x02=>(int)ProgrammingCode.AccessDenied,_=>(int)ProgrammingCode.CosemConnectionFailed};}catch{return(int)ProgrammingCode.CosemConnectionFailed;}});
-    public async Task<int> ReadDataBlockCommandAsync(byte[] obis,byte cls,byte att,byte acc,List<byte> desc)=>await Task.Run(()=>{try{_cosem.nBlockIndex=0;_cosem.nBlockNumber=0;_idx=0;BuildGetFrame(obis,cls,att,acc,desc);if(!_ser.fSendDataToPort(_cmd,_idx))return(int)ProgrammingCode.CosemConnectionFailed;_hdlc.fIncRecieve();if(!fCheckHDLCResponse(_ser.ReceiveBuffer))return(int)ProgrammingCode.CosemConnectionFailed;int ret=_cosem.fCheckCOSEMResponse(_ser.ReceiveBuffer);if(ret==0x01)return(int)ProgrammingCode.Success;if(ret==0x05)return(int)ProgrammingCode.AccessDenied;if(ret==0x07)return(int)ProgrammingCode.DataUnavailable;if(ret!=0x02)return(int)ProgrammingCode.CosemConnectionFailed;while(true){_idx=0;BuildBlockNextFrame();_hdlc.fIncRecieve();if(!_ser.fSendDataToPort(_cmd,_idx))return(int)ProgrammingCode.CosemConnectionFailed;if(!fCheckHDLCResponse(_ser.ReceiveBuffer))return(int)ProgrammingCode.CosemConnectionFailed;ret=_cosem.fCheckCOSEMResponse(_ser.ReceiveBuffer);if(ret==0x01)break;if(ret==0x02)continue;if(ret==0xC5){if(IsLastBlockReceived())break;continue;}return(int)ProgrammingCode.CosemConnectionFailed;}return(int)ProgrammingCode.Success;}catch{return(int)ProgrammingCode.CosemConnectionFailed;}});
+    public async Task<int> ReadDataBlockCommandAsync(byte[] obis,byte cls,byte att,byte acc,List<byte> desc)=>await Task.Run(()=>{try{_cosem.nBlockIndex=0;_cosem.nBlockNumber=0;_idx=0;BuildGetFrame(obis,cls,att,acc,desc);if(!_ser.fSendDataToPort(_cmd,_idx))return(int)ProgrammingCode.CosemConnectionFailed;_hdlc.fIncRecieve();if(!fCheckHDLCResponse(_ser.ReceiveBuffer))return(int)ProgrammingCode.CosemConnectionFailed;int ret=_cosem.fCheckCOSEMResponse(_ser.ReceiveBuffer);if(ret==0x01)return(int)ProgrammingCode.Success;if(ret==0x05)return(int)ProgrammingCode.AccessDenied;if(ret==0x07)return(int)ProgrammingCode.DataUnavailable;if(ret!=0x02)return(int)ProgrammingCode.CosemConnectionFailed;while(true){_idx=0;BuildBlockNextFrame();_hdlc.fIncRecieve();if(!_ser.fSendDataToPort(_cmd,_idx))return(int)ProgrammingCode.CosemConnectionFailed;if(!fCheckHDLCResponse(_ser.ReceiveBuffer))return(int)ProgrammingCode.CosemConnectionFailed;ret=_cosem.fCheckCOSEMResponse(_ser.ReceiveBuffer);if(ret==0x01)break;if(ret==0x02)continue;return(int)ProgrammingCode.CosemConnectionFailed;}return(int)ProgrammingCode.Success;}catch{return(int)ProgrammingCode.CosemConnectionFailed;}});
     public async Task<int> ReadDataBlockCommandCypheredAsync(byte[] obis,byte cls,byte att,byte acc,List<byte> desc)=>await ReadDataBlockCommandAsync(obis,cls,att,acc,desc);
     public async Task<bool> WriteDataToMeterAsync(byte att,byte[] obis,byte cls,byte dt,byte dl,List<byte> data,byte[] rt){int r=await Task.Run(()=>WriteParam(att,obis,cls,dt,dl,data,rt));GetWriteResponseCode=r;return r==(int)ProgrammingCode.Success;}
     int WriteParam(byte att,byte[] obis,byte cls,byte dt,byte dl,List<byte> data,byte[] rt){try{_idx=0;_idx=_hdlc.fAdd7E(_cmd,_idx);_idx=_hdlc.fAddHDLCFrameTag(_cmd,_idx);_idx=_hdlc.fAddServerSAP(_cmd,_idx,_set.ServerSAP,_set.ServerLowerMacAddress);_idx=_hdlc.fAddClientSAP(_cmd,_idx,_set.ClientSAP);_hdlc.fIncSend();_idx=_hdlc.fAddCmdByte(_cmd,_idx);_idx=_hdlc.fAddBlankFCS(_cmd,_idx);_idx=_cosem.fAddLLCByte(_cmd,_idx);_idx=_cosem.GetQueryWriteToMeter(data,_cmd,_idx,att,obis,cls,dt,dl,rt);_idx=_hdlc.FillWriteParameters(_cmd,_idx,data);_idx=_hdlc.fAddBlankFCS(_cmd,_idx);_hdlc.ffillLength(_cmd,_idx);_hdlc.fGenerateFCS(_cmd,1,8);_hdlc.fFillFCS(_cmd,9,10);_hdlc.fGenerateFCS(_cmd,1,_idx-3);_hdlc.fFillFCS(_cmd,_idx-2,_idx-1);_idx=_hdlc.fAdd7E(_cmd,_idx);if(!_ser.fSendDataToPort(_cmd,_idx))return(int)ProgrammingCode.CosemConnectionFailed;_hdlc.fIncRecieve();if(!fCheckHDLCResponse(_ser.ReceiveBuffer))return(int)ProgrammingCode.CosemConnectionFailed;int r=_cosem.fCheckCOSEMResponseForSet(_ser.ReceiveBuffer);return r==0x01?(int)ProgrammingCode.Success:r==0x02||r==0x04?(int)ProgrammingCode.AccessDenied:(int)ProgrammingCode.CosemConnectionFailed;}catch{return(int)ProgrammingCode.CosemConnectionFailed;}}
@@ -96,125 +96,12 @@ public class DlmsService : IDlmsService
     public async Task<int> ReadDataBlockCommandCypheredBytesAsync(byte[] obis,byte cls,byte att,byte acc,byte[] desc)=>await ReadDataBlockCommandCypheredAsync(obis,cls,att,acc,desc.ToList());
     public string[]? DLMSDataFormatorLabView(byte[] d,int idx,bool ascii){try{return DlmsHelper.DLMSDataFormator(d,idx,ascii);}catch{return null;}}
     public async Task<byte[]?> Read3PHDLMSCalibCoeffAsync(byte[] cmd)=>await Task.Run(()=>{try{if(!_ser.fSendDataToPort(cmd,cmd.Length))return null;if(_ser.BufferIndex<_ser.NoOfBytesToBeReceive3PHDLMSCalibCoeff)return null;byte[] r=new byte[_ser.BufferIndex+1];for(int i=0;i<_ser.BufferIndex;i++)r[i]=_ser.ReceiveBuffer[i];return r;}catch{return null;}});
-
-    public async Task<byte[]> ReadLargeObjectAsync(byte[] obisCode)
-    {
-        var allData = new List<byte>();
-        uint blockIndex = 1;
-        bool isLastBlock = false;
-
-        // 1. Send the initial GET-Request-Normal
-        var initialRequest = _hdlc.CreateGetRequest(obisCode); 
-        var response = await SendAndReceiveAsync(initialRequest);
-
-        while (!isLastBlock)
-        {
-            // Check for GET-Response-with-Block (Tag: 0xC5)
-            if (response != null && response.Length > 0 && response[0] == 0xC5)
-            {
-                // The meter response format for C5:
-                // [C5] [Sub-Type] [Invoke-ID] [Last-Block-Flag (1 byte)] [Block-Number (4 bytes)] [Raw Data...]
-                
-                isLastBlock = response[3] == 0x01; // 0x01 means this is the final block
-                
-                // Extract the actual data (skip headers, usually starts around offset 8-12 depending on meter)
-                var dataChunk = ExtractCosemData(response);
-                allData.AddRange(dataChunk);
-
-                if (!isLastBlock)
-                {
-                    // 2. Request the NEXT block (GET-Request-Next)
-                    blockIndex++;
-                    var nextRequest = _hdlc.CreateGetNextRequest(blockIndex);
-                    response = await SendAndReceiveAsync(nextRequest);
-                    
-                    // Add inter-frame delay for meter processing
-                    await Task.Delay(50);
-                }
-            }
-            else if (response != null && response.Length > 0 && response[0] == 0xC4) // GET-Response-Normal (Fits in one packet)
-            {
-                allData.AddRange(ExtractCosemData(response));
-                isLastBlock = true;
-            }
-            else
-            {
-                throw new Exception("Unexpected Meter Response or Timeout");
-            }
-        }
-
-        return allData.ToArray();
-    }
-
-    private async Task<byte[]> SendAndReceiveAsync(byte[] request)
-    {
-        if (!_ser.fSendDataToPort(request, request.Length))
-        {
-            throw new Exception("Failed to send data to meter");
-        }
-
-        // Wait for response with timeout
-        var timeout = DateTime.UtcNow.AddMilliseconds(_ser.CommandTimeout);
-        while (DateTime.UtcNow < timeout && _ser.BufferIndex == 0)
-        {
-            await Task.Delay(25);
-        }
-
-        if (_ser.BufferIndex == 0)
-        {
-            throw new Exception("No response from meter");
-        }
-
-        var response = new byte[_ser.BufferIndex];
-        Array.Copy(_ser.ReceiveBuffer, response, _ser.BufferIndex);
-        return response;
-    }
-
-    private byte[] ExtractCosemData(byte[] response)
-    {
-        // Skip HDLC headers and COSEM wrappers to get to actual data
-        // Typical format: [7E] [A0] [SAP] [SAP] [CTL] [FCS] [LLC] [COSEM] [DATA...]
-        int dataStart = 18; // Default starting position
-        
-        // Adjust for variable length headers
-        if (response.Length > 15)
-        {
-            if (response[15] == 0x81)
-                dataStart++;
-            else if (response[15] == 0x82)
-                dataStart += 2;
-        }
-
-        // Find actual data start by looking for COSEM data tags
-        for (int i = dataStart; i < response.Length - 1; i++)
-        {
-            // Look for common COSEM data type tags
-            if ((response[i] >= 0x01 && response[i] <= 0x1F) || // Basic types
-                (response[i] >= 0x09 && response[i] <= 0x0C) || // String types
-                (response[i] >= 0x12 && response[i] <= 0x16))   // Numeric types
-            {
-                dataStart = i;
-                break;
-            }
-        }
-
-        var dataLength = response.Length - dataStart;
-        if (dataLength <= 0)
-        {
-            return Array.Empty<byte>();
-        }
-
-        var data = new byte[dataLength];
-        Array.Copy(response, dataStart, data, 0, dataLength);
-        return data;
-    }
     public List<byte> GetByteByEntryValueType(long f,long t)=>DlmsHelper.GetByteByEntryValueType(f,t);
     public List<byte> GetByteByEntryDateType(DateTime f,DateTime t)=>DlmsHelper.GetByteByEntryDateType(f,t);
     public List<string> GetMeterTypeList()=>MeterVariant.VisibleVariants.Select(v=>v.Name).ToList();
     public string GetSelectedMeterType(){var l=MeterVariant.AllVariants;int m=_set.GetMeterMode();return m>=0&&m<l.Count?l[m].Name:string.Empty;}
     public int DedicatedCommand(byte[] buf,int ni,string type,int len){if(!string.IsNullOrEmpty(_cosem.DedKeystr)&&type=="Read")buf[ni++]=0xD0;else if(string.IsNullOrEmpty(_cosem.DedKeystr)&&type=="Read")buf[ni++]=0xC8;else if(!string.IsNullOrEmpty(_cosem.DedKeystr)&&type=="Write")buf[ni++]=0xD1;else buf[ni++]=0xC9;if(len<128)buf[ni++]=0x00;else if(len<256){buf[ni++]=0x00;buf[ni++]=0x00;}else{buf[ni++]=0x00;buf[ni++]=0x00;buf[ni++]=0x00;}buf[ni]=0x00;byte sm=_set.GetSecurityMachanism();if(sm==0x01){_hdlc.SecuritysuitByte=0x20;buf[ni++]=0x20;}else buf[ni++]=(byte)_hdlc.SecuritysuitByte;buf[ni++]=(byte)((_hdlc.InitializationCounter>>24)&0xFF);buf[ni++]=(byte)((_hdlc.InitializationCounter>>16)&0xFF);buf[ni++]=(byte)((_hdlc.InitializationCounter>>8)&0xFF);buf[ni++]=(byte)(_hdlc.InitializationCounter&0xFF);return ni;}
     public bool fCheckHDLCResponse(byte[] b){try{return _hdlc.fCheckStartEndTag(b)&&_hdlc.fCheckFCS(b)&&_hdlc.fCheckServerSAP(b,_set.ClientSAP)&&_hdlc.fCheckCommand(b,_hdlc.nCMDByte);}catch{return false;}}
-    bool IsLastBlockReceived(){try{if(_ser.BufferIndex<18)return false;int infoStart=18;if(_ser.ReceiveBuffer[15]==0x81)infoStart++;else if(_ser.ReceiveBuffer[15]==0x82)infoStart+=2;if(infoStart+2>_ser.BufferIndex)return false;return (_ser.ReceiveBuffer[infoStart]&0x80)!=0;}catch{return false;}}
     void BuildGetFrame(byte[] obis,byte cls,byte att,byte acc=0,List<byte>? desc=null){_idx=0;_idx=_hdlc.fAdd7E(_cmd,_idx);_idx=_hdlc.fAddHDLCFrameTag(_cmd,_idx);_idx=_hdlc.fAddServerSAP(_cmd,_idx,_set.ServerSAP,_set.ServerLowerMacAddress);_idx=_hdlc.fAddClientSAP(_cmd,_idx,_set.ClientSAP);_hdlc.fIncSend();_idx=_hdlc.fAddCmdByte(_cmd,_idx);_idx=_hdlc.fAddBlankFCS(_cmd,_idx);_idx=_cosem.fAddLLCByte(_cmd,_idx);_idx=_cosem.GetQueryReadByClassOBIS(_cmd,_idx,att,obis,cls);if(acc!=0&&desc!=null)_idx=_cosem.FillCommandData(_cmd,--_idx,desc);_idx=_hdlc.fAddBlankFCS(_cmd,_idx);_hdlc.ffillLength(_cmd,_idx);_hdlc.fGenerateFCS(_cmd,1,8);_hdlc.fFillFCS(_cmd,9,10);_hdlc.fGenerateFCS(_cmd,1,_idx-3);_hdlc.fFillFCS(_cmd,_idx-2,_idx-1);_idx=_hdlc.fAdd7E(_cmd,_idx);}
     void BuildGetFrameCiphered(byte[] obis,byte cls,byte att){_idx=0;_idx=_hdlc.fAdd7E(_cmd,_idx);_idx=_hdlc.fAddHDLCFrameTag(_cmd,_idx);_idx=_hdlc.fAddServerSAP(_cmd,_idx,_set.ServerSAP,_set.ServerLowerMacAddress);_idx=_hdlc.fAddClientSAP(_cmd,_idx,_set.ClientSAP);_hdlc.fIncSend();_idx=_hdlc.fAddCmdByte(_cmd,_idx);_idx=_hdlc.fAddBlankFCS(_cmd,_idx);_idx=_cosem.fAddLLCByte(_cmd,_idx);_idx=DedicatedCommand(_cmd,_idx,"Read",0);int ci=_idx;_idx=_cosem.GetQueryReadByClassOBIS(_cmd,_idx,att,obis,cls);byte[] pt=new byte[_idx-ci];Buffer.BlockCopy(_cmd,ci,pt,0,pt.Length);_idx=ci;byte[] gek=AesGcmCryptoService.HexToBytes(_set.GlobalEncryptionKey);byte[] ak=AesGcmCryptoService.HexToBytes(_set.AuthenticationKey);byte[] st=System.Text.Encoding.ASCII.GetBytes(_set.ClientSystemTitle);byte[] enc=_crypto.CreateCipherCommand(pt,gek,ak,st,_hdlc.InitializationCounter,(byte)_set.Securitysuit);foreach(var b in enc)_cmd[_idx++]=b;_idx=_hdlc.fAddBlankFCS(_cmd,_idx);_hdlc.ffillLength(_cmd,_idx);_cmd[15]=(byte)(_idx-18);_hdlc.fGenerateFCS(_cmd,1,8);_hdlc.fFillFCS(_cmd,9,10);_hdlc.fGenerateFCS(_cmd,1,_idx-3);_hdlc.fFillFCS(_cmd,_idx-2,_idx-1);_idx=_hdlc.fAdd7E(_cmd,_idx);}
     void BuildBlockNextFrame(){_idx=0;_idx=_hdlc.fAdd7E(_cmd,_idx);_idx=_hdlc.fAddHDLCFrameTag(_cmd,_idx);_idx=_hdlc.fAddServerSAP(_cmd,_idx,_set.ServerSAP,_set.ServerLowerMacAddress);_idx=_hdlc.fAddClientSAP(_cmd,_idx,_set.ClientSAP);_hdlc.fIncSend();_idx=_hdlc.fAddCmdByte(_cmd,_idx);_idx=_hdlc.fAddBlankFCS(_cmd,_idx);_idx=_cosem.fAddLLCByte(_cmd,_idx);_idx=_cosem.fGetBlockTransferPacket(_cmd,_idx);_idx=_hdlc.fAddBlankFCS(_cmd,_idx);_hdlc.ffillLength(_cmd,_idx);_hdlc.fGenerateFCS(_cmd,1,8);_hdlc.fFillFCS(_cmd,9,10);_hdlc.fGenerateFCS(_cmd,1,_idx-3);_hdlc.fFillFCS(_cmd,_idx-2,_idx-1);_idx=_hdlc.fAdd7E(_cmd,_idx);}
