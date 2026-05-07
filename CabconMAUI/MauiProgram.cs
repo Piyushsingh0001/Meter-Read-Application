@@ -15,11 +15,11 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Regular.ttf",  "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             });
-        builder.Services.AddSingleton<ISettingsService,  PreferencesSettingsService>();
+        builder.Services.AddSingleton<ISettingsService,  XmlBackedSettingsService>();
         // Register platform-specific serial port service
 #if ANDROID
         builder.Services.AddSingleton<ISerialPortService, AndroidSerialPortService>();
-#else
+#elif WINDOWS
         builder.Services.AddSingleton<ISerialPortService, WindowsSerialPortService>();
 #endif
         builder.Services.AddSingleton<IBluetoothService,  BluetoothService>();
@@ -32,6 +32,15 @@ public static class MauiProgram
         builder.Services.AddSingleton<IReadExportService, ReadExportService>();
         builder.Services.AddSingleton<IAuthService,        AuthService>();
         builder.Services.AddSingleton<INavigationService,  NavigationService>();
+        builder.Services.AddSingleton<IMeterReadBackgroundService, MeterReadBackgroundService>();
+        builder.Services.AddSingleton<ICommandRepositoryService, CommandRepositoryService>();
+        builder.Services.AddSingleton<IRelayControlService, RelayControlService>();
+        builder.Services.AddSingleton<IOtaUpdateService, OtaUpdateService>();
+        builder.Services.AddSingleton<IHdlcFrameService, HdlcFrameService>();
+        builder.Services.AddSingleton<IHdlcFrameServiceWithRetry, HdlcFrameServiceWithRetry>();
+        builder.Services.AddSingleton<ICosemDataParser, CosemDataParser>();
+        builder.Services.AddSingleton<IStatusLogger, StatusLogger>();
+        builder.Services.AddSingleton<IIecMeterService, IecMeterService>();
         builder.Services.AddTransient<LoginViewModel>();
         builder.Services.AddTransient<DashboardViewModel>();
         builder.Services.AddTransient<MeterReadViewModel>();

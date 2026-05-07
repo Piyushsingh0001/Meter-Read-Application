@@ -14,7 +14,7 @@ public class AppSettings
     public int    InterframeTimeout     { get; set; } = 1500;
     // HDLC
     public int    ServerSAP             { get; set; } = 1;
-    public int    ServerLowerMacAddress { get; set; } = 256;
+    public int    ServerLowerMacAddress { get; set; } = 17;
     public int    ClientSAP             { get; set; } = 64;
     public int    AddressingSchem       { get; set; } = 2;
     public int    ServerPhysicalID      { get; set; } = 1;
@@ -52,7 +52,8 @@ public class AppSettings
     public string BillingVZ             { get; set; } = string.Empty;
     public string TamperXML             { get; set; } = string.Empty;
     // Communication
-    public string CommunicationPort     { get; set; } = "RJ Port";
+    //public string CommunicationPort     { get; set; } = "RJ Port";
+    public string CommunicationPort { get; set; } = string.Empty;
     public string CommunicationMode     { get; set; } = "Mode-E";
     public string ModemNumber           { get; set; } = string.Empty;
     // App login

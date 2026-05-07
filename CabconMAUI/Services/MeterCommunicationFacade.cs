@@ -1,3 +1,5 @@
+using System.Text;
+using System.Threading.Tasks;
 using CabconMAUI.Helpers;
 using CabconMAUI.Models;
 using CabconMAUI.Services.Interfaces;
@@ -10,14 +12,53 @@ public sealed class MeterCommunicationFacade : IMeterCommunicationFacade
     readonly IIecMeterService _iec;
     readonly ISettingsService _settings;
     readonly ISerialPortService _serial;
+    readonly IStatusLogger _logger;
     MeterProtocolFamily _activeProtocol;
 
-    public MeterCommunicationFacade(IDlmsService dlms, IIecMeterService iec, ISettingsService settings, ISerialPortService serial)
+    public MeterCommunicationFacade(IDlmsService dlms, IIecMeterService iec, ISettingsService settings, ISerialPortService serial, IStatusLogger logger)
     {
         _dlms = dlms;
         _iec = iec;
         _settings = settings;
         _serial = serial;
+        _logger = logger;
+    }
+
+    public async Task<bool> ConnectAndAuthenticateAsync(MeterVariant selectedVariant)
+    {
+        _logger.Log($"Selected Variant: {selectedVariant.Name}");
+        _serial.SetSerialPortSettings(
+        _settings.CommunicationPort, // Use the port selected in UI
+        _settings.CommandBaudRate,
+        _settings.Parity,
+        _settings.DataBits,
+        _settings.StopBits,
+        _settings.CommandTimeOut,
+        _settings.IntercharacterDelay
+    );
+
+        // 1. Open the Physical Port First
+        var portOpened = _serial.OpenPort();
+        if (!portOpened) 
+        {
+            _logger.Log("ERROR: Could not open Serial/USB Port.");
+            return false;
+        }
+
+        // 2. Protocol Switching Logic (The "Desktop" Way)
+        if (selectedVariant.IsSmart) // Smart Meter (DLMS)
+        {
+            _logger.Log("Mode: Smart Meter. Starting DLMS Handshake...");
+            _activeProtocol = MeterProtocolFamily.Dlms1Phase;
+            return await _dlms.ConnectToMeterAsync();
+        }
+        else // Non-Smart Meter (IEC 62056-21)
+        {
+            _logger.Log("Mode: Non-Smart. Starting IEC Sign-on...");
+            _activeProtocol = MeterProtocolFamily.IecNonDlms;
+            // This wakes up the meter using the "/?! <CR><LF>" command
+            return await _iec.PerformSignOnAsync(); 
+        }
     }
 
     public async Task<bool> ConnectToMeterAsync(MeterConnectRequest request)
@@ -29,12 +70,13 @@ public sealed class MeterCommunicationFacade : IMeterCommunicationFacade
             _settings.SerialPort = request.PortName;
         }
 
-        if (request.ProtocolFamily == MeterProtocolFamily.IecNonDlms)
-        {
-            return await _iec.ConnectToIECMeterAsync(0);
-        }
-
-        return await _dlms.ConnectToMeterAsync();
+        // Use the new protocol switching logic instead of hardcoded protocol
+        return await ConnectAndAuthenticateAsync(new MeterVariant 
+        { 
+            Name = "Manual Connection",
+            Type = request.ProtocolFamily == MeterProtocolFamily.IecNonDlms ? MeterTypeInfo.Non_DLMS_1PH : MeterTypeInfo.Smart_Meter_1PH,
+            Id = request.ProtocolFamily == MeterProtocolFamily.IecNonDlms ? 1 : 2
+        });
     }
 
     public async Task DisconnectAsync()
@@ -70,7 +112,7 @@ public sealed class MeterCommunicationFacade : IMeterCommunicationFacade
 
     async Task<MeterReadResult> ReadDlmsAsync(MeterReadRequest request)
     {
-        return request.Feature switch
+        var result = request.Feature switch
         {
             MeterReadFeature.Instantaneous => await ReadInstantaneousAsync(),
             MeterReadFeature.Billing => await ReadProfileAsync("billing", DlmsHelper.ObisCode.BillingProfile, request),
@@ -81,6 +123,8 @@ public sealed class MeterCommunicationFacade : IMeterCommunicationFacade
             MeterReadFeature.ReadAll => await ReadAllAsync(request),
             _ => new MeterReadResult { IsSuccess = false, Message = "Unsupported feature." }
         };
+        
+        return result;
     }
 
     async Task<MeterReadResult> ReadIecAsync(MeterReadRequest request)
@@ -220,7 +264,7 @@ public sealed class MeterCommunicationFacade : IMeterCommunicationFacade
                 merged.Values[$"{feature}:{kv.Key}"] = kv.Value;
             }
         }
-
+        
         return merged;
     }
 

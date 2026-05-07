@@ -1,0 +1,1611 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CabconMAUI</name>
+    </assembly>
+    <members>
+        <member name="T:CabconMAUI.Models.AppSettings">
+            <summary>Plain model for all 45+ settings matching SerialPortSettings.Default.</summary>
+        </member>
+        <member name="T:CabconMAUI.Models.ConformanceOption">
+            <inheritdoc/>
+        </member>
+        <member name="P:CabconMAUI.Models.ConformanceOption.Label">
+            <inheritdoc cref="F:CabconMAUI.Models.ConformanceOption._label"/>
+        </member>
+        <member name="P:CabconMAUI.Models.ConformanceOption.IsChecked">
+            <inheritdoc cref="F:CabconMAUI.Models.ConformanceOption._isChecked"/>
+        </member>
+        <member name="T:CabconMAUI.Models.MeterReadDisplayRow">
+            <inheritdoc/>
+        </member>
+        <member name="P:CabconMAUI.Models.MeterReadDisplayRow.SerialNumber">
+            <inheritdoc cref="F:CabconMAUI.Models.MeterReadDisplayRow._serialNumber"/>
+        </member>
+        <member name="P:CabconMAUI.Models.MeterReadDisplayRow.ClassId">
+            <inheritdoc cref="F:CabconMAUI.Models.MeterReadDisplayRow._classId"/>
+        </member>
+        <member name="P:CabconMAUI.Models.MeterReadDisplayRow.ObisCode">
+            <inheritdoc cref="F:CabconMAUI.Models.MeterReadDisplayRow._obisCode"/>
+        </member>
+        <member name="P:CabconMAUI.Models.MeterReadDisplayRow.Attribute">
+            <inheritdoc cref="F:CabconMAUI.Models.MeterReadDisplayRow._attribute"/>
+        </member>
+        <member name="P:CabconMAUI.Models.MeterReadDisplayRow.ParameterName">
+            <inheritdoc cref="F:CabconMAUI.Models.MeterReadDisplayRow._parameterName"/>
+        </member>
+        <member name="P:CabconMAUI.Models.MeterReadDisplayRow.Value">
+            <inheritdoc cref="F:CabconMAUI.Models.MeterReadDisplayRow._value"/>
+        </member>
+        <member name="P:CabconMAUI.Models.MeterVariant.IsSmart">
+            <summary>
+            Determines if this variant uses DLMS (Smart) or IEC (Non-Smart) protocol
+            </summary>
+        </member>
+        <member name="T:CabconMAUI.Models.RtcData">
+            <summary>Mirrors RTC_ISFormat struct exactly. 12-byte DLMS clock object.</summary>
+        </member>
+        <member name="T:CabconMAUI.ViewModels.BaseViewModel">
+            <inheritdoc/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.BaseViewModel.IsBusy">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.BaseViewModel._isBusy"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.BaseViewModel.StatusMessage">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.BaseViewModel._statusMessage"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.BaseViewModel.IsError">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.BaseViewModel._isError"/>
+        </member>
+        <member name="T:CabconMAUI.ViewModels.DashboardViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="F:CabconMAUI.ViewModels.DashboardViewModel.goToMeterReadCommand">
+            <summary>The backing field for <see cref="P:CabconMAUI.ViewModels.DashboardViewModel.GoToMeterReadCommand"/>.</summary>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.DashboardViewModel.GoToMeterReadCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:CabconMAUI.ViewModels.DashboardViewModel.GoToMeterReadAsync"/>.</summary>
+        </member>
+        <member name="F:CabconMAUI.ViewModels.DashboardViewModel.goToSettingsCommand">
+            <summary>The backing field for <see cref="P:CabconMAUI.ViewModels.DashboardViewModel.GoToSettingsCommand"/>.</summary>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.DashboardViewModel.GoToSettingsCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:CabconMAUI.ViewModels.DashboardViewModel.GoToSettingsAsync"/>.</summary>
+        </member>
+        <member name="F:CabconMAUI.ViewModels.DashboardViewModel.logoutCommand">
+            <summary>The backing field for <see cref="P:CabconMAUI.ViewModels.DashboardViewModel.LogoutCommand"/>.</summary>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.DashboardViewModel.LogoutCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:CabconMAUI.ViewModels.DashboardViewModel.LogoutAsync"/>.</summary>
+        </member>
+        <member name="T:CabconMAUI.ViewModels.LoginViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.LoginViewModel.UserId">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.LoginViewModel._userId"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.LoginViewModel.Password">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.LoginViewModel._password"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.LoginViewModel.RememberMe">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.LoginViewModel._rememberMe"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.LoginViewModel.AppVersion">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.LoginViewModel._appVersion"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.LoginViewModel.MeterVariants">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.LoginViewModel._meterVariants"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.LoginViewModel.SelectedMeterVariant">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.LoginViewModel._selectedMeterVariant"/>
+        </member>
+        <member name="F:CabconMAUI.ViewModels.LoginViewModel.loginCommand">
+            <summary>The backing field for <see cref="P:CabconMAUI.ViewModels.LoginViewModel.LoginCommand"/>.</summary>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.LoginViewModel.LoginCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:CabconMAUI.ViewModels.LoginViewModel.LoginAsync"/>.</summary>
+        </member>
+        <member name="T:CabconMAUI.ViewModels.MeterReadViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.IsConnected">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.MeterReadViewModel._isConnected"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.SelectedPort">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.MeterReadViewModel._selectedPort"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.SelectedProtocol">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.MeterReadViewModel._selectedProtocol"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.SelectedTransport">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.MeterReadViewModel._selectedTransport"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.SelectedVariant">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.MeterReadViewModel._selectedVariant"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.HasData">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.MeterReadViewModel._hasData"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.MeterNumber">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.MeterReadViewModel._meterNumber"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.MeterType">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.MeterReadViewModel._meterType"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.MeterSignature">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.MeterReadViewModel._meterSignature"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.EnergyImport">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.MeterReadViewModel._energyImport"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.EnergyExport">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.MeterReadViewModel._energyExport"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.VoltageR">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.MeterReadViewModel._voltageR"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.VoltageY">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.MeterReadViewModel._voltageY"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.VoltageB">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.MeterReadViewModel._voltageB"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.CurrentR">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.MeterReadViewModel._currentR"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.CurrentY">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.MeterReadViewModel._currentY"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.CurrentB">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.MeterReadViewModel._currentB"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.PowerFactor">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.MeterReadViewModel._powerFactor"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.Frequency">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.MeterReadViewModel._frequency"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.ActivePower">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.MeterReadViewModel._activePower"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.ReactivePower">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.MeterReadViewModel._reactivePower"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.Timestamp">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.MeterReadViewModel._timestamp"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.ShowRaw">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.MeterReadViewModel._showRaw"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.SelectedReadTab">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.MeterReadViewModel._selectedReadTab"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.InstantaneousSelected">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.MeterReadViewModel._instantaneousSelected"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.BillingSelected">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.MeterReadViewModel._billingSelected"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.TamperSelected">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.MeterReadViewModel._tamperSelected"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.LoadSurveySelected">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.MeterReadViewModel._loadSurveySelected"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.DailyProfileSelected">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.MeterReadViewModel._dailyProfileSelected"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.NameplateSelected">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.MeterReadViewModel._nameplateSelected"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.SelectAllFeatures">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.MeterReadViewModel._selectAllFeatures"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.ReadCompleteMode">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.MeterReadViewModel._readCompleteMode"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.ReadByDateRangeMode">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.MeterReadViewModel._readByDateRangeMode"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.ReadByEntryRangeMode">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.MeterReadViewModel._readByEntryRangeMode"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.BackgroundReadInProgress">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.MeterReadViewModel._backgroundReadInProgress"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.RangeFrom">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.MeterReadViewModel._rangeFrom"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.RangeTo">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.MeterReadViewModel._rangeTo"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.EntryFrom">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.MeterReadViewModel._entryFrom"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.EntryTo">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.MeterReadViewModel._entryTo"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.MeterResults">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.MeterReadViewModel._meterResults"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.SelectedReadDataOption">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.MeterReadViewModel._selectedReadDataOption"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.InstantaneousRows">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.MeterReadViewModel._instantaneousRows"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.NameplateRows">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.MeterReadViewModel._nameplateRows"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.ShowInstantaneousPanel">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.MeterReadViewModel._showInstantaneousPanel"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.ShowNameplatePanel">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.MeterReadViewModel._showNameplatePanel"/>
+        </member>
+        <member name="M:CabconMAUI.ViewModels.MeterReadViewModel.OnSelectAllFeaturesChanged(System.Boolean)">
+            <summary>Executes the logic for when <see cref="P:CabconMAUI.ViewModels.MeterReadViewModel.SelectAllFeatures"/> just changed.</summary>
+            <param name="value">The new property value that was set.</param>
+            <remarks>This method is invoked right after the value of <see cref="P:CabconMAUI.ViewModels.MeterReadViewModel.SelectAllFeatures"/> is changed.</remarks>
+        </member>
+        <member name="M:CabconMAUI.ViewModels.MeterReadViewModel.OnReadCompleteModeChanged(System.Boolean)">
+            <summary>Executes the logic for when <see cref="P:CabconMAUI.ViewModels.MeterReadViewModel.ReadCompleteMode"/> just changed.</summary>
+            <param name="value">The new property value that was set.</param>
+            <remarks>This method is invoked right after the value of <see cref="P:CabconMAUI.ViewModels.MeterReadViewModel.ReadCompleteMode"/> is changed.</remarks>
+        </member>
+        <member name="M:CabconMAUI.ViewModels.MeterReadViewModel.OnReadByDateRangeModeChanged(System.Boolean)">
+            <summary>Executes the logic for when <see cref="P:CabconMAUI.ViewModels.MeterReadViewModel.ReadByDateRangeMode"/> just changed.</summary>
+            <param name="value">The new property value that was set.</param>
+            <remarks>This method is invoked right after the value of <see cref="P:CabconMAUI.ViewModels.MeterReadViewModel.ReadByDateRangeMode"/> is changed.</remarks>
+        </member>
+        <member name="M:CabconMAUI.ViewModels.MeterReadViewModel.OnReadByEntryRangeModeChanged(System.Boolean)">
+            <summary>Executes the logic for when <see cref="P:CabconMAUI.ViewModels.MeterReadViewModel.ReadByEntryRangeMode"/> just changed.</summary>
+            <param name="value">The new property value that was set.</param>
+            <remarks>This method is invoked right after the value of <see cref="P:CabconMAUI.ViewModels.MeterReadViewModel.ReadByEntryRangeMode"/> is changed.</remarks>
+        </member>
+        <member name="F:CabconMAUI.ViewModels.MeterReadViewModel.connectCommand">
+            <summary>The backing field for <see cref="P:CabconMAUI.ViewModels.MeterReadViewModel.ConnectCommand"/>.</summary>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.ConnectCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:CabconMAUI.ViewModels.MeterReadViewModel.ConnectAsync"/>.</summary>
+        </member>
+        <member name="F:CabconMAUI.ViewModels.MeterReadViewModel.readMeterCommand">
+            <summary>The backing field for <see cref="P:CabconMAUI.ViewModels.MeterReadViewModel.ReadMeterCommand"/>.</summary>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.ReadMeterCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:CabconMAUI.ViewModels.MeterReadViewModel.ReadMeterAsync"/>.</summary>
+        </member>
+        <member name="F:CabconMAUI.ViewModels.MeterReadViewModel.disconnectCommand">
+            <summary>The backing field for <see cref="P:CabconMAUI.ViewModels.MeterReadViewModel.DisconnectCommand"/>.</summary>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.DisconnectCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:CabconMAUI.ViewModels.MeterReadViewModel.DisconnectAsync"/>.</summary>
+        </member>
+        <member name="F:CabconMAUI.ViewModels.MeterReadViewModel.toggleRawCommand">
+            <summary>The backing field for <see cref="P:CabconMAUI.ViewModels.MeterReadViewModel.ToggleRawCommand"/>.</summary>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.ToggleRawCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand"/> instance wrapping <see cref="M:CabconMAUI.ViewModels.MeterReadViewModel.ToggleRaw"/>.</summary>
+        </member>
+        <member name="F:CabconMAUI.ViewModels.MeterReadViewModel.readInstantaneousCommand">
+            <summary>The backing field for <see cref="P:CabconMAUI.ViewModels.MeterReadViewModel.ReadInstantaneousCommand"/>.</summary>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.ReadInstantaneousCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:CabconMAUI.ViewModels.MeterReadViewModel.ReadInstantaneousAsync"/>.</summary>
+        </member>
+        <member name="F:CabconMAUI.ViewModels.MeterReadViewModel.readBillingCommand">
+            <summary>The backing field for <see cref="P:CabconMAUI.ViewModels.MeterReadViewModel.ReadBillingCommand"/>.</summary>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.ReadBillingCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:CabconMAUI.ViewModels.MeterReadViewModel.ReadBillingAsync"/>.</summary>
+        </member>
+        <member name="F:CabconMAUI.ViewModels.MeterReadViewModel.readLoadSurveyCommand">
+            <summary>The backing field for <see cref="P:CabconMAUI.ViewModels.MeterReadViewModel.ReadLoadSurveyCommand"/>.</summary>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.ReadLoadSurveyCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:CabconMAUI.ViewModels.MeterReadViewModel.ReadLoadSurveyAsync"/>.</summary>
+        </member>
+        <member name="F:CabconMAUI.ViewModels.MeterReadViewModel.readDailyProfileCommand">
+            <summary>The backing field for <see cref="P:CabconMAUI.ViewModels.MeterReadViewModel.ReadDailyProfileCommand"/>.</summary>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.ReadDailyProfileCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:CabconMAUI.ViewModels.MeterReadViewModel.ReadDailyProfileAsync"/>.</summary>
+        </member>
+        <member name="F:CabconMAUI.ViewModels.MeterReadViewModel.readTamperCommand">
+            <summary>The backing field for <see cref="P:CabconMAUI.ViewModels.MeterReadViewModel.ReadTamperCommand"/>.</summary>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.ReadTamperCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:CabconMAUI.ViewModels.MeterReadViewModel.ReadTamperAsync"/>.</summary>
+        </member>
+        <member name="F:CabconMAUI.ViewModels.MeterReadViewModel.readNameplateCommand">
+            <summary>The backing field for <see cref="P:CabconMAUI.ViewModels.MeterReadViewModel.ReadNameplateCommand"/>.</summary>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.ReadNameplateCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:CabconMAUI.ViewModels.MeterReadViewModel.ReadNameplateAsync"/>.</summary>
+        </member>
+        <member name="F:CabconMAUI.ViewModels.MeterReadViewModel.readAllCommand">
+            <summary>The backing field for <see cref="P:CabconMAUI.ViewModels.MeterReadViewModel.ReadAllCommand"/>.</summary>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.ReadAllCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:CabconMAUI.ViewModels.MeterReadViewModel.ReadAllAsync"/>.</summary>
+        </member>
+        <member name="F:CabconMAUI.ViewModels.MeterReadViewModel.readAllFromXmlCommand">
+            <summary>The backing field for <see cref="P:CabconMAUI.ViewModels.MeterReadViewModel.ReadAllFromXmlCommand"/>.</summary>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.ReadAllFromXmlCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:CabconMAUI.ViewModels.MeterReadViewModel.ReadAllFromXmlAsync"/>.</summary>
+        </member>
+        <member name="F:CabconMAUI.ViewModels.MeterReadViewModel.startBackgroundReadAllCommand">
+            <summary>The backing field for <see cref="P:CabconMAUI.ViewModels.MeterReadViewModel.StartBackgroundReadAllCommand"/>.</summary>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.StartBackgroundReadAllCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:CabconMAUI.ViewModels.MeterReadViewModel.StartBackgroundReadAllAsync"/>.</summary>
+        </member>
+        <member name="F:CabconMAUI.ViewModels.MeterReadViewModel.stopBackgroundReadAllCommand">
+            <summary>The backing field for <see cref="P:CabconMAUI.ViewModels.MeterReadViewModel.StopBackgroundReadAllCommand"/>.</summary>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.StopBackgroundReadAllCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:CabconMAUI.ViewModels.MeterReadViewModel.StopBackgroundReadAllAsync"/>.</summary>
+        </member>
+        <member name="F:CabconMAUI.ViewModels.MeterReadViewModel.readSelectedCommand">
+            <summary>The backing field for <see cref="P:CabconMAUI.ViewModels.MeterReadViewModel.ReadSelectedCommand"/>.</summary>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.ReadSelectedCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:CabconMAUI.ViewModels.MeterReadViewModel.ReadSelectedAsync"/>.</summary>
+        </member>
+        <member name="F:CabconMAUI.ViewModels.MeterReadViewModel.selectReadTabCommand">
+            <summary>The backing field for <see cref="P:CabconMAUI.ViewModels.MeterReadViewModel.SelectReadTabCommand"/>.</summary>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.SelectReadTabCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand`1"/> instance wrapping <see cref="M:CabconMAUI.ViewModels.MeterReadViewModel.SelectReadTab(System.Object)"/>.</summary>
+        </member>
+        <member name="F:CabconMAUI.ViewModels.MeterReadViewModel.exportCsvCommand">
+            <summary>The backing field for <see cref="P:CabconMAUI.ViewModels.MeterReadViewModel.ExportCsvCommand"/>.</summary>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.ExportCsvCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:CabconMAUI.ViewModels.MeterReadViewModel.ExportCsvAsync"/>.</summary>
+        </member>
+        <member name="F:CabconMAUI.ViewModels.MeterReadViewModel.exportXmlCommand">
+            <summary>The backing field for <see cref="P:CabconMAUI.ViewModels.MeterReadViewModel.ExportXmlCommand"/>.</summary>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.ExportXmlCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:CabconMAUI.ViewModels.MeterReadViewModel.ExportXmlAsync"/>.</summary>
+        </member>
+        <member name="F:CabconMAUI.ViewModels.MeterReadViewModel.executeReadDataCommand">
+            <summary>The backing field for <see cref="P:CabconMAUI.ViewModels.MeterReadViewModel.ExecuteReadDataCommand"/>.</summary>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.ExecuteReadDataCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:CabconMAUI.ViewModels.MeterReadViewModel.ExecuteReadData"/>.</summary>
+        </member>
+        <member name="F:CabconMAUI.ViewModels.MeterReadViewModel.selectReadDataOptionCommand">
+            <summary>The backing field for <see cref="P:CabconMAUI.ViewModels.MeterReadViewModel.SelectReadDataOptionCommand"/>.</summary>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.SelectReadDataOptionCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand`1"/> instance wrapping <see cref="M:CabconMAUI.ViewModels.MeterReadViewModel.SelectReadDataOption(System.Object)"/>.</summary>
+        </member>
+        <member name="F:CabconMAUI.ViewModels.MeterReadViewModel.captureInstantaneousObjectCommand">
+            <summary>The backing field for <see cref="P:CabconMAUI.ViewModels.MeterReadViewModel.CaptureInstantaneousObjectCommand"/>.</summary>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.CaptureInstantaneousObjectCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand"/> instance wrapping <see cref="M:CabconMAUI.ViewModels.MeterReadViewModel.CaptureInstantaneousObject"/>.</summary>
+        </member>
+        <member name="F:CabconMAUI.ViewModels.MeterReadViewModel.readInstantaneousProfileDataCommand">
+            <summary>The backing field for <see cref="P:CabconMAUI.ViewModels.MeterReadViewModel.ReadInstantaneousProfileDataCommand"/>.</summary>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.ReadInstantaneousProfileDataCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:CabconMAUI.ViewModels.MeterReadViewModel.ReadInstantaneousProfileDataAsync"/>.</summary>
+        </member>
+        <member name="F:CabconMAUI.ViewModels.MeterReadViewModel.closeInstantaneousObjectCommand">
+            <summary>The backing field for <see cref="P:CabconMAUI.ViewModels.MeterReadViewModel.CloseInstantaneousObjectCommand"/>.</summary>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.CloseInstantaneousObjectCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand"/> instance wrapping <see cref="M:CabconMAUI.ViewModels.MeterReadViewModel.CloseInstantaneousObject"/>.</summary>
+        </member>
+        <member name="F:CabconMAUI.ViewModels.MeterReadViewModel.captureNameplateObjectCommand">
+            <summary>The backing field for <see cref="P:CabconMAUI.ViewModels.MeterReadViewModel.CaptureNameplateObjectCommand"/>.</summary>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.CaptureNameplateObjectCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand"/> instance wrapping <see cref="M:CabconMAUI.ViewModels.MeterReadViewModel.CaptureNameplateObject"/>.</summary>
+        </member>
+        <member name="F:CabconMAUI.ViewModels.MeterReadViewModel.readNameplateDataCommand">
+            <summary>The backing field for <see cref="P:CabconMAUI.ViewModels.MeterReadViewModel.ReadNameplateDataCommand"/>.</summary>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.ReadNameplateDataCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:CabconMAUI.ViewModels.MeterReadViewModel.ReadNameplateDataAsync"/>.</summary>
+        </member>
+        <member name="F:CabconMAUI.ViewModels.MeterReadViewModel.closeNameplateObjectCommand">
+            <summary>The backing field for <see cref="P:CabconMAUI.ViewModels.MeterReadViewModel.CloseNameplateObjectCommand"/>.</summary>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.MeterReadViewModel.CloseNameplateObjectCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand"/> instance wrapping <see cref="M:CabconMAUI.ViewModels.MeterReadViewModel.CloseNameplateObject"/>.</summary>
+        </member>
+        <member name="T:CabconMAUI.ViewModels.SettingsViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.LeftConformanceOptions">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._leftConformanceOptions"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.RightConformanceOptions">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._rightConformanceOptions"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.AllConformanceSelected">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._allConformanceSelected"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.SelectedTab">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._selectedTab"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.SerialPort">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._serialPort"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.SignOnBaudRate">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._signOnBaudRate"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.CommandBaudRate">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._commandBaudRate"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.StopBits">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._stopBits"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.DataBits">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._dataBits"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.Parity">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._parity"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.CommandTimeOut">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._commandTimeOut"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.IntercharacterDelay">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._intercharacterDelay"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.InterframeTimeout">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._interframeTimeout"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.ServerSAP">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._serverSAP"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.ServerLowerMacAddress">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._serverLowerMacAddress"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.ClientSAP">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._clientSAP"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.AddressingSchem">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._addressingSchem"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.ServerPhysicalID">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._serverPhysicalID"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.HDLCAddressing">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._hDLCAddressing"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.InfoSize">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._infoSize"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.WindowSize">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._windowSize"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.CosemBufferSize">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._cosemBufferSize"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.DLLBufferSize">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._dLLBufferSize"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.ApplicationContext">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._applicationContext"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.SecurityMechanism">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._securityMechanism"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.PDUSize">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._pDUSize"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.ConformanceBlock">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._conformanceBlock"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.DLMSVersion">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._dLMSVersion"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.AssociationMode">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._associationMode"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.AssociationType">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._associationType"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.AssociationAccess">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._associationAccess"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.Password">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._password"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.HLSKey">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._hLSKey"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.HLSPWD">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._hLSPWD"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.ClientSystemTitle">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._clientSystemTitle"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.Securitysuit">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._securitysuit"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.GlobalEncryptionKey">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._globalEncryptionKey"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.DedicatedKey">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._dedicatedKey"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.AuthenticationKey">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._authenticationKey"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.AESEncryption">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._aESEncryption"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.MeterMode">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._meterMode"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.CommunicationPort">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._communicationPort"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.CommunicationMode">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._communicationMode"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.ModemNumber">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._modemNumber"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.AppUser">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._appUser"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.AppPwd">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._appPwd"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.AppUserRememberMe">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._appUserRememberMe"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.DefaultReadClassID">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._defaultReadClassID"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.DefaultReadOBIS">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._defaultReadOBIS"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.DefaultReadAtt">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._defaultReadAtt"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.DefaultReadDaraType">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._defaultReadDaraType"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.DefaultReadLen">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._defaultReadLen"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.DefaultReadAccSelector">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._defaultReadAccSelector"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.DefaultReadCmdType">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._defaultReadCmdType"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.DefaultReadSelectiveAccessCommand">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._defaultReadSelectiveAccessCommand"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.DefaultReadDataValueCommand">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._defaultReadDataValueCommand"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.Cnf1">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._cnf1"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.Cnf2">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._cnf2"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.Cnf3">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._cnf3"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.WindowSizeOption">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._windowSizeOption"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.HdlcAddressingSchemeOption">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._hdlcAddressingSchemeOption"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.ClientTypeOption">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._clientTypeOption"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.ApplicationContextOption">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._applicationContextOption"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.AuthenticationLevelOption">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._authenticationLevelOption"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.SecuritySuitOption">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._securitySuitOption"/>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.DedicatedKeyOption">
+            <inheritdoc cref="F:CabconMAUI.ViewModels.SettingsViewModel._dedicatedKeyOption"/>
+        </member>
+        <member name="M:CabconMAUI.ViewModels.SettingsViewModel.OnConformanceBlockChanged(System.String)">
+            <summary>Executes the logic for when <see cref="P:CabconMAUI.ViewModels.SettingsViewModel.ConformanceBlock"/> just changed.</summary>
+            <param name="value">The new property value that was set.</param>
+            <remarks>This method is invoked right after the value of <see cref="P:CabconMAUI.ViewModels.SettingsViewModel.ConformanceBlock"/> is changed.</remarks>
+        </member>
+        <member name="F:CabconMAUI.ViewModels.SettingsViewModel.saveSettingsCommand">
+            <summary>The backing field for <see cref="P:CabconMAUI.ViewModels.SettingsViewModel.SaveSettingsCommand"/>.</summary>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.SaveSettingsCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:CabconMAUI.ViewModels.SettingsViewModel.SaveSettingsAsync"/>.</summary>
+        </member>
+        <member name="F:CabconMAUI.ViewModels.SettingsViewModel.cancelCommand">
+            <summary>The backing field for <see cref="P:CabconMAUI.ViewModels.SettingsViewModel.CancelCommand"/>.</summary>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.CancelCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:CabconMAUI.ViewModels.SettingsViewModel.CancelAsync"/>.</summary>
+        </member>
+        <member name="F:CabconMAUI.ViewModels.SettingsViewModel.selectTabCommand">
+            <summary>The backing field for <see cref="P:CabconMAUI.ViewModels.SettingsViewModel.SelectTabCommand"/>.</summary>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.SelectTabCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand`1"/> instance wrapping <see cref="M:CabconMAUI.ViewModels.SettingsViewModel.SelectTab(System.Object)"/>.</summary>
+        </member>
+        <member name="F:CabconMAUI.ViewModels.SettingsViewModel.resetDefaultsCommand">
+            <summary>The backing field for <see cref="P:CabconMAUI.ViewModels.SettingsViewModel.ResetDefaultsCommand"/>.</summary>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.ResetDefaultsCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand"/> instance wrapping <see cref="M:CabconMAUI.ViewModels.SettingsViewModel.ResetDefaults"/>.</summary>
+        </member>
+        <member name="F:CabconMAUI.ViewModels.SettingsViewModel.refreshPortsCommand">
+            <summary>The backing field for <see cref="P:CabconMAUI.ViewModels.SettingsViewModel.RefreshPortsCommand"/>.</summary>
+        </member>
+        <member name="P:CabconMAUI.ViewModels.SettingsViewModel.RefreshPortsCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand"/> instance wrapping <see cref="M:CabconMAUI.ViewModels.SettingsViewModel.RefreshPorts"/>.</summary>
+        </member>
+        <member name="T:CabconMAUI.Resource">
+            <summary>
+            Android Resource Designer class.
+            Exposes the Android Resource designer assembly into the project Namespace.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.ColorAnimationExtensions_Button.TextColorTo(Microsoft.Maui.Controls.Button,Microsoft.Maui.Graphics.Color,System.UInt32,System.UInt32,Microsoft.Maui.Easing,System.Threading.CancellationToken)">
+            <summary>
+            Animates the TextColor of an <see cref = "T:Microsoft.Maui.ITextStyle"/> to the given color
+            </summary>
+            <param name = "element"></param>
+            <param name = "color">The target color to animate the <see cref = "P:Microsoft.Maui.ITextStyle.TextColor"/> to</param>
+            <param name = "rate">The time, in milliseconds, between the frames of the animation</param>
+            <param name = "length">The duration, in milliseconds, of the animation</param>
+            <param name = "easing">The easing function to be used in the animation</param>
+            <param name = "token"><see cref = "T:System.Threading.CancellationToken"/></param>
+            <returns>Value indicating if the animation completed successfully or not</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.ColorAnimationExtensions_DatePicker.TextColorTo(Microsoft.Maui.Controls.DatePicker,Microsoft.Maui.Graphics.Color,System.UInt32,System.UInt32,Microsoft.Maui.Easing,System.Threading.CancellationToken)">
+            <summary>
+            Animates the TextColor of an <see cref = "T:Microsoft.Maui.ITextStyle"/> to the given color
+            </summary>
+            <param name = "element"></param>
+            <param name = "color">The target color to animate the <see cref = "P:Microsoft.Maui.ITextStyle.TextColor"/> to</param>
+            <param name = "rate">The time, in milliseconds, between the frames of the animation</param>
+            <param name = "length">The duration, in milliseconds, of the animation</param>
+            <param name = "easing">The easing function to be used in the animation</param>
+            <param name = "token"><see cref = "T:System.Threading.CancellationToken"/></param>
+            <returns>Value indicating if the animation completed successfully or not</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.ColorAnimationExtensions_Editor.TextColorTo(Microsoft.Maui.Controls.Editor,Microsoft.Maui.Graphics.Color,System.UInt32,System.UInt32,Microsoft.Maui.Easing,System.Threading.CancellationToken)">
+            <summary>
+            Animates the TextColor of an <see cref = "T:Microsoft.Maui.ITextStyle"/> to the given color
+            </summary>
+            <param name = "element"></param>
+            <param name = "color">The target color to animate the <see cref = "P:Microsoft.Maui.ITextStyle.TextColor"/> to</param>
+            <param name = "rate">The time, in milliseconds, between the frames of the animation</param>
+            <param name = "length">The duration, in milliseconds, of the animation</param>
+            <param name = "easing">The easing function to be used in the animation</param>
+            <param name = "token"><see cref = "T:System.Threading.CancellationToken"/></param>
+            <returns>Value indicating if the animation completed successfully or not</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.ColorAnimationExtensions_Entry.TextColorTo(Microsoft.Maui.Controls.Entry,Microsoft.Maui.Graphics.Color,System.UInt32,System.UInt32,Microsoft.Maui.Easing,System.Threading.CancellationToken)">
+            <summary>
+            Animates the TextColor of an <see cref = "T:Microsoft.Maui.ITextStyle"/> to the given color
+            </summary>
+            <param name = "element"></param>
+            <param name = "color">The target color to animate the <see cref = "P:Microsoft.Maui.ITextStyle.TextColor"/> to</param>
+            <param name = "rate">The time, in milliseconds, between the frames of the animation</param>
+            <param name = "length">The duration, in milliseconds, of the animation</param>
+            <param name = "easing">The easing function to be used in the animation</param>
+            <param name = "token"><see cref = "T:System.Threading.CancellationToken"/></param>
+            <returns>Value indicating if the animation completed successfully or not</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.ColorAnimationExtensions_InputView.TextColorTo(Microsoft.Maui.Controls.InputView,Microsoft.Maui.Graphics.Color,System.UInt32,System.UInt32,Microsoft.Maui.Easing,System.Threading.CancellationToken)">
+            <summary>
+            Animates the TextColor of an <see cref = "T:Microsoft.Maui.ITextStyle"/> to the given color
+            </summary>
+            <param name = "element"></param>
+            <param name = "color">The target color to animate the <see cref = "P:Microsoft.Maui.ITextStyle.TextColor"/> to</param>
+            <param name = "rate">The time, in milliseconds, between the frames of the animation</param>
+            <param name = "length">The duration, in milliseconds, of the animation</param>
+            <param name = "easing">The easing function to be used in the animation</param>
+            <param name = "token"><see cref = "T:System.Threading.CancellationToken"/></param>
+            <returns>Value indicating if the animation completed successfully or not</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.ColorAnimationExtensions_Label.TextColorTo(Microsoft.Maui.Controls.Label,Microsoft.Maui.Graphics.Color,System.UInt32,System.UInt32,Microsoft.Maui.Easing,System.Threading.CancellationToken)">
+            <summary>
+            Animates the TextColor of an <see cref = "T:Microsoft.Maui.ITextStyle"/> to the given color
+            </summary>
+            <param name = "element"></param>
+            <param name = "color">The target color to animate the <see cref = "P:Microsoft.Maui.ITextStyle.TextColor"/> to</param>
+            <param name = "rate">The time, in milliseconds, between the frames of the animation</param>
+            <param name = "length">The duration, in milliseconds, of the animation</param>
+            <param name = "easing">The easing function to be used in the animation</param>
+            <param name = "token"><see cref = "T:System.Threading.CancellationToken"/></param>
+            <returns>Value indicating if the animation completed successfully or not</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.ColorAnimationExtensions_Picker.TextColorTo(Microsoft.Maui.Controls.Picker,Microsoft.Maui.Graphics.Color,System.UInt32,System.UInt32,Microsoft.Maui.Easing,System.Threading.CancellationToken)">
+            <summary>
+            Animates the TextColor of an <see cref = "T:Microsoft.Maui.ITextStyle"/> to the given color
+            </summary>
+            <param name = "element"></param>
+            <param name = "color">The target color to animate the <see cref = "P:Microsoft.Maui.ITextStyle.TextColor"/> to</param>
+            <param name = "rate">The time, in milliseconds, between the frames of the animation</param>
+            <param name = "length">The duration, in milliseconds, of the animation</param>
+            <param name = "easing">The easing function to be used in the animation</param>
+            <param name = "token"><see cref = "T:System.Threading.CancellationToken"/></param>
+            <returns>Value indicating if the animation completed successfully or not</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.ColorAnimationExtensions_RadioButton.TextColorTo(Microsoft.Maui.Controls.RadioButton,Microsoft.Maui.Graphics.Color,System.UInt32,System.UInt32,Microsoft.Maui.Easing,System.Threading.CancellationToken)">
+            <summary>
+            Animates the TextColor of an <see cref = "T:Microsoft.Maui.ITextStyle"/> to the given color
+            </summary>
+            <param name = "element"></param>
+            <param name = "color">The target color to animate the <see cref = "P:Microsoft.Maui.ITextStyle.TextColor"/> to</param>
+            <param name = "rate">The time, in milliseconds, between the frames of the animation</param>
+            <param name = "length">The duration, in milliseconds, of the animation</param>
+            <param name = "easing">The easing function to be used in the animation</param>
+            <param name = "token"><see cref = "T:System.Threading.CancellationToken"/></param>
+            <returns>Value indicating if the animation completed successfully or not</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.ColorAnimationExtensions_SearchBar.TextColorTo(Microsoft.Maui.Controls.SearchBar,Microsoft.Maui.Graphics.Color,System.UInt32,System.UInt32,Microsoft.Maui.Easing,System.Threading.CancellationToken)">
+            <summary>
+            Animates the TextColor of an <see cref = "T:Microsoft.Maui.ITextStyle"/> to the given color
+            </summary>
+            <param name = "element"></param>
+            <param name = "color">The target color to animate the <see cref = "P:Microsoft.Maui.ITextStyle.TextColor"/> to</param>
+            <param name = "rate">The time, in milliseconds, between the frames of the animation</param>
+            <param name = "length">The duration, in milliseconds, of the animation</param>
+            <param name = "easing">The easing function to be used in the animation</param>
+            <param name = "token"><see cref = "T:System.Threading.CancellationToken"/></param>
+            <returns>Value indicating if the animation completed successfully or not</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.ColorAnimationExtensions_TimePicker.TextColorTo(Microsoft.Maui.Controls.TimePicker,Microsoft.Maui.Graphics.Color,System.UInt32,System.UInt32,Microsoft.Maui.Easing,System.Threading.CancellationToken)">
+            <summary>
+            Animates the TextColor of an <see cref = "T:Microsoft.Maui.ITextStyle"/> to the given color
+            </summary>
+            <param name = "element"></param>
+            <param name = "color">The target color to animate the <see cref = "P:Microsoft.Maui.ITextStyle.TextColor"/> to</param>
+            <param name = "rate">The time, in milliseconds, between the frames of the animation</param>
+            <param name = "length">The duration, in milliseconds, of the animation</param>
+            <param name = "easing">The easing function to be used in the animation</param>
+            <param name = "token"><see cref = "T:System.Threading.CancellationToken"/></param>
+            <returns>Value indicating if the animation completed successfully or not</returns>
+        </member>
+        <member name="T:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs">
+            <summary>
+            A helper type providing cached, reusable <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instances
+            for all properties generated with <see cref="T:CommunityToolkit.Mvvm.ComponentModel.ObservablePropertyAttribute"/>.
+            </summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Label">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Label" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsChecked">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsChecked" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SerialNumber">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SerialNumber" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ClassId">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ClassId" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ObisCode">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ObisCode" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Attribute">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Attribute" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ParameterName">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ParameterName" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Value">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Value" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsBusy">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsBusy" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsNotBusy">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsNotBusy" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.StatusMessage">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "StatusMessage" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsError">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsError" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.UserId">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "UserId" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Password">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Password" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.RememberMe">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "RememberMe" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.AppVersion">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "AppVersion" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.MeterVariants">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "MeterVariants" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SelectedMeterVariant">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SelectedMeterVariant" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsConnected">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsConnected" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ConnectButtonText">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ConnectButtonText" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ConnectionStatusColor">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ConnectionStatusColor" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SelectedPort">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SelectedPort" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SelectedProtocol">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SelectedProtocol" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SelectedTransport">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SelectedTransport" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SelectedVariant">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SelectedVariant" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.HasData">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "HasData" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.MeterNumber">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "MeterNumber" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.MeterType">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "MeterType" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.MeterSignature">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "MeterSignature" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.EnergyImport">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "EnergyImport" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.EnergyExport">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "EnergyExport" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.VoltageR">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "VoltageR" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.VoltageY">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "VoltageY" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.VoltageB">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "VoltageB" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.CurrentR">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "CurrentR" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.CurrentY">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "CurrentY" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.CurrentB">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "CurrentB" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.PowerFactor">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "PowerFactor" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Frequency">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Frequency" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ActivePower">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ActivePower" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ReactivePower">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ReactivePower" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Timestamp">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Timestamp" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ShowRaw">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ShowRaw" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SelectedReadTab">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SelectedReadTab" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.InstantaneousSelected">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "InstantaneousSelected" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.BillingSelected">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "BillingSelected" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.TamperSelected">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "TamperSelected" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.LoadSurveySelected">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "LoadSurveySelected" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.DailyProfileSelected">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "DailyProfileSelected" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.NameplateSelected">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "NameplateSelected" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SelectAllFeatures">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SelectAllFeatures" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ReadCompleteMode">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ReadCompleteMode" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ReadByDateRangeMode">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ReadByDateRangeMode" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ReadByEntryRangeMode">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ReadByEntryRangeMode" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.BackgroundReadInProgress">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "BackgroundReadInProgress" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.RangeFrom">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "RangeFrom" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.RangeTo">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "RangeTo" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.EntryFrom">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "EntryFrom" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.EntryTo">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "EntryTo" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.MeterResults">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "MeterResults" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SelectedReadDataOption">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SelectedReadDataOption" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.InstantaneousRows">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "InstantaneousRows" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.NameplateRows">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "NameplateRows" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ShowInstantaneousPanel">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ShowInstantaneousPanel" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ShowNameplatePanel">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ShowNameplatePanel" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.LeftConformanceOptions">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "LeftConformanceOptions" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.RightConformanceOptions">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "RightConformanceOptions" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.AllConformanceSelected">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "AllConformanceSelected" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SelectedTab">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SelectedTab" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SerialPort">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SerialPort" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SignOnBaudRate">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SignOnBaudRate" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.CommandBaudRate">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "CommandBaudRate" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.StopBits">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "StopBits" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.DataBits">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "DataBits" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Parity">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Parity" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.CommandTimeOut">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "CommandTimeOut" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IntercharacterDelay">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IntercharacterDelay" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.InterframeTimeout">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "InterframeTimeout" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ServerSAP">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ServerSAP" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ServerLowerMacAddress">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ServerLowerMacAddress" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ClientSAP">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ClientSAP" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.AddressingSchem">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "AddressingSchem" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ServerPhysicalID">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ServerPhysicalID" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.HDLCAddressing">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "HDLCAddressing" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.InfoSize">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "InfoSize" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.WindowSize">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "WindowSize" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.CosemBufferSize">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "CosemBufferSize" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.DLLBufferSize">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "DLLBufferSize" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ApplicationContext">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ApplicationContext" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SecurityMechanism">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SecurityMechanism" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.PDUSize">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "PDUSize" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ConformanceBlock">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ConformanceBlock" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.DLMSVersion">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "DLMSVersion" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.AssociationMode">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "AssociationMode" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.AssociationType">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "AssociationType" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.AssociationAccess">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "AssociationAccess" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.HLSKey">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "HLSKey" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.HLSPWD">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "HLSPWD" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ClientSystemTitle">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ClientSystemTitle" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Securitysuit">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Securitysuit" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.GlobalEncryptionKey">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "GlobalEncryptionKey" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.DedicatedKey">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "DedicatedKey" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.AuthenticationKey">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "AuthenticationKey" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.AESEncryption">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "AESEncryption" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.MeterMode">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "MeterMode" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.CommunicationPort">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "CommunicationPort" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.CommunicationMode">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "CommunicationMode" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ModemNumber">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ModemNumber" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.AppUser">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "AppUser" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.AppPwd">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "AppPwd" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.AppUserRememberMe">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "AppUserRememberMe" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.DefaultReadClassID">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "DefaultReadClassID" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.DefaultReadOBIS">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "DefaultReadOBIS" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.DefaultReadAtt">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "DefaultReadAtt" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.DefaultReadDaraType">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "DefaultReadDaraType" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.DefaultReadLen">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "DefaultReadLen" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.DefaultReadAccSelector">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "DefaultReadAccSelector" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.DefaultReadCmdType">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "DefaultReadCmdType" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.DefaultReadSelectiveAccessCommand">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "DefaultReadSelectiveAccessCommand" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.DefaultReadDataValueCommand">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "DefaultReadDataValueCommand" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Cnf1">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Cnf1" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Cnf2">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Cnf2" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Cnf3">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Cnf3" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.WindowSizeOption">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "WindowSizeOption" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.HdlcAddressingSchemeOption">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "HdlcAddressingSchemeOption" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ClientTypeOption">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ClientTypeOption" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ApplicationContextOption">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ApplicationContextOption" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.AuthenticationLevelOption">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "AuthenticationLevelOption" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SecuritySuitOption">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SecuritySuitOption" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.DedicatedKeyOption">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "DedicatedKeyOption" generated properties.</summary>
+        </member>
+        <member name="T:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs">
+            <summary>
+            A helper type providing cached, reusable <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instances
+            for all properties generated with <see cref="T:CommunityToolkit.Mvvm.ComponentModel.ObservablePropertyAttribute"/>.
+            </summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Label">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Label" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsChecked">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsChecked" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SerialNumber">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SerialNumber" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ClassId">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ClassId" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ObisCode">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ObisCode" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Attribute">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Attribute" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ParameterName">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ParameterName" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Value">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Value" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsBusy">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsBusy" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsNotBusy">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsNotBusy" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.StatusMessage">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "StatusMessage" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsError">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsError" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.UserId">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "UserId" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Password">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Password" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.RememberMe">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "RememberMe" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.AppVersion">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "AppVersion" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.MeterVariants">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "MeterVariants" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SelectedMeterVariant">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SelectedMeterVariant" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsConnected">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsConnected" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ConnectButtonText">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ConnectButtonText" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ConnectionStatusColor">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ConnectionStatusColor" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SelectedPort">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SelectedPort" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SelectedProtocol">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SelectedProtocol" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SelectedTransport">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SelectedTransport" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SelectedVariant">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SelectedVariant" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.HasData">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "HasData" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.MeterNumber">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "MeterNumber" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.MeterType">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "MeterType" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.MeterSignature">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "MeterSignature" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.EnergyImport">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "EnergyImport" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.EnergyExport">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "EnergyExport" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.VoltageR">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "VoltageR" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.VoltageY">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "VoltageY" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.VoltageB">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "VoltageB" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.CurrentR">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "CurrentR" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.CurrentY">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "CurrentY" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.CurrentB">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "CurrentB" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.PowerFactor">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "PowerFactor" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Frequency">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Frequency" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ActivePower">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ActivePower" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ReactivePower">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ReactivePower" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Timestamp">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Timestamp" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ShowRaw">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ShowRaw" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SelectedReadTab">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SelectedReadTab" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.InstantaneousSelected">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "InstantaneousSelected" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.BillingSelected">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "BillingSelected" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.TamperSelected">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "TamperSelected" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.LoadSurveySelected">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "LoadSurveySelected" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.DailyProfileSelected">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "DailyProfileSelected" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.NameplateSelected">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "NameplateSelected" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SelectAllFeatures">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SelectAllFeatures" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ReadCompleteMode">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ReadCompleteMode" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ReadByDateRangeMode">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ReadByDateRangeMode" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ReadByEntryRangeMode">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ReadByEntryRangeMode" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.BackgroundReadInProgress">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "BackgroundReadInProgress" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.RangeFrom">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "RangeFrom" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.RangeTo">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "RangeTo" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.EntryFrom">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "EntryFrom" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.EntryTo">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "EntryTo" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.MeterResults">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "MeterResults" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SelectedReadDataOption">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SelectedReadDataOption" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.InstantaneousRows">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "InstantaneousRows" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.NameplateRows">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "NameplateRows" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ShowInstantaneousPanel">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ShowInstantaneousPanel" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ShowNameplatePanel">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ShowNameplatePanel" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.LeftConformanceOptions">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "LeftConformanceOptions" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.RightConformanceOptions">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "RightConformanceOptions" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.AllConformanceSelected">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "AllConformanceSelected" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SelectedTab">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SelectedTab" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SerialPort">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SerialPort" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SignOnBaudRate">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SignOnBaudRate" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.CommandBaudRate">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "CommandBaudRate" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.StopBits">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "StopBits" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.DataBits">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "DataBits" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Parity">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Parity" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.CommandTimeOut">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "CommandTimeOut" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IntercharacterDelay">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IntercharacterDelay" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.InterframeTimeout">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "InterframeTimeout" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ServerSAP">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ServerSAP" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ServerLowerMacAddress">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ServerLowerMacAddress" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ClientSAP">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ClientSAP" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.AddressingSchem">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "AddressingSchem" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ServerPhysicalID">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ServerPhysicalID" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.HDLCAddressing">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "HDLCAddressing" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.InfoSize">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "InfoSize" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.WindowSize">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "WindowSize" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.CosemBufferSize">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "CosemBufferSize" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.DLLBufferSize">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "DLLBufferSize" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ApplicationContext">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ApplicationContext" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SecurityMechanism">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SecurityMechanism" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.PDUSize">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "PDUSize" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ConformanceBlock">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ConformanceBlock" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.DLMSVersion">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "DLMSVersion" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.AssociationMode">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "AssociationMode" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.AssociationType">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "AssociationType" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.AssociationAccess">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "AssociationAccess" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.HLSKey">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "HLSKey" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.HLSPWD">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "HLSPWD" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ClientSystemTitle">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ClientSystemTitle" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Securitysuit">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Securitysuit" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.GlobalEncryptionKey">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "GlobalEncryptionKey" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.DedicatedKey">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "DedicatedKey" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.AuthenticationKey">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "AuthenticationKey" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.AESEncryption">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "AESEncryption" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.MeterMode">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "MeterMode" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.CommunicationPort">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "CommunicationPort" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.CommunicationMode">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "CommunicationMode" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ModemNumber">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ModemNumber" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.AppUser">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "AppUser" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.AppPwd">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "AppPwd" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.AppUserRememberMe">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "AppUserRememberMe" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.DefaultReadClassID">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "DefaultReadClassID" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.DefaultReadOBIS">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "DefaultReadOBIS" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.DefaultReadAtt">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "DefaultReadAtt" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.DefaultReadDaraType">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "DefaultReadDaraType" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.DefaultReadLen">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "DefaultReadLen" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.DefaultReadAccSelector">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "DefaultReadAccSelector" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.DefaultReadCmdType">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "DefaultReadCmdType" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.DefaultReadSelectiveAccessCommand">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "DefaultReadSelectiveAccessCommand" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.DefaultReadDataValueCommand">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "DefaultReadDataValueCommand" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Cnf1">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Cnf1" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Cnf2">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Cnf2" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Cnf3">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Cnf3" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.WindowSizeOption">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "WindowSizeOption" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.HdlcAddressingSchemeOption">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "HdlcAddressingSchemeOption" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ClientTypeOption">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ClientTypeOption" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ApplicationContextOption">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ApplicationContextOption" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.AuthenticationLevelOption">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "AuthenticationLevelOption" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SecuritySuitOption">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SecuritySuitOption" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.DedicatedKeyOption">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "DedicatedKeyOption" generated properties.</summary>
+        </member>
+    </members>
+</doc>

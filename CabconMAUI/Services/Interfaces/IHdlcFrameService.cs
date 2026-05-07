@@ -16,4 +16,8 @@ public interface IHdlcFrameService
     bool IrDACheckBCC(byte[] buf); bool IrDACheckSyncWord(byte[] buf);
     bool IrDACheckCommandID(byte[] buf,byte cmd);
     bool IrDACheckBCC_1P(byte[] buf,int len); bool IrDACheckSyncWord_1P(byte[] buf,int len);
+    
+    // Block transfer methods
+    byte[] CreateGetRequest(byte[] obisCode);
+    byte[] CreateGetNextRequest(uint blockIndex);
 }

@@ -34,6 +34,7 @@ public static class DlmsHelper
         public static readonly byte[] LoadProfileInstant       ={0x01,0x00,0x63,0x00,0x00,0xFF};
         public static readonly byte[] TamperProfile            ={0x00,0x00,0x62,0x00,0x00,0xFF};
         public static readonly byte[] DailyProfile             ={0x01,0x00,0x62,0x01,0x00,0xFF};
+        public static readonly byte[] ConnectControlObject     ={0x00,0x00,0x96,0x03,0x0A,0xFF}; // 0.0.96.3.10.255 Relay Control
     }
 
     public static string[]? DLMSDataFormator(byte[] buf,int idx,bool ascii)

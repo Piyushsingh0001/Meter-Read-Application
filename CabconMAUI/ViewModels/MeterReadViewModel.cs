@@ -2,7 +2,9 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CabconMAUI.Helpers;
 using CabconMAUI.Models;
+using CabconMAUI.Services;
 using CabconMAUI.Services.Interfaces;
+using System.Collections.ObjectModel;
 namespace CabconMAUI.ViewModels;
 public partial class MeterReadViewModel : BaseViewModel
 {
@@ -10,13 +12,18 @@ public partial class MeterReadViewModel : BaseViewModel
     readonly IMeterCommunicationFacade _meterFacade;
     readonly IReadExportService _exportService;
     readonly ISerialPortService _serial;
+    readonly IMeterReadBackgroundService _backgroundService;
+    readonly MeterCommandRepository _commandRepository;
+    readonly ICosemDataParser _dataParser;
+    readonly IStatusLogger _logger;
     MeterReadResult? _lastRead;
-    [ObservableProperty][NotifyPropertyChangedFor(nameof(ConnectButtonText))][NotifyPropertyChangedFor(nameof(ConnectionStatusColor))][NotifyCanExecuteChangedFor(nameof(ConnectCommand))][NotifyCanExecuteChangedFor(nameof(ReadMeterCommand))][NotifyCanExecuteChangedFor(nameof(DisconnectCommand))] private bool _isConnected;
+    [ObservableProperty][NotifyPropertyChangedFor(nameof(ConnectButtonText))][NotifyPropertyChangedFor(nameof(ConnectionStatusColor))][NotifyCanExecuteChangedFor(nameof(ConnectCommand))][NotifyCanExecuteChangedFor(nameof(ReadMeterCommand))][NotifyCanExecuteChangedFor(nameof(DisconnectCommand))][NotifyCanExecuteChangedFor(nameof(StartBackgroundReadAllCommand))][NotifyCanExecuteChangedFor(nameof(StopBackgroundReadAllCommand))] private bool _isConnected;
     public string ConnectButtonText=>IsConnected?"Connected ✓":"Connect";
     public string ConnectionStatusColor=>IsConnected?"#1E8449":"#C0392B";
     [ObservableProperty] private string _selectedPort="USB Serial";
     [ObservableProperty] private string _selectedProtocol="1-Phase Smart / DLMS";
     [ObservableProperty] private string _selectedTransport="Serial";
+    [ObservableProperty] private MeterVariant? _selectedVariant;
     public IReadOnlyList<string> PortOptions=>new[]{"USB Serial","Bluetooth","IrDA"};
     public IReadOnlyList<string> ProtocolOptions=>new[]{"1-Phase Smart / DLMS","3-Phase Smart / DLMS","IEC / Non-DLMS"};
     public IReadOnlyList<string> TransportOptions=>new[]{"Serial","Bluetooth","IrDA"};
@@ -49,11 +56,22 @@ public partial class MeterReadViewModel : BaseViewModel
     [ObservableProperty] private bool _readCompleteMode = true;
     [ObservableProperty] private bool _readByDateRangeMode;
     [ObservableProperty] private bool _readByEntryRangeMode;
+    [ObservableProperty][NotifyCanExecuteChangedFor(nameof(StartBackgroundReadAllCommand))][NotifyCanExecuteChangedFor(nameof(StopBackgroundReadAllCommand))] private bool _backgroundReadInProgress;
     [ObservableProperty] private DateTime _rangeFrom=DateTime.Now.AddDays(-1);
     [ObservableProperty] private DateTime _rangeTo=DateTime.Now;
     [ObservableProperty] private int _entryFrom=1;
     [ObservableProperty] private int _entryTo=10;
-    public MeterReadViewModel(IDlmsService d,ISettingsService s,INavigationService n,ISerialPortService ser,IMeterCommunicationFacade meterFacade,IReadExportService exportService){_dlms=d;_set=s;_nav=n;_serial=ser;_meterFacade=meterFacade;_exportService=exportService;_dlms.StatusUpdated+=(o,e)=>{StatusMessage=e.Message;IsError=e.IsError;};}
+    
+    private string _statusLog = string.Empty;
+    public string StatusLog 
+    { 
+        get => _statusLog; 
+        set => SetProperty(ref _statusLog, value); 
+    }
+    
+    [ObservableProperty] private ObservableCollection<MeterReadDisplayRow> _meterResults = new();
+    
+    public MeterReadViewModel(IDlmsService d,ISettingsService s,INavigationService n,ISerialPortService ser,IMeterCommunicationFacade meterFacade,IReadExportService exportService,IMeterReadBackgroundService backgroundService,ICosemDataParser dataParser,IStatusLogger logger){_dlms=d;_set=s;_nav=n;_serial=ser;_meterFacade=meterFacade;_exportService=exportService;_backgroundService=backgroundService;_dataParser=dataParser;_logger=logger;_commandRepository=new MeterCommandRepository();_dlms.StatusUpdated+=(o,e)=>{StatusMessage=e.Message;IsError=e.IsError;};_backgroundService.StatusUpdated+=(o,e)=>{StatusMessage=e.Message;IsError=e.IsError;};_backgroundService.ReadCompleted+=(o,result)=>{ProcessBackgroundReadResult(result);};_logger.OnMessageLogged+=(msg)=>StatusLog+=msg+Environment.NewLine;}
 
     [RelayCommand(CanExecute=nameof(CanConnect))]
     async Task ConnectAsync(){if(IsBusy)return;IsBusy=true;ClearStatus();try{var req=new MeterConnectRequest{ProtocolFamily=GetProtocol(),TransportMode=GetTransport(),PortName=SelectedPort};bool ok=await _meterFacade.ConnectToMeterAsync(req);IsConnected=ok;if(!ok)SetStatus("Connection failed. Check settings and cable.",true);}catch(Exception ex){SetStatus($"Connect error: {ex.Message}",true);}finally{IsBusy=false;}}
@@ -143,6 +161,210 @@ public partial class MeterReadViewModel : BaseViewModel
     async Task ReadAllAsync() => await ExecuteFeatureReadAsync(MeterReadFeature.ReadAll);
 
     [RelayCommand]
+    async Task ReadAllFromXmlAsync()
+    {
+        if (!IsConnected) 
+        { 
+            SetStatus("Connect meter first.", true); 
+            return; 
+        }
+        
+        if (IsBusy) return;
+        
+        IsBusy = true;
+        HasData = false;
+        ClearStatus();
+        _lastRead = null;
+        
+        try
+        {
+            SetStatus("Reading from XML configuration...");
+            
+            var commands = await _commandRepository.GetInstantaneousCommandsAsync();
+            var results = new Dictionary<string, string>();
+            var processedCount = 0;
+            
+            foreach (var cmd in commands)
+            {
+                try
+                {
+                    SetStatus($"Reading {cmd.Name}...");
+                    
+                    // Read raw data from meter
+                    if (await _dlms.ReadByteFromMeterAsync(cmd.ObisCode, cmd.Class, cmd.Attribute))
+                    {
+                        // Parse with OBIS-specific formatting
+                        var parseResult = _dataParser.ParseObisData(_serial.ReceiveBuffer, cmd.ObisCode, 18);
+                        
+                        if (parseResult.IsSuccess)
+                        {
+                            var displayValue = ApplyScaling(parseResult.ParsedValue, cmd.Scale);
+                            results[cmd.Name] = displayValue;
+                            
+                            // Update UI properties for known parameters
+                            UpdateUiProperty(cmd.Name, displayValue);
+                            
+                            processedCount++;
+                        }
+                        else
+                        {
+                            results[cmd.Name] = "Parse Error";
+                        }
+                    }
+                    else
+                    {
+                        results[cmd.Name] = "Read Failed";
+                    }
+                    
+                    // Small delay between reads
+                    await Task.Delay(100);
+                }
+                catch (Exception ex)
+                {
+                    results[cmd.Name] = $"Error: {ex.Message}";
+                    System.Diagnostics.Debug.WriteLine($"[ReadAll] Error reading {cmd.Name}: {ex.Message}");
+                }
+            }
+            
+            // Update meter info
+            MeterType = _dlms.GetSelectedMeterType();
+            MeterSignature = _dlms.MeterInfoValue;
+            
+            // Create read result
+            _lastRead = new MeterReadResult
+            {
+                IsSuccess = true,
+                Source = "xml-instantaneous",
+                Message = $"XML-based read completed. {processedCount}/{commands.Count} parameters read successfully.",
+                Values = results
+            };
+            
+            HasData = processedCount > 0;
+            SetStatus($"XML read completed: {processedCount}/{commands.Count} parameters read.");
+        }
+        catch (Exception ex)
+        {
+            SetStatus($"XML read error: {ex.Message}", true);
+        }
+        finally
+        {
+            IsBusy = false;
+        }
+    }
+
+    private string ApplyScaling(string value, double scale)
+    {
+        if (scale == 1.0) return value;
+        
+        // Extract numeric value from formatted string (e.g., "230.5 V" -> "230.5")
+        var parts = value.Split(' ');
+        if (parts.Length > 0 && double.TryParse(parts[0], out var numericValue))
+        {
+            var scaledValue = numericValue * scale;
+            var unit = parts.Length > 1 ? parts[1] : "";
+            return $"{scaledValue:F3} {unit}".Trim();
+        }
+        
+        return value;
+    }
+
+    private void UpdateUiProperty(string parameterName, string value)
+    {
+        switch (parameterName)
+        {
+            case "Meter Number":
+                MeterNumber = value;
+                break;
+            case "Energy Import":
+                EnergyImport = value.Contains("kWh") ? value : $"{value} kWh";
+                break;
+            case "Energy Export":
+                EnergyExport = value.Contains("kWh") ? value : $"{value} kWh";
+                break;
+            case "Voltage L1":
+                VoltageR = value.Contains("V") ? value : $"{value} V";
+                break;
+            case "Voltage L2":
+                VoltageY = value.Contains("V") ? value : $"{value} V";
+                break;
+            case "Voltage L3":
+                VoltageB = value.Contains("V") ? value : $"{value} V";
+                break;
+            case "Current L1":
+                CurrentR = value.Contains("A") ? value : $"{value} A";
+                break;
+            case "Current L2":
+                CurrentY = value.Contains("A") ? value : $"{value} A";
+                break;
+            case "Current L3":
+                CurrentB = value.Contains("A") ? value : $"{value} A";
+                break;
+            case "Active Power Total":
+                ActivePower = value.Contains("W") ? value : $"{value} W";
+                break;
+            case "Reactive Power Total":
+                ReactivePower = value.Contains("VAR") ? value : $"{value} VAR";
+                break;
+            case "Power Factor":
+                PowerFactor = value;
+                break;
+            case "Frequency":
+                Frequency = value.Contains("Hz") ? value : $"{value} Hz";
+                break;
+            case "Clock":
+                Timestamp = value;
+                break;
+        }
+    }
+
+    [RelayCommand(CanExecute=nameof(CanStartBackgroundRead))]
+    async Task StartBackgroundReadAllAsync()
+    {
+        if (!IsConnected) 
+        { 
+            SetStatus("Connect meter first.", true); 
+            return; 
+        }
+
+        BackgroundReadInProgress = true;
+        try
+        {
+            var request = new MeterReadRequest
+            {
+                Feature = MeterReadFeature.ReadAll,
+                FromDate = RangeFrom,
+                ToDate = RangeTo,
+                FromEntry = EntryFrom,
+                ToEntry = EntryTo
+            };
+
+            await _backgroundService.StartReadAllAsync(request);
+        }
+        catch (Exception ex)
+        {
+            SetStatus($"Background read failed: {ex.Message}", true);
+            BackgroundReadInProgress = false;
+        }
+    }
+
+    [RelayCommand(CanExecute=nameof(CanStopBackgroundRead))]
+    async Task StopBackgroundReadAllAsync()
+    {
+        try
+        {
+            await _backgroundService.StopReadAllAsync();
+            BackgroundReadInProgress = false;
+        }
+        catch (Exception ex)
+        {
+            SetStatus($"Error stopping background read: {ex.Message}", true);
+        }
+    }
+
+    bool CanStartBackgroundRead() => IsConnected && !BackgroundReadInProgress;
+    bool CanStopBackgroundRead() => BackgroundReadInProgress;
+
+    [RelayCommand]
     async Task ReadSelectedAsync()
     {
         if (InstantaneousSelected) await ExecuteFeatureReadAsync(MeterReadFeature.Instantaneous);
@@ -174,6 +396,36 @@ public partial class MeterReadViewModel : BaseViewModel
         if (_lastRead == null) { SetStatus("No read data available for export.", true); return; }
         var path = await _exportService.ExportAsync(_lastRead, ExportFormat.Xml);
         SetStatus($"XML exported: {path}");
+    }
+
+    [RelayCommand]
+    async Task ExecuteReadData()
+    {
+        if (SelectedVariant == null)
+        {
+            _logger.Log("STOP: Please select a Meter Type (e.g., 1-Phase Non-Smart)");
+            return;
+        }
+
+        IsBusy = true;
+        try {
+            _logger.Log($"Action: Reading {SelectedVariant.Name}...");
+            
+            // Pass the actual variant to the facade so it knows which protocol to use
+            bool isConnected = await _meterFacade.ConnectAndAuthenticateAsync(SelectedVariant);
+            
+            if (!isConnected)
+            {
+                // This is where your error is currently triggering
+                _logger.Log("FAILED: Could not establish communication. Check port/variant/cable.");
+                return; 
+            }
+            
+            _logger.Log("SUCCESS: Communication Channel Established.");
+            // Continue with data readout...
+        } finally {
+            IsBusy = false;
+        }
     }
 
     async Task ExecuteFeatureReadAsync(MeterReadFeature feature)
@@ -242,6 +494,30 @@ public partial class MeterReadViewModel : BaseViewModel
         _ => MeterTransportMode.Serial
     };
 
+    async Task<bool> EnsureConnectedAsync()
+    {
+        if (IsConnected)
+        {
+            return true;
+        }
+
+        var request = new MeterConnectRequest
+        {
+            ProtocolFamily = GetProtocol(),
+            TransportMode = GetTransport(),
+            PortName = SelectedPort
+        };
+
+        var ok = await _meterFacade.ConnectToMeterAsync(request);
+        IsConnected = ok;
+        if (!ok)
+        {
+            SetStatus("Connection failed. Check settings and cable.", true);
+        }
+
+        return ok;
+    }
+
     partial void OnSelectAllFeaturesChanged(bool value)
     {
         InstantaneousSelected = value;
@@ -272,5 +548,37 @@ public partial class MeterReadViewModel : BaseViewModel
         ReadCompleteMode = false;
         ReadByDateRangeMode = false;
     }
+    void ProcessBackgroundReadResult(MeterReadResult result)
+    {
+        BackgroundReadInProgress = false;
+        
+        if (!result.IsSuccess)
+        {
+            SetStatus(result.Message, true);
+            return;
+        }
+
+        _lastRead = result;
+        
+        // Update UI with key values
+        if (result.Values.TryGetValue("Instantaneous:meter-number", out var meterNo) && !string.IsNullOrWhiteSpace(meterNo))
+            MeterNumber = meterNo;
+        if (result.Values.TryGetValue("Instantaneous:energy-import", out var imp) && !string.IsNullOrWhiteSpace(imp))
+            EnergyImport = $"{imp} kWh";
+        if (result.Values.TryGetValue("Instantaneous:energy-export", out var exp) && !string.IsNullOrWhiteSpace(exp))
+            EnergyExport = $"{exp} kWh";
+        if (result.Values.TryGetValue("Instantaneous:voltage-r", out var vr) && !string.IsNullOrWhiteSpace(vr))
+            VoltageR = $"{vr} V";
+        if (result.Values.TryGetValue("Instantaneous:voltage-y", out var vy) && !string.IsNullOrWhiteSpace(vy))
+            VoltageY = $"{vy} V";
+        if (result.Values.TryGetValue("Instantaneous:voltage-b", out var vb) && !string.IsNullOrWhiteSpace(vb))
+            VoltageB = $"{vb} V";
+        if (result.Values.TryGetValue("Instantaneous:clock", out var clk) && !string.IsNullOrWhiteSpace(clk))
+            Timestamp = clk;
+
+        HasData = true;
+        SetStatus("Background read-all completed successfully.");
+    }
+
     void Reset(){MeterNumber=MeterType=MeterSignature=EnergyImport=EnergyExport=VoltageR=VoltageY=VoltageB=CurrentR=CurrentY=CurrentB=PowerFactor=Frequency=ActivePower=ReactivePower=Timestamp="--";}
 }
