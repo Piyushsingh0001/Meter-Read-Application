@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="CabconMAUI.Views.MeterReadPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="Meter Reading"
+             BackgroundColor="{StaticResource PageBackground}"
+             Shell.NavBarIsVisible="True">
+    <Grid RowDefinitions="Auto, *, Auto">
+        <!-- Button Area -->
+        <!--  <HorizontalStackLayout Grid.Row="0" Spacing="10" Padding="10">
+            <Button Text="Read Data" Command="{Binding ReadDataCommand}" />
+        </HorizontalStackLayout> -->
+        
+        <!-- Main Content Area -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="14" Spacing="12">
+            <Border BackgroundColor="White" StrokeShape="RoundRectangle 16" Stroke="{StaticResource CardBorder}" Padding="16">
+                <VerticalStackLayout Spacing="14">
+                    <Label Text="READ DATA" Style="{StaticResource SectionHeader}"/>
+
+                    <Border Stroke="{StaticResource CardBorder}" StrokeShape="RoundRectangle 12" Padding="14" BackgroundColor="{StaticResource SectionBg}">
+                        <VerticalStackLayout Spacing="10">
+                            <HorizontalStackLayout Spacing="8">
+                                <Label Text="Read Data" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}" FontSize="15"/>
+                                <Label Text="Tree View" TextColor="{StaticResource TextSecondary}" FontSize="12" VerticalOptions="End"/>
+                            </HorizontalStackLayout>
+
+                            <VerticalStackLayout Margin="16,0,0,0" Spacing="8">
+                                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
+                                    <Label Text="" TextColor="{StaticResource TextSecondary}" VerticalOptions="Center"/>
+                                    <Button Grid.Column="1"
+                                            Text="Instantaneous Profile Read Out"
+                                            Command="{Binding SelectReadDataOptionCommand}"
+                                            CommandParameter="0"
+                                            Style="{StaticResource OutlineButton}"
+                                            HeightRequest="46"
+                                            HorizontalOptions="Fill">
+                                        <Button.Triggers>
+                                            <DataTrigger TargetType="Button" Binding="{Binding SelectedReadDataOption}" Value="0">
+                                                <Setter Property="BackgroundColor" Value="{StaticResource Primary}"/>
+                                                <Setter Property="TextColor" Value="White"/>
+                                                <Setter Property="BorderColor" Value="{StaticResource Primary}"/>
+                                            </DataTrigger>
+                                        </Button.Triggers>
+                                    </Button>
+                                </Grid>
+
+                                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
+                                    <Label Text="" TextColor="{StaticResource TextSecondary}" VerticalOptions="Center"/>
+                                    <Button Grid.Column="1"
+                                            Text="Nameplate"
+                                            Command="{Binding SelectReadDataOptionCommand}"
+                                            CommandParameter="1"
+                                            Style="{StaticResource OutlineButton}"
+                                            HeightRequest="46"
+                                            HorizontalOptions="Fill">
+                                        <Button.Triggers>
+                                            <DataTrigger TargetType="Button" Binding="{Binding SelectedReadDataOption}" Value="1">
+                                                <Setter Property="BackgroundColor" Value="{StaticResource Primary}"/>
+                                                <Setter Property="TextColor" Value="White"/>
+                                                <Setter Property="BorderColor" Value="{StaticResource Primary}"/>
+                                            </DataTrigger>
+                                        </Button.Triggers>
+                                    </Button>
+                                </Grid>
+
+                                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
+                                    <Label Text="" TextColor="{StaticResource TextSecondary}" VerticalOptions="Center"/>
+                                    <Button Grid.Column="1"
+                                            Text="RTC (Clock)"
+                                            Command="{Binding SelectReadDataOptionCommand}"
+                                            CommandParameter="2"
+                                            Style="{StaticResource OutlineButton}"
+                                            HeightRequest="46"
+                                            HorizontalOptions="Fill">
+                                        <Button.Triggers>
+                                            <DataTrigger TargetType="Button" Binding="{Binding SelectedReadDataOption}" Value="2">
+                                                <Setter Property="BackgroundColor" Value="{StaticResource Primary}"/>
+                                                <Setter Property="TextColor" Value="White"/>
+                                                <Setter Property="BorderColor" Value="{StaticResource Primary}"/>
+                                            </DataTrigger>
+                                        </Button.Triggers>
+                                    </Button>
+                                </Grid>
+
+                                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
+                                    <Label Text="" TextColor="{StaticResource TextSecondary}" VerticalOptions="Center"/>
+                                    <Button Grid.Column="1"
+                                            Text="Billing Profile"
+                                            Command="{Binding OpenBillingProfileCommand}"
+                                            CommandParameter="3"
+                                            Style="{StaticResource OutlineButton}"
+                                            HeightRequest="46"
+                                            HorizontalOptions="Fill">
+                                        <Button.Triggers>
+                                            <DataTrigger TargetType="Button" Binding="{Binding SelectedReadDataOption}" Value="3">
+                                                <Setter Property="BackgroundColor" Value="{StaticResource Primary}"/>
+                                                <Setter Property="TextColor" Value="White"/>
+                                                <Setter Property="BorderColor" Value="{StaticResource Primary}"/>
+                                            </DataTrigger>
+                                        </Button.Triggers>
+                                    </Button>
+                                </Grid>
+                            </VerticalStackLayout>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Border Stroke="{StaticResource CardBorder}" StrokeShape="RoundRectangle 12" Padding="12" IsVisible="False">
+                        <Border.Triggers>
+                            <DataTrigger TargetType="Border" Binding="{Binding SelectedReadDataOption}" Value="0">
+                                <Setter Property="IsVisible" Value="True"/>
+                            </DataTrigger>
+                        </Border.Triggers>
+                        <VerticalStackLayout Spacing="10">
+                            <Label Text="Instantaneous Profile Read Out" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}" FontSize="15"/>
+                            <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8">
+                                <Button Text="Capture Object" Command="{Binding CaptureInstantaneousObjectCommand}" Style="{StaticResource OutlineButton}"/>
+                                <Button Grid.Column="1" Text="Read Data" Command="{Binding ReadInstantaneousProfileDataCommand}" Style="{StaticResource PrimaryButton}"/>
+                                <Button Grid.Column="2" Text="Close" Command="{Binding CloseInstantaneousObjectCommand}" Style="{StaticResource OutlineButton}"/>
+                            </Grid>
+                            <VerticalStackLayout IsVisible="{Binding ShowInstantaneousPanel}" Spacing="0">
+                                <ScrollView Orientation="Horizontal">
+                                    <VerticalStackLayout WidthRequest="900" Spacing="0">
+                                        <Grid ColumnDefinitions="60,80,160,90,*,160" BackgroundColor="{StaticResource SectionBg}" Padding="8,10">
+                                            <Label Text="S.No." FontAttributes="Bold"/>
+                                            <Label Grid.Column="1" Text="Class ID" FontAttributes="Bold"/>
+                                            <Label Grid.Column="2" Text="OBIS Code" FontAttributes="Bold"/>
+                                            <Label Grid.Column="3" Text="Attribute" FontAttributes="Bold"/>
+                                            <Label Grid.Column="4" Text="Parameter Name" FontAttributes="Bold"/>
+                                            <Label Grid.Column="5" Text="Value" FontAttributes="Bold"/>
+                                        </Grid>
+                                        <VerticalStackLayout BindableLayout.ItemsSource="{Binding InstantaneousRows}" Spacing="0">
+                                            <BindableLayout.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid ColumnDefinitions="60,80,160,90,*,160" Padding="8,10" BackgroundColor="White">
+                                                        <Label Text="{Binding SerialNumber}"/>
+                                                        <Label Grid.Column="1" Text="{Binding ClassId}"/>
+                                                        <Label Grid.Column="2" Text="{Binding ObisCode}"/>
+                                                        <Label Grid.Column="3" Text="{Binding Attribute}"/>
+                                                        <Label Grid.Column="4" Text="{Binding ParameterName}"/>
+                                                        <Label Grid.Column="5" Text="{Binding Value}"/>
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </BindableLayout.ItemTemplate>
+                                        </VerticalStackLayout>
+                                    </VerticalStackLayout>
+                                </ScrollView>
+                            </VerticalStackLayout>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Border Stroke="{StaticResource CardBorder}" StrokeShape="RoundRectangle 12" Padding="12" IsVisible="False">
+                        <Border.Triggers>
+                            <DataTrigger TargetType="Border" Binding="{Binding SelectedReadDataOption}" Value="1">
+                                <Setter Property="IsVisible" Value="True"/>
+                            </DataTrigger>
+                        </Border.Triggers>
+                        <VerticalStackLayout Spacing="10">
+                            <Label Text="Nameplate" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}" FontSize="15"/>
+                            <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8">
+                                <Button Text="Capture Object" Command="{Binding CaptureNameplateObjectCommand}" Style="{StaticResource OutlineButton}"/>
+                                <Button Grid.Column="1" Text="Read Data" Command="{Binding ReadNameplateDataCommand}" Style="{StaticResource PrimaryButton}"/>
+                                <Button Grid.Column="2" Text="Close" Command="{Binding CloseNameplateObjectCommand}" Style="{StaticResource OutlineButton}"/>
+                            </Grid>
+                            <VerticalStackLayout IsVisible="{Binding ShowNameplatePanel}" Spacing="0">
+                                <ScrollView Orientation="Horizontal">
+                                    <VerticalStackLayout WidthRequest="900" Spacing="0">
+                                        <Grid ColumnDefinitions="60,80,160,90,*,160" BackgroundColor="{StaticResource SectionBg}" Padding="8,10">
+                                            <Label Text="S.No." FontAttributes="Bold"/>
+                                            <Label Grid.Column="1" Text="Class ID" FontAttributes="Bold"/>
+                                            <Label Grid.Column="2" Text="OBIS Code" FontAttributes="Bold"/>
+                                            <Label Grid.Column="3" Text="Attribute" FontAttributes="Bold"/>
+                                            <Label Grid.Column="4" Text="Parameter Name" FontAttributes="Bold"/>
+                                            <Label Grid.Column="5" Text="Value" FontAttributes="Bold"/>
+                                        </Grid>
+                                        <VerticalStackLayout BindableLayout.ItemsSource="{Binding NameplateRows}" Spacing="0">
+                                            <BindableLayout.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid ColumnDefinitions="60,80,160,90,*,160" Padding="8,10" BackgroundColor="White">
+                                                        <Label Text="{Binding SerialNumber}"/>
+                                                        <Label Grid.Column="1" Text="{Binding ClassId}"/>
+                                                        <Label Grid.Column="2" Text="{Binding ObisCode}"/>
+                                                        <Label Grid.Column="3" Text="{Binding Attribute}"/>
+                                                        <Label Grid.Column="4" Text="{Binding ParameterName}"/>
+                                                        <Label Grid.Column="5" Text="{Binding Value}"/>
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </BindableLayout.ItemTemplate>
+                                        </VerticalStackLayout>
+                                    </VerticalStackLayout>
+                                </ScrollView>
+                            </VerticalStackLayout>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Border Stroke="{StaticResource CardBorder}" StrokeShape="RoundRectangle 12" Padding="12" IsVisible="False">
+                        <Border.Triggers>
+                            <DataTrigger TargetType="Border" Binding="{Binding SelectedReadDataOption}" Value="2">
+                                <Setter Property="IsVisible" Value="True"/>
+                            </DataTrigger>
+                        </Border.Triggers>
+                        <VerticalStackLayout Spacing="10">
+                            <Label Text="RTC (Clock)" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}" FontSize="15"/>
+                            <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8">
+                                <Button Text="Capture Object" Command="{Binding CaptureRtcObjectCommand}" Style="{StaticResource OutlineButton}"/>
+                                <Button Grid.Column="1" Text="Read Data" Command="{Binding ReadRtcDataCommand}" Style="{StaticResource PrimaryButton}"/>
+                                <Button Grid.Column="2" Text="Close" Command="{Binding CloseRtcObjectCommand}" Style="{StaticResource OutlineButton}"/>
+                            </Grid>
+                            <VerticalStackLayout IsVisible="{Binding ShowRtcPanel}" Spacing="10" Margin="0,10,0,0">
+                                <Label Text="Meter Clock:" FontAttributes="Bold" FontSize="14"/>
+                                <Label Text="{Binding Timestamp}" FontSize="16" TextColor="{StaticResource Primary}"/>
+                            </VerticalStackLayout>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Border Stroke="{StaticResource CardBorder}" StrokeShape="RoundRectangle 12" Padding="12" IsVisible="False">
+                        <Border.Triggers>
+                            <DataTrigger TargetType="Border" Binding="{Binding SelectedReadDataOption}" Value="3">
+                                <Setter Property="IsVisible" Value="True"/>
+                            </DataTrigger>
+                        </Border.Triggers>
+                        <VerticalStackLayout Spacing="10">
+                            <Label Text="Billing Profile Read Out" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}" FontSize="15"/>
+                            
+                            <!-- Filtering Options -->
+                            <VerticalStackLayout Spacing="5" Margin="0,0,0,10">
+                                <HorizontalStackLayout Spacing="10">
+                                    <RadioButton Content="Read Complete" IsChecked="{Binding IsBillingReadComplete}" />
+                                    <RadioButton Content="Read Last" IsChecked="{Binding IsBillingReadLast}" />
+                                    <Picker ItemsSource="{Binding BillingIndices}" SelectedIndex="{Binding BillingLastNIndex}" IsEnabled="{Binding IsBillingReadLast}" WidthRequest="60" />
+                                </HorizontalStackLayout>
+                                <HorizontalStackLayout Spacing="10">
+                                    <RadioButton Content="Read Between" IsChecked="{Binding IsBillingReadBetween}" />
+                                    <Label Text="From:" VerticalOptions="Center" />
+                                    <Picker ItemsSource="{Binding BillingIndices}" SelectedIndex="{Binding BillingFromIndex}" IsEnabled="{Binding IsBillingReadBetween}" WidthRequest="60" />
+                                    <Label Text="To:" VerticalOptions="Center" />
+                                    <Picker ItemsSource="{Binding BillingIndices}" SelectedIndex="{Binding BillingToIndex}" IsEnabled="{Binding IsBillingReadBetween}" WidthRequest="60" />
+                                </HorizontalStackLayout>
+                            </VerticalStackLayout>
+
+                            <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8">
+                                <Button Text="Capture Object" Command="{Binding CaptureBillingObjectCommand}" Style="{StaticResource OutlineButton}"/>
+                                <Button Grid.Column="1" Text="Read Data" Command="{Binding ReadBillingDataCommand}" Style="{StaticResource PrimaryButton}"/>
+                                <Button Grid.Column="2" Text="Close" Command="{Binding CloseBillingObjectCommand}" Style="{StaticResource OutlineButton}"/>
+                            </Grid>
+
+                            <VerticalStackLayout IsVisible="{Binding ShowBillingPanel}" Spacing="0" Margin="0,10,0,0">
+                                <ScrollView Orientation="Horizontal">
+                                    <VerticalStackLayout Spacing="0">
+                                        <!-- Dynamic Header -->
+                                        <HorizontalStackLayout BackgroundColor="{StaticResource SectionBg}" Padding="8,10">
+                                            <Label Text="S.No." FontAttributes="Bold" WidthRequest="50" />
+                                            <Label Text="Class ID" FontAttributes="Bold" WidthRequest="60" />
+                                            <Label Text="OBIS Code" FontAttributes="Bold" WidthRequest="120" />
+                                            <Label Text="Attribute" FontAttributes="Bold" WidthRequest="65" />
+                                            <Label Text="Parameter Name" FontAttributes="Bold" WidthRequest="150" />
+                                            <HorizontalStackLayout BindableLayout.ItemsSource="{Binding BillingColumnHeaders}">
+                                                <BindableLayout.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Label Text="{Binding .}" FontAttributes="Bold" WidthRequest="150" />
+                                                    </DataTemplate>
+                                                </BindableLayout.ItemTemplate>
+                                            </HorizontalStackLayout>
+                                        </HorizontalStackLayout>
+
+                                        <!-- Dynamic Rows -->
+                                        <VerticalStackLayout BindableLayout.ItemsSource="{Binding BillingRows}" Spacing="0">
+                                            <BindableLayout.ItemTemplate>
+                                                <DataTemplate>
+                                                    <HorizontalStackLayout Padding="8,10" BackgroundColor="White">
+                                                        <Label Text="{Binding SerialNumber}" WidthRequest="50" />
+                                                        <Label Text="{Binding ClassId}" WidthRequest="60" />
+                                                        <Label Text="{Binding ObisCode}" WidthRequest="120" />
+                                                        <Label Text="{Binding Attribute}" WidthRequest="65" />
+                                                        <Label Text="{Binding ParameterName}" WidthRequest="150" FontAttributes="Bold" />
+                                                        <HorizontalStackLayout BindableLayout.ItemsSource="{Binding Values}">
+                                                            <BindableLayout.ItemTemplate>
+                                                                <DataTemplate>
+                                                                    <Label Text="{Binding .}" WidthRequest="150" />
+                                                                </DataTemplate>
+                                                            </BindableLayout.ItemTemplate>
+                                                        </HorizontalStackLayout>
+                                                    </HorizontalStackLayout>
+                                                </DataTemplate>
+                                            </BindableLayout.ItemTemplate>
+                                        </VerticalStackLayout>
+                                    </VerticalStackLayout>
+                                </ScrollView>
+                            </VerticalStackLayout>
+                        </VerticalStackLayout>
+                    </Border>
+                </VerticalStackLayout>
+            </Border>
+        </VerticalStackLayout>
+    </ScrollView>
+    
+    <!-- Status Console -->
+    <Border Grid.Row="2" BackgroundColor="Black" HeightRequest="150" Margin="5">
+        <ScrollView x:Name="LogScroller">
+            <Label Text="{Binding StatusLog}" 
+                   TextColor="LimeGreen" 
+                   FontFamily="Monospace" 
+                   FontSize="11" 
+                   Padding="5" />
+        </ScrollView>
+    </Border>
+</Grid>
+</ContentPage>

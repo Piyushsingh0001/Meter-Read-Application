@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DLMS>
+  <LTCT_3Phase>
+    <Class ID="1" Name="Data" AttributeCount="2">
+      <Attribute ID="1" Description="Logical Name" />
+      <Attribute ID="2" Description="Value" />
+      <OBIS ParamCode="00.00.60.01.00.FF" ParamName="Meter Serial number" />
+      <OBIS ParamCode="00.00.60.01.01.FF" ParamName="Manufacturer Name" />
+      <OBIS ParamCode="01.00.00.02.00.FF" ParamName="Firmware Version for meter" />
+      <OBIS ParamCode="00.00.5E.5B.09.FF" ParamName="Meter Type (3P-3W / 3P-4W)" />
+      <OBIS ParamCode="00.00.60.07.00.FF" ParamName="Number of power failures" />
+      <OBIS ParamCode="01.00.00.04.02.FF" ParamName="Internal CT Ratio" />
+      <OBIS ParamCode="00.00.60.01.04.FF" ParamName="Meter Year of Manufacture" />
+      <OBIS ParamCode="00.00.5E.5B.00.FF" ParamName="Cumulative Tamper count" />
+      <OBIS ParamCode="00.00.00.01.00.FF" ParamName="MD Reset Count" />
+      <OBIS ParamCode="00.00.60.02.00.FF" ParamName="Cumulative programming count" />
+      <OBIS ParamCode="01.00.00.01.02.FF" ParamName="Billing date" />
+	  <OBIS ParamCode="00.00.60.0B.00.FF" ParamName="Voltage related events"/>
+	  <OBIS ParamCode="00.00.60.0B.01.FF" ParamName="Current related events"/>
+	  <OBIS ParamCode="00.00.60.0B.02.FF" ParamName="Power failure related events"/>
+	  <OBIS ParamCode="00.00.60.0B.03.FF" ParamName="Transaction related events"/>
+	  <OBIS ParamCode="00.00.60.0B.04.FF" ParamName="Other events"/>
+	  <OBIS ParamCode="00.00.60.0B.05.FF" ParamName="Non-rollover events"/>
+	  <OBIS ParamCode="00.00.60.0B.06.FF" ParamName="Control events for connect/disconnect"/>
+	  <OBIS ParamCode="00.00.00.01.00.FF" ParamName="Billing period counter"/>
+	  <OBIS ParamCode="00.00.00.01.01.FF" ParamName="Available billing periods"/>
+	  <OBIS ParamCode="00.00.60.0B.00.FF" ParamName="Event Code" />
+          <OBIS ParamCode="00.00.60.01.86.FF" ParamName="Push Button Display Parameters" />
+	<OBIS ParamCode="00.00.60.01.87.FF" ParamName="Scroll Button Display Parameters" />
+	<OBIS ParamCode="00.00.60.01.88.FF" ParamName="High Resolution Display Parameters" />
+	<OBIS ParamCode="00.00.60.01.89.FF" ParamName="MD Lock Out" />
+	<OBIS ParamCode="00.00.60.01.8A.FF" ParamName="LCD backlight" />
+	<OBIS ParamCode="00.00.60.01.8B.FF" ParamName="PCBA ID" />
+        <OBIS ParamCode="00.00.2A.00.00.FF" ParamName="Logical Device Name" />
+ 	<OBIS ParamCode="01.00.00.08.00.FF" ParamName="Demand Integration Period" />
+	<OBIS ParamCode="01.00.00.08.04.FF" ParamName="Load Survey capture Period" />
+	<OBIS ParamCode="00.00.60.01.80.FF" ParamName="Display Parameter Time out" />
+	 <OBIS ParamCode="00.00.60.01.81.FF" ParamName="Tamper Threshold" />	
+	 <OBIS ParamCode="00.00.60.01.82.FF" ParamName="Number of events in compartments" />
+	 <OBIS ParamCode="00.00.60.01.83.FF" ParamName="Tamper persistence time" />
+	 <OBIS ParamCode="00.00.60.01.84.FF" ParamName="Resolution" />
+         <OBIS ParamCode="00.00.60.01.85.FF" ParamName="Load Survey capture parameter" />
+ 	 <OBIS ParamCode="00.00.60.01.8E.FF" ParamName="Factory Password" />
+	 <OBIS ParamCode="00.00.60.01.8F.FF" ParamName="KVAh Selection" />
+	 <OBIS ParamCode="00.00.60.01.90.FF" ParamName="Manufacture Code for PMP Use" />
+	 <OBIS ParamCode="01.00.60.00.A1.FF" ParamName="Power off time - R Phase (hh:mm)" />
+	 <OBIS ParamCode="01.00.60.00.A2.FF" ParamName="Power off time - Y Phase (hh:mm)" />
+         <OBIS ParamCode="01.00.60.00.A3.FF" ParamName="Power off time - B Phase (hh:mm)" />
+	 <OBIS ParamCode="00.00.60.07.95.FF" ParamName="Tamper Status Flag" />
+
+	<OBIS ParamCode="00.00.5E.5B.0A.FF" ParamName="Voltage related events  ( Compartment 1) Counts" />
+	<OBIS ParamCode="00.00.5E.5B.0B.FF" ParamName="Current ( Compartment 2) related events Counts" />
+	<OBIS ParamCode="00.00.5E.5B.0C.FF" ParamName="Power Failure related events ( Compartment 3) Counts" />
+	<OBIS ParamCode="00.00.5E.5B.0D.FF" ParamName="Transaction  related events ( Compartment 4) Counts" />
+	<OBIS ParamCode="00.00.5E.5B.0E.FF" ParamName="Other events ( Compartment 5) Counts" />
+	<OBIS ParamCode="00.00.5E.5B.0F.FF" ParamName="Non roll over ( Compartment 6) Counts" />
+	<OBIS ParamCode="00.00.5E.5B.10.FF" ParamName="Control events for connect/disconnect (Compartment 7)Counts" />
+	<OBIS ParamCode="00.00.5E.5B.11.FF" ParamName="Earth Load (Compartment 8) Counts" />
+	<OBIS ParamCode="00.00.5E.5B.12.FF" ParamName="Single wire tamper (Compartment 9)Counts" />
+	<OBIS ParamCode="00.00.5E.5B.13.FF" ParamName="ACTIVE INST POWER TARIFF IN INR based on present tarrif And Load" />
+	<OBIS ParamCode="00.00.5E.5B.14.FF" ParamName="Over the air f/w upgrade counter for meter" />
+	<OBIS ParamCode="00.00.5E.5B.15.FF" ParamName="Over the air f/w upgrade counter for comms module" />
+	 
+
+	 
+
+    </Class>
+    <Class ID="3" Name="Register" AttributeCount="3">
+      <Attribute ID="1" Description="Logical Name" />
+      <Attribute ID="2" Description="Value" />
+      <Attribute ID="3" Description="Scaler Unit" />
+      <OBIS ParamCode="01.00.1F.07.00.FF" ParamName="Current - IR"/>
+      <OBIS ParamCode="01.00.33.07.00.FF" ParamName="Current - IY"/>
+      <OBIS ParamCode="01.00.47.07.00.FF" ParamName="Current - IB"/>
+      <OBIS ParamCode="01.00.20.07.00.FF" ParamName="Voltage - VRN"/>
+      <OBIS ParamCode="01.00.34.07.00.FF" ParamName="Voltage - VYN"/>
+      <OBIS ParamCode="01.00.48.07.00.FF" ParamName="Voltage - VBN"/>
+	  <OBIS ParamCode="01.00.1F.1B.00.FF" ParamName="Current - IR"/>
+      <OBIS ParamCode="01.00.33.1B.00.FF" ParamName="Current - IY"/>
+      <OBIS ParamCode="01.00.47.1B.00.FF" ParamName="Current - IB"/>
+      <OBIS ParamCode="01.00.20.1B.00.FF" ParamName="Voltage - VRN"/>
+      <OBIS ParamCode="01.00.34.1B.00.FF" ParamName="Voltage - VYN"/>
+      <OBIS ParamCode="01.00.48.1B.00.FF" ParamName="Voltage - VBN"/>
+      <OBIS ParamCode="00.00.5E.5B.08.FF" ParamName="Cumulative power-failure duration" />
+	  <OBIS ParamCode="01.00.01.1D.00.FF" ParamName="Block Energy - kWh"/>
+	  <OBIS ParamCode="01.00.05.1D.00.FF" ParamName="Block Energy - kvarh - lag"/>
+	  <OBIS ParamCode="01.00.08.1D.00.FF" ParamName="Block Energy - kvarh - lead"/>
+	  <OBIS ParamCode="01.00.09.1D.00.FF" ParamName="Block Energy - kVAh"/>
+      <OBIS ParamCode="01.00.21.07.00.FF" ParamName="Power Factor - R phase" />
+      <OBIS ParamCode="01.00.35.07.00.FF" ParamName="Power Factor - Y phase" />
+      <OBIS ParamCode="01.00.49.07.00.FF" ParamName="Power Factor - B phase" />
+      <OBIS ParamCode="01.00.0D.07.00.FF" ParamName="Three Phase Power Factor - PF" />
+      <OBIS ParamCode="01.00.0E.07.00.FF" ParamName="Frequency" />
+      <OBIS ParamCode="01.00.09.07.00.FF" ParamName="Neutral Power" />
+      <OBIS ParamCode="01.00.01.07.00.FF" ParamName="Phase Power" />
+      <OBIS ParamCode="01.00.03.07.00.FF" ParamName="Signed Reactive Power - kvar (+ Lag; - Lead)" />
+      <OBIS ParamCode="01.00.01.08.00.FF" ParamName="Cumulative Energy - kWh" />
+      <OBIS ParamCode="01.00.05.08.00.FF" ParamName="Cumulative Energy - kvarh - Lag" />
+      <OBIS ParamCode="01.00.08.08.00.FF" ParamName="Cumulative Energy - kvarh - Lead" />
+      <OBIS ParamCode="01.00.09.08.00.FF" ParamName="Cumulative Energy - kVAh" />
+	  <OBIS ParamCode="01.00.0D.00.00.FF" ParamName="System Power Factor for billing period" />
+	  <OBIS ParamCode="01.00.01.08.00.FF" ParamName="Cumulative Energy – kWh" />
+	  <OBIS ParamCode="01.00.01.08.01.FF" ParamName="Cumulative Energy – kWh – TZ1" />
+	  <OBIS ParamCode="01.00.01.08.02.FF" ParamName="Cumulative Energy – kWh – TZ2" />
+	  <OBIS ParamCode="01.00.01.08.03.FF" ParamName="Cumulative Energy – kWh – TZ3" />
+	  <OBIS ParamCode="01.00.01.08.04.FF" ParamName="Cumulative Energy – kWh – TZ4" />
+	 <OBIS ParamCode="01.00.01.08.05.FF" ParamName="Cumulative Energy – kWh – TZ5" /> 
+	 <OBIS ParamCode="01.00.01.08.06.FF" ParamName="Cumulative Energy – kWh – TZ6" />
+	 <OBIS ParamCode="01.00.01.08.07.FF" ParamName="Cumulative Energy – kWh – TZ7" />
+	 <OBIS ParamCode="01.00.01.08.08.FF" ParamName="Cumulative Energy – kWh – TZ8" />
+	 <OBIS ParamCode="01.00.05.08.00.FF" ParamName="Cumulative Energy – kvarh – Lag" />
+	 <OBIS ParamCode="01.00.08.08.00.FF" ParamName="Cumulative Energy – kvarh – Lead" />
+	 <OBIS ParamCode="01.00.09.08.00.FF" ParamName="Cumulative Energy – kVAh" />
+	 <OBIS ParamCode="01.00.09.08.01.FF" ParamName="Cumulative Energy – kVAH – TZ1" />
+	 <OBIS ParamCode="01.00.09.08.02.FF" ParamName="Cumulative Energy – kVAH – TZ2" />
+	 <OBIS ParamCode="01.00.09.08.03.FF" ParamName="Cumulative Energy – kVAH – TZ3" />
+	 <OBIS ParamCode="01.00.09.08.04.FF" ParamName="Cumulative Energy – kVAH – TZ4" />
+	 <OBIS ParamCode="01.00.09.08.05.FF" ParamName="Cumulative Energy – kVAH – TZ5" />
+	 <OBIS ParamCode="01.00.09.08.06.FF" ParamName="Cumulative Energy – kVAH – TZ6" />
+	 <OBIS ParamCode="01.00.09.08.07.FF" ParamName="Cumulative Energy – kVAH – TZ7" />
+	 <OBIS ParamCode="01.00.09.08.08.FF" ParamName="Cumulative Energy – kVAH – TZ8" />
+	 <OBIS ParamCode="00.00.60.01.8C.FF" ParamName="Reverse Active Energy – kWh" />
+	 <OBIS ParamCode="00.00.60.01.8D.FF" ParamName="Reverse Apparent Energy – kVAh" />
+         <OBIS ParamCode="00.00.00.01.02.FF" ParamName="Billing Date" />
+	 <OBIS ParamName="Phase Current" ParamCode="01.00.0B.07.00.FF"/>
+	 <OBIS ParamName="Phase Voltage" ParamCode="01.00.0C.07.00.FF"/> 
+	 <OBIS ParamName="Neutral Current" ParamCode="01.00.5B.07.00.FF"/>
+
+ 	<OBIS ParamName="Instant Signed Power Factor" ParamCode="01.00.21.07.00.FF"/>
+ 	<OBIS ParamName="Average PF For Present Month" ParamCode="01.00.21.00.00.FF"/>
+	<OBIS ParamName=" Present month consumption" ParamCode="01.00.01.00.00.FF"/>
+
+</Class>
+    <Class ID="4" Name="Extended Register" AttributeCount="5">
+      <Attribute ID="1" Description="Logical Name" />
+      <Attribute ID="2" Description="Value" />
+      <Attribute ID="3" Description="Scaler Unit" />
+      <Attribute ID="4" Description="Status" />
+      <Attribute ID="5" Description="Capture Time" />      
+	  <OBIS ParamCode="01.00.01.06.00.FF" ParamName="MD – kW" /> 
+	  <OBIS ParamCode="01.00.01.06.01.FF" ParamName="MD – kW – TZ1" /> 
+	  <OBIS ParamCode="01.00.01.06.02.FF" ParamName="MD – kW – TZ2" /> 
+	  <OBIS ParamCode="01.00.01.06.03.FF" ParamName="MD – kW – TZ3" /> 
+	  <OBIS ParamCode="01.00.01.06.04.FF" ParamName="MD – kW – TZ4" />
+	  <OBIS ParamCode="01.00.01.06.05.FF" ParamName="MD – kW – TZ5" />
+	  <OBIS ParamCode="01.00.01.06.06.FF" ParamName="MD – kW – TZ6" />
+	  <OBIS ParamCode="01.00.01.06.07.FF" ParamName="MD – kW – TZ7" />
+	  <OBIS ParamCode="01.00.01.06.08.FF" ParamName="MD – kW – TZ8" />
+	  <OBIS ParamCode="01.00.09.06.00.FF" ParamName="MD – kVA" />
+	  <OBIS ParamCode="01.00.09.06.01.FF" ParamName="MD – kVA – TZ1" />
+	  <OBIS ParamCode="01.00.09.06.02.FF" ParamName="MD – kVA – TZ2" />
+	  <OBIS ParamCode="01.00.09.06.03.FF" ParamName="MD – kVA – TZ3" />
+	  <OBIS ParamCode="01.00.09.06.04.FF" ParamName="MD – kVA – TZ4" />
+	  <OBIS ParamCode="01.00.09.06.05.FF" ParamName="MD – kVA – TZ5" />
+	  <OBIS ParamCode="01.00.09.06.06.FF" ParamName="MD – kVA – TZ6" />
+	  <OBIS ParamCode="01.00.09.06.07.FF" ParamName="MD – kVA – TZ7" />
+	  <OBIS ParamCode="01.00.09.06.08.FF" ParamName="MD – kVA – TZ8" />
+    </Class>
+	<Class ID="7" Name="Profile Generic" AttributeCount="8">
+      <Attribute ID="1" Description="Logical Name"/>
+      <Attribute ID="2" Description="Buffer"/>
+	  <Attribute ID="3" Description="Capture Object"/>
+	  <Attribute ID="4" Description="Capture Period"/>
+	  <Attribute ID="5" Description="Sort Method"/>
+	  <Attribute ID="6" Description="Sort Object"/>
+	  <Attribute ID="7" Description="Entries in Use"/>
+	  <Attribute ID="8" Description="Profile Entries"/>
+      <OBIS ParamCode="01.00.5E.5B.00.FF" ParamName="Instantaneous Profile" />
+      <OBIS ParamCode="01.00.62.01.00.FF" ParamName="Billing Profile" />
+      <OBIS ParamCode="01.00.63.01.00.FF" ParamName="Load Profile" />
+      <OBIS ParamCode="00.00.63.62.00.FF" ParamName="Event Profile- Voltage related" />
+      <OBIS ParamCode="00.00.63.62.01.FF" ParamName="Event Profile- Current related" />
+      <OBIS ParamCode="00.00.63.62.02.FF" ParamName="Event Profile- Power related" />
+      <OBIS ParamCode="00.00.63.62.03.FF" ParamName="Event Profile- Transaction related" />
+      <OBIS ParamCode="00.00.63.62.04.FF" ParamName="Event Profile- Others" />
+      <OBIS ParamCode="00.00.63.62.05.FF" ParamName="Event Profile- Non Roll Over related" />
+      <OBIS ParamCode="01.00.5E.5B.03.FF" ParamName="Instantaneous Scalar Units"/>
+      <OBIS ParamCode="01.00.5E.5B.06.FF" ParamName="Billing Scalar Units"/>
+      <OBIS ParamCode="01.00.5E.5B.07.FF" ParamName="Event Profile Scalar Units"/>
+      <OBIS ParamCode="01.00.5E.5B.04.FF" ParamName="Load Profile Scalar Units"/>
+    </Class>
+    <Class ID="8" Name="Clock" AttributeCount="9">
+      <Attribute ID="1" Description="Logical Name" />
+      <Attribute ID="2" Description="Value" />
+      <OBIS ParamCode="00.00.01.00.00.FF" ParamName="Real Time Clock - Date and Time" />
+    </Class>
+    <Class ID="15" Name="Association LN" AttributeCount="9">
+      <Attribute ID="1" Description="Logical Name" />
+      <Attribute ID="2" Description="Object List" />
+      <OBIS ParamCode="00.00.28.00.00.FF" ParamName="Current Association" />
+      <OBIS ParamCode="00.00.28.00.01.FF" ParamName="MR Association" />
+      <OBIS ParamCode="00.00.28.00.02.FF" ParamName="PC Association" />
+      <OBIS ParamCode="00.00.28.00.03.FF" ParamName="US Association" />
+      <OBIS ParamCode="00.00.28.00.05.FF" ParamName="FU Association" />
+    </Class>
+    <Class ID="20" Name="Activity calendar" AttributeCount="10">
+      <Attribute ID="1" Description="Logical Name" />
+      <OBIS ParamCode="00.00.0D.00.00.FF" ParamName="Activity calender" />
+    </Class>
+    <Class ID="22" Name="Single Action Schedule" AttributeCount="4">
+      <Attribute ID="1" Description="Logical Name" />
+      <OBIS ParamCode="00.00.0F.00.00.FF" ParamName="Single Action Schedule" />
+    </Class>
+  <Class ID="23" Name="IEC HDLC setup Class" AttributeCount="9">
+      <Attribute ID="1" Description="Logical Name" />
+      <OBIS ParamCode="00.01.16.00.00.FF" ParamName="IEC HDLC setup class" />
+    </Class> 
+  
+  </LTCT_3Phase>
+</DLMS>

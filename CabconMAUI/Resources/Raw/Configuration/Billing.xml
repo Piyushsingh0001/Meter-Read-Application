@@ -1,0 +1,267 @@
+<?xml version="1.0" standalone="yes"?>
+<BillingScalar>
+  <DLMS>
+    <Class>3</Class>
+    <ObisCode>0.0.0.1.2.255</ObisCode>
+    <Attribute>2</Attribute>
+    <ParameterName>Billing Date</ParameterName>
+    <Scale>0</Scale>
+    <Unit />
+  </DLMS>
+  <DLMS>
+    <Class>3</Class>
+    <ObisCode>1.0.13.0.0.255</ObisCode>
+    <Attribute>3</Attribute>
+    <ParameterName>System Power Factor for billing period</ParameterName>
+    <Scale>-2</Scale>
+    <Unit />
+  </DLMS>
+  <DLMS>
+    <Class>3</Class>
+    <ObisCode>1.0.1.8.0.255</ObisCode>
+    <Attribute>3</Attribute>
+    <ParameterName>Cumulative Energy - kWh</ParameterName>
+    <Scale>-1</Scale>
+    <Unit>kWh</Unit>
+  </DLMS>
+  <DLMS>
+    <Class>3</Class>
+    <ObisCode>1.0.1.8.1.255</ObisCode>
+    <Attribute>3</Attribute>
+    <ParameterName>Cumulative Energy – kWh – TZ1</ParameterName>
+    <Scale>-1</Scale>
+    <Unit>kWh</Unit>
+  </DLMS>
+  <DLMS>
+    <Class>3</Class>
+    <ObisCode>1.0.1.8.2.255</ObisCode>
+    <Attribute>3</Attribute>
+    <ParameterName>Cumulative Energy – kWh – TZ2</ParameterName>
+    <Scale>-1</Scale>
+    <Unit>kWh</Unit>
+  </DLMS>
+  <DLMS>
+    <Class>3</Class>
+    <ObisCode>1.0.1.8.3.255</ObisCode>
+    <Attribute>3</Attribute>
+    <ParameterName>Cumulative Energy – kWh – TZ3</ParameterName>
+    <Scale>-1</Scale>
+    <Unit>kWh</Unit>
+  </DLMS>
+  <DLMS>
+    <Class>3</Class>
+    <ObisCode>1.0.1.8.4.255</ObisCode>
+    <Attribute>3</Attribute>
+    <ParameterName>Cumulative Energy – kWh – TZ4</ParameterName>
+    <Scale>-1</Scale>
+    <Unit>kWh</Unit>
+  </DLMS>
+  <DLMS>
+    <Class>3</Class>
+    <ObisCode>1.0.1.8.5.255</ObisCode>
+    <Attribute>3</Attribute>
+    <ParameterName>Cumulative Energy – kWh – TZ5</ParameterName>
+    <Scale>-1</Scale>
+    <Unit>kWh</Unit>
+  </DLMS>
+  <DLMS>
+    <Class>3</Class>
+    <ObisCode>1.0.1.8.6.255</ObisCode>
+    <Attribute>3</Attribute>
+    <ParameterName>Cumulative Energy – kWh – TZ6</ParameterName>
+    <Scale>-1</Scale>
+    <Unit>kWh</Unit>
+  </DLMS>
+  <DLMS>
+    <Class>3</Class>
+    <ObisCode>1.0.5.8.0.255</ObisCode>
+    <Attribute>3</Attribute>
+    <ParameterName>Cumulative Energy - kvarh - Lag</ParameterName>
+    <Scale>-1</Scale>
+    <Unit>kvarh</Unit>
+  </DLMS>
+  <DLMS>
+    <Class>3</Class>
+    <ObisCode>1.0.8.8.0.255</ObisCode>
+    <Attribute>3</Attribute>
+    <ParameterName>Cumulative Energy - kvarh - Lead</ParameterName>
+    <Scale>-1</Scale>
+    <Unit>kvarh</Unit>
+  </DLMS>
+  <DLMS>
+    <Class>3</Class>
+    <ObisCode>1.0.9.8.0.255</ObisCode>
+    <Attribute>3</Attribute>
+    <ParameterName>Cumulative Energy - kVAh</ParameterName>
+    <Scale>-1</Scale>
+    <Unit>kVAh</Unit>
+  </DLMS>
+  <DLMS>
+    <Class>3</Class>
+    <ObisCode>1.0.9.8.1.255</ObisCode>
+    <Attribute>3</Attribute>
+    <ParameterName>Cumulative Energy – kVAH – TZ1</ParameterName>
+    <Scale>-1</Scale>
+    <Unit>kVAh</Unit>
+  </DLMS>
+  <DLMS>
+    <Class>3</Class>
+    <ObisCode>1.0.9.8.2.255</ObisCode>
+    <Attribute>3</Attribute>
+    <ParameterName>Cumulative Energy – kVAH – TZ2</ParameterName>
+    <Scale>-1</Scale>
+    <Unit>kVAh</Unit>
+  </DLMS>
+  <DLMS>
+    <Class>3</Class>
+    <ObisCode>1.0.9.8.3.255</ObisCode>
+    <Attribute>3</Attribute>
+    <ParameterName>Cumulative Energy – kVAH – TZ3</ParameterName>
+    <Scale>-1</Scale>
+    <Unit>kVAh</Unit>
+  </DLMS>
+  <DLMS>
+    <Class>3</Class>
+    <ObisCode>1.0.9.8.4.255</ObisCode>
+    <Attribute>3</Attribute>
+    <ParameterName>Cumulative Energy – kVAH – TZ4</ParameterName>
+    <Scale>-1</Scale>
+    <Unit>kVAh</Unit>
+  </DLMS>
+  <DLMS>
+    <Class>3</Class>
+    <ObisCode>1.0.9.8.5.255</ObisCode>
+    <Attribute>3</Attribute>
+    <ParameterName>Cumulative Energy – kVAH – TZ5</ParameterName>
+    <Scale>-1</Scale>
+    <Unit>kVAh</Unit>
+  </DLMS>
+  <DLMS>
+    <Class>3</Class>
+    <ObisCode>1.0.9.8.6.255</ObisCode>
+    <Attribute>3</Attribute>
+    <ParameterName>Cumulative Energy – kVAH – TZ6</ParameterName>
+    <Scale>-1</Scale>
+    <Unit>kVAh</Unit>
+  </DLMS>
+  <DLMS>
+    <Class>4</Class>
+    <ObisCode>1.0.1.6.0.255</ObisCode>
+    <Attribute>3</Attribute>
+    <ParameterName>MD – kW</ParameterName>
+    <Scale>-1</Scale>
+    <Unit>kW</Unit>
+  </DLMS>
+  <DLMS>
+    <Class>4</Class>
+    <ObisCode>1.0.9.6.0.255</ObisCode>
+    <Attribute>3</Attribute>
+    <ParameterName>MD – kVA</ParameterName>
+    <Scale>-1</Scale>
+    <Unit>kVA</Unit>
+  </DLMS>
+  <DLMS>
+    <Class>3</Class>
+    <ObisCode>0.0.94.91.13.255</ObisCode>
+    <Attribute>3</Attribute>
+    <ParameterName>Total Power On time for Billing Month</ParameterName>
+    <Scale>0</Scale>
+    <Unit>min</Unit>
+  </DLMS>
+  <DLMS>
+    <Class>4</Class>
+    <ObisCode>1.0.1.6.1.255</ObisCode>
+    <Attribute>3</Attribute>
+    <ParameterName>MD – kW – TZ1</ParameterName>
+    <Scale>-1</Scale>
+    <Unit>kW</Unit>
+  </DLMS>
+  <DLMS>
+    <Class>4</Class>
+    <ObisCode>1.0.1.6.2.255</ObisCode>
+    <Attribute>3</Attribute>
+    <ParameterName>MD – kW – TZ2</ParameterName>
+    <Scale>-1</Scale>
+    <Unit>kW</Unit>
+  </DLMS>
+  <DLMS>
+    <Class>4</Class>
+    <ObisCode>1.0.1.6.3.255</ObisCode>
+    <Attribute>3</Attribute>
+    <ParameterName>MD – kW – TZ3</ParameterName>
+    <Scale>-1</Scale>
+    <Unit>kW</Unit>
+  </DLMS>
+  <DLMS>
+    <Class>4</Class>
+    <ObisCode>1.0.1.6.4.255</ObisCode>
+    <Attribute>3</Attribute>
+    <ParameterName>MD – kW – TZ4</ParameterName>
+    <Scale>-1</Scale>
+    <Unit>kW</Unit>
+  </DLMS>
+  <DLMS>
+    <Class>4</Class>
+    <ObisCode>1.0.1.6.5.255</ObisCode>
+    <Attribute>3</Attribute>
+    <ParameterName>MD – kW – TZ5</ParameterName>
+    <Scale>-1</Scale>
+    <Unit>kW</Unit>
+  </DLMS>
+  <DLMS>
+    <Class>4</Class>
+    <ObisCode>1.0.1.6.6.255</ObisCode>
+    <Attribute>3</Attribute>
+    <ParameterName>MD – kW – TZ6</ParameterName>
+    <Scale>-1</Scale>
+    <Unit>kW</Unit>
+  </DLMS>
+  <DLMS>
+    <Class>4</Class>
+    <ObisCode>1.0.9.6.1.255</ObisCode>
+    <Attribute>3</Attribute>
+    <ParameterName>MD – kVA – TZ1</ParameterName>
+    <Scale>-1</Scale>
+    <Unit>kVA</Unit>
+  </DLMS>
+  <DLMS>
+    <Class>4</Class>
+    <ObisCode>1.0.9.6.2.255</ObisCode>
+    <Attribute>3</Attribute>
+    <ParameterName>MD – kVA – TZ2</ParameterName>
+    <Scale>-1</Scale>
+    <Unit>kVA</Unit>
+  </DLMS>
+  <DLMS>
+    <Class>4</Class>
+    <ObisCode>1.0.9.6.3.255</ObisCode>
+    <Attribute>3</Attribute>
+    <ParameterName>MD – kVA – TZ3</ParameterName>
+    <Scale>-1</Scale>
+    <Unit>kVA</Unit>
+  </DLMS>
+  <DLMS>
+    <Class>4</Class>
+    <ObisCode>1.0.9.6.4.255</ObisCode>
+    <Attribute>3</Attribute>
+    <ParameterName>MD – kVA – TZ4</ParameterName>
+    <Scale>-1</Scale>
+    <Unit>kVA</Unit>
+  </DLMS>
+  <DLMS>
+    <Class>4</Class>
+    <ObisCode>1.0.9.6.5.255</ObisCode>
+    <Attribute>3</Attribute>
+    <ParameterName>MD – kVA – TZ5</ParameterName>
+    <Scale>-1</Scale>
+    <Unit>kVA</Unit>
+  </DLMS>
+  <DLMS>
+    <Class>4</Class>
+    <ObisCode>1.0.9.6.6.255</ObisCode>
+    <Attribute>3</Attribute>
+    <ParameterName>MD – kVA – TZ6</ParameterName>
+    <Scale>-1</Scale>
+    <Unit>kVA</Unit>
+  </DLMS>
+</BillingScalar>
