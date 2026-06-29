@@ -2,7 +2,10 @@ using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CabconMAUI.Models;
+<<<<<<< HEAD
 using CabconMAUI.Helpers;
+=======
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
 
 namespace CabconMAUI.ViewModels;
 
@@ -51,7 +54,10 @@ public partial class MeterReadViewModel
     [ObservableProperty] private ObservableCollection<MeterReadDisplayRow> _nameplateRows = new();
     [ObservableProperty] private bool _showInstantaneousPanel;
     [ObservableProperty] private bool _showNameplatePanel;
+<<<<<<< HEAD
     [ObservableProperty] private bool _showRtcPanel;
+=======
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
 
     [RelayCommand]
     void SelectReadDataOption(object? option)
@@ -69,6 +75,7 @@ public partial class MeterReadViewModel
     }
 
     [RelayCommand]
+<<<<<<< HEAD
     async Task CaptureInstantaneousObjectAsync()
     {
         if (!await EnsureConnectedAsync() || IsBusy) return;
@@ -106,12 +113,20 @@ public partial class MeterReadViewModel
         {
             IsBusy = false;
         }
+=======
+    void CaptureInstantaneousObject()
+    {
+        InstantaneousRows.Clear();
+        ShowInstantaneousPanel = true;
+        SetStatus("Ready to read Instantaneous Profile data from meter.");
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
     }
 
     [RelayCommand]
     async Task ReadInstantaneousProfileDataAsync()
     {
         ShowInstantaneousPanel = true;
+<<<<<<< HEAD
         if (!await EnsureConnectedAsync() || IsBusy) return;
 
         if (InstantaneousRows.Count == 0) PopulateRows(InstantaneousRows, InstantaneousDefinitions);
@@ -167,6 +182,9 @@ public partial class MeterReadViewModel
         {
             IsBusy = false;
         }
+=======
+        await ReadObjectGroupAsync(InstantaneousDefinitions, InstantaneousRows, "Instantaneous Profile Read Out");
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
     }
 
     [RelayCommand]
@@ -178,6 +196,7 @@ public partial class MeterReadViewModel
     }
 
     [RelayCommand]
+<<<<<<< HEAD
     async Task CaptureNameplateObjectAsync()
     {
         if (!await EnsureConnectedAsync() || IsBusy) return;
@@ -215,12 +234,20 @@ public partial class MeterReadViewModel
         {
             IsBusy = false;
         }
+=======
+    void CaptureNameplateObject()
+    {
+        NameplateRows.Clear();
+        ShowNameplatePanel = true;
+        SetStatus("Ready to read Nameplate data from meter.");
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
     }
 
     [RelayCommand]
     async Task ReadNameplateDataAsync()
     {
         ShowNameplatePanel = true;
+<<<<<<< HEAD
         if (!await EnsureConnectedAsync() || IsBusy) return;
 
         if (NameplateRows.Count == 0) PopulateRows(NameplateRows, NameplateDefinitions);
@@ -276,6 +303,9 @@ public partial class MeterReadViewModel
         {
             IsBusy = false;
         }
+=======
+        await ReadObjectGroupAsync(NameplateDefinitions, NameplateRows, "Nameplate");
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
     }
 
     [RelayCommand]
@@ -286,6 +316,7 @@ public partial class MeterReadViewModel
         SetStatus("Nameplate closed.");
     }
 
+<<<<<<< HEAD
     [RelayCommand]
     void CaptureRtcObject()
     {
@@ -396,6 +427,8 @@ public partial class MeterReadViewModel
         SetStatus("RTC closed.");
     }
 
+=======
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
     async Task ReadObjectGroupAsync(IReadOnlyList<ReadObjectDefinition> definitions, ObservableCollection<MeterReadDisplayRow> rows, string sectionTitle)
     {
         if (!await EnsureConnectedAsync())
@@ -426,7 +459,11 @@ public partial class MeterReadViewModel
                 var definition = definitions[index];
                 var row = rows[index];
                 string value = "--";
+<<<<<<< HEAD
 
+=======
+                
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
                 // Special handling for Association View (Class ID 15) - use Block Transfer
                 if (definition.ClassIdByte == 0x0F) // Class ID 15 = Association
                 {
@@ -434,6 +471,7 @@ public partial class MeterReadViewModel
                     {
                         // Use Block Transfer for large Association View response
                         var associationResult = await _meterFacade.ReadBlockAsync(
+<<<<<<< HEAD
                             definition.ObisBytes,
                             definition.ClassIdByte,
                             definition.AttributeByte,
@@ -441,6 +479,15 @@ public partial class MeterReadViewModel
                             new List<byte>() // descriptor
                         );
 
+=======
+                            definition.ObisBytes, 
+                            definition.ClassIdByte, 
+                            definition.AttributeByte, 
+                            0, // access selector
+                            new List<byte>() // descriptor
+                        );
+                        
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
                         if (associationResult.IsSuccess && associationResult.Values.Any())
                         {
                             // Parse the Association View data - it contains multiple OBIS codes

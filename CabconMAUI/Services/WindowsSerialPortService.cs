@@ -8,6 +8,7 @@ namespace CabconMAUI.Services
 {
     public class WindowsSerialPortService : ISerialPortService
     {
+<<<<<<< HEAD
         private const int MeterProcessingDelayMs = 200;
         private SerialPort? _port;
         private readonly object _bufLock = new();
@@ -16,6 +17,13 @@ namespace CabconMAUI.Services
         public byte[] ReceiveBuffer { get; } = new byte[8192];
         public int BufferIndex { get; private set; }
         public string EndpointDetails => "Windows COM Port";
+=======
+        private SerialPort? _port;
+        private readonly object _bufLock = new();
+        public bool IsOpen { get; private set; }
+        public byte[] ReceiveBuffer { get; } = new byte[8192];
+        public int BufferIndex { get; private set; }
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
         public int CommandTimeout { get; set; } = 3500;
         public int InterchatracterDelay { get; set; } = 2500;
         public int NoOfBytesToBeReceive3PHDLMSCalibCoeff { get; set; } = 200;
@@ -55,7 +63,10 @@ namespace CabconMAUI.Services
                 };
                 _port.DataReceived += OnDataReceived;
                 _port.Open();
+<<<<<<< HEAD
                 ResetReceiveBuffer();
+=======
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
                 IsOpen = _port.IsOpen;
                 return IsOpen;
             }
@@ -77,6 +88,7 @@ namespace CabconMAUI.Services
                 _port = null;
             }
             catch { }
+<<<<<<< HEAD
             finally
             {
                 ResetReceiveBuffer();
@@ -137,6 +149,9 @@ namespace CabconMAUI.Services
                 await Task.Delay(25);
             }
             return Array.Empty<byte>();
+=======
+            finally { IsOpen = false; }
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
         }
 
         public bool fSendDataToPort(byte[] data, int length)
@@ -144,10 +159,15 @@ namespace CabconMAUI.Services
             if (!IsOpen || _port == null) return false;
             try
             {
+<<<<<<< HEAD
                 ResetReceiveBuffer();
                 _port.DiscardInBuffer();
                 _port.Write(data, 0, Math.Min(length, data.Length));
                 return WaitForReply();
+=======
+                _port.Write(data, 0, Math.Min(length, data.Length));
+                return true;
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
             }
             catch
             {
@@ -158,6 +178,7 @@ namespace CabconMAUI.Services
         public bool fSendIrDADataToPort(byte[] data, int length) => fSendDataToPort(data, length);
         public bool fSendIrDADataToPort_1P(byte[] data, int length) => fSendDataToPort(data, length);
 
+<<<<<<< HEAD
         public void SetReceiveBuffer(byte[] data, int length)
         {
             lock (_bufLock)
@@ -173,6 +194,8 @@ namespace CabconMAUI.Services
             }
         }
 
+=======
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
         public int ASCIIHexToDecimalConversion(byte[] buf, int start, int len)
         {
             try
@@ -190,6 +213,7 @@ namespace CabconMAUI.Services
             catch { return new[] { "COM1" }; }
         }
 
+<<<<<<< HEAD
         public bool ChangeBaudRate(int newBaudRate)
         {
             if (!IsOpen || _port == null) return false;
@@ -266,6 +290,8 @@ namespace CabconMAUI.Services
             }
         }
 
+=======
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
         private void OnDataReceived(object? sender, SerialDataReceivedEventArgs e)
         {
             try
@@ -282,6 +308,7 @@ namespace CabconMAUI.Services
                     BufferIndex += copyLen;
                     if (BufferIndex >= ReceiveBuffer.Length) BufferIndex = 0;
                 }
+<<<<<<< HEAD
                 if (read > 0) _dataSignal.Set();
             }
             catch { }
@@ -325,6 +352,11 @@ namespace CabconMAUI.Services
 
             return BufferIndex > 0;
         }
+=======
+            }
+            catch { }
+        }
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
     }
 }
 

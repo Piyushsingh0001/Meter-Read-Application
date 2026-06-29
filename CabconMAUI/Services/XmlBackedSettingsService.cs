@@ -49,7 +49,11 @@ public sealed class XmlBackedSettingsService : ISettingsService
     public byte ApplicationContext { get => _prefs.ApplicationContext; set => _prefs.ApplicationContext = value; }
     public byte SecurityMechanism { get => _prefs.SecurityMechanism; set => _prefs.SecurityMechanism = value; }
     public int PDUSize { get => _prefs.PDUSize; set => _prefs.PDUSize = value; }
+<<<<<<< HEAD
     public string ConformanceBlock { get => "0100121A"; set => _prefs.ConformanceBlock = "0100121A"; }
+=======
+    public string ConformanceBlock { get => _prefs.ConformanceBlock; set => _prefs.ConformanceBlock = value; }
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
     public int DLMSVersion { get => _prefs.DLMSVersion; set => _prefs.DLMSVersion = value; }
     public int InformationSize { get => _prefs.InformationSize; set => _prefs.InformationSize = value; }
     public int WindowSize { get => _prefs.WindowSize; set => _prefs.WindowSize = value; }

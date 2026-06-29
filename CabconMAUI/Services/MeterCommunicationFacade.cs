@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 using System.Text;
 using System.Threading.Tasks;
+=======
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
 using CabconMAUI.Helpers;
 using CabconMAUI.Models;
 using CabconMAUI.Services.Interfaces;
@@ -12,15 +15,22 @@ public sealed class MeterCommunicationFacade : IMeterCommunicationFacade
     readonly IIecMeterService _iec;
     readonly ISettingsService _settings;
     readonly ISerialPortService _serial;
+<<<<<<< HEAD
     readonly IStatusLogger _logger;
     MeterProtocolFamily _activeProtocol;
 
     public MeterCommunicationFacade(IDlmsService dlms, IIecMeterService iec, ISettingsService settings, ISerialPortService serial, IStatusLogger logger)
+=======
+    MeterProtocolFamily _activeProtocol;
+
+    public MeterCommunicationFacade(IDlmsService dlms, IIecMeterService iec, ISettingsService settings, ISerialPortService serial)
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
     {
         _dlms = dlms;
         _iec = iec;
         _settings = settings;
         _serial = serial;
+<<<<<<< HEAD
         _logger = logger;
     }
 
@@ -59,6 +69,8 @@ public sealed class MeterCommunicationFacade : IMeterCommunicationFacade
             // This wakes up the meter using the "/?! <CR><LF>" command
             return await _iec.PerformSignOnAsync();
         }
+=======
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
     }
 
     public async Task<bool> ConnectToMeterAsync(MeterConnectRequest request)
@@ -70,6 +82,7 @@ public sealed class MeterCommunicationFacade : IMeterCommunicationFacade
             _settings.SerialPort = request.PortName;
         }
 
+<<<<<<< HEAD
         // Use the new protocol switching logic instead of hardcoded protocol
         return await ConnectAndAuthenticateAsync(new MeterVariant
         {
@@ -77,6 +90,14 @@ public sealed class MeterCommunicationFacade : IMeterCommunicationFacade
             Type = request.ProtocolFamily == MeterProtocolFamily.IecNonDlms ? MeterTypeInfo.Non_DLMS_1PH : MeterTypeInfo.Smart_Meter_1PH,
             Id = request.ProtocolFamily == MeterProtocolFamily.IecNonDlms ? 1 : 2
         });
+=======
+        if (request.ProtocolFamily == MeterProtocolFamily.IecNonDlms)
+        {
+            return await _iec.ConnectToIECMeterAsync(0);
+        }
+
+        return await _dlms.ConnectToMeterAsync();
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
     }
 
     public async Task DisconnectAsync()
@@ -112,7 +133,11 @@ public sealed class MeterCommunicationFacade : IMeterCommunicationFacade
 
     async Task<MeterReadResult> ReadDlmsAsync(MeterReadRequest request)
     {
+<<<<<<< HEAD
         var result = request.Feature switch
+=======
+        return request.Feature switch
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
         {
             MeterReadFeature.Instantaneous => await ReadInstantaneousAsync(),
             MeterReadFeature.Billing => await ReadProfileAsync("billing", DlmsHelper.ObisCode.BillingProfile, request),
@@ -123,8 +148,11 @@ public sealed class MeterCommunicationFacade : IMeterCommunicationFacade
             MeterReadFeature.ReadAll => await ReadAllAsync(request),
             _ => new MeterReadResult { IsSuccess = false, Message = "Unsupported feature." }
         };
+<<<<<<< HEAD
 
         return result;
+=======
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
     }
 
     async Task<MeterReadResult> ReadIecAsync(MeterReadRequest request)

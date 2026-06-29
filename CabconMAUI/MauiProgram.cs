@@ -15,12 +15,20 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Regular.ttf",  "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             });
+<<<<<<< HEAD
         builder.Services.AddSingleton<IConfigurationService, JsonConfigurationService>();
         builder.Services.AddSingleton<ISettingsService,  XmlBackedSettingsService>();
         // Register platform-specific serial port service
 #if ANDROID
         builder.Services.AddSingleton<ISerialPortService, AndroidSerialPortService>();
 #elif WINDOWS
+=======
+        builder.Services.AddSingleton<ISettingsService,  PreferencesSettingsService>();
+        // Register platform-specific serial port service
+#if ANDROID
+        builder.Services.AddSingleton<ISerialPortService, AndroidSerialPortService>();
+#else
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
         builder.Services.AddSingleton<ISerialPortService, WindowsSerialPortService>();
 #endif
         builder.Services.AddSingleton<IBluetoothService,  BluetoothService>();
@@ -33,6 +41,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<IReadExportService, ReadExportService>();
         builder.Services.AddSingleton<IAuthService,        AuthService>();
         builder.Services.AddSingleton<INavigationService,  NavigationService>();
+<<<<<<< HEAD
         builder.Services.AddSingleton<IMeterReadBackgroundService, MeterReadBackgroundService>();
         builder.Services.AddSingleton<ICommandRepositoryService, CommandRepositoryService>();
         builder.Services.AddSingleton<IRelayControlService, RelayControlService>();
@@ -42,6 +51,8 @@ public static class MauiProgram
         builder.Services.AddSingleton<ICosemDataParser, CosemDataParser>();
         builder.Services.AddSingleton<IStatusLogger, StatusLogger>();
         builder.Services.AddSingleton<IIecMeterService, IecMeterService>();
+=======
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
         builder.Services.AddTransient<LoginViewModel>();
         builder.Services.AddTransient<DashboardViewModel>();
         builder.Services.AddTransient<MeterReadViewModel>();
@@ -56,4 +67,8 @@ public static class MauiProgram
 #endif
         return builder.Build();
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023

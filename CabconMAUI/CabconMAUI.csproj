@@ -1,7 +1,14 @@
+<<<<<<< HEAD
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
 	  <TargetFrameworks>net9.0-android;net9.0-windows10.0.19041.0</TargetFrameworks>
+=======
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFrameworks>net9.0-android</TargetFrameworks>
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
     <RootNamespace>CabconMAUI</RootNamespace>
     <UseMaui>true</UseMaui>
     <SingleProject>true</SingleProject>
@@ -13,6 +20,7 @@
     <ApplicationId>com.cabcon.maui</ApplicationId>
     <ApplicationVersion>1</ApplicationVersion>
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+<<<<<<< HEAD
     <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">29.0</SupportedOSPlatformVersion>
     <TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
     <WindowsPackageType Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">None</WindowsPackageType>
@@ -30,11 +38,19 @@
     <ItemGroup>
     <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="white" />
     <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="white"/>
+=======
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">26.0</SupportedOSPlatformVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#1E3A5F" />
+    <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#1E3A5F" BaseSize="128,128" />
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
     <MauiImage Include="Resources\Images\*" />
     <MauiFont Include="Resources\Fonts\*" />
     <MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <PackageReference Include="Microsoft.Maui.Controls" Version="9.0.10" />
     <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="9.0.10" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
@@ -52,6 +68,13 @@
     <MauiSplashScreen Remove=".tmp\**\*" />
     <MauiXaml Remove=".tmp\**\*" />
     <None Remove=".tmp\**\*" />
+=======
+    <PackageReference Include="Microsoft.Maui.Controls" Version="9.0.50" />
+    <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="9.0.50" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.2" />
+    <PackageReference Include="CommunityToolkit.Maui" Version="9.1.0" />
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
   </ItemGroup>
   <!--
     Vendor DLLs: uncomment when \Cabcon provides Android-compatible builds

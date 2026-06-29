@@ -1,11 +1,18 @@
 namespace CabconMAUI.Services.Interfaces;
 public interface IHdlcFrameService
 {
+<<<<<<< HEAD
     long InitializationCounter{get;set;} int SecuritysuitByte{get;set;} byte nCMDByte{get;set;}
     string LastSnrmTx { get; }
     int  fAdd7E(byte[] buf,int idx); int fAddHDLCFrameTag(byte[] buf,int idx);
     int  fAddServerSAP(byte[] buf,int idx,int srv,int mac); int fAddClientSAP(byte[] buf,int idx,int cli);
     void fSetInitialI(); void fIncSend(); int fAddCmdByte(byte[] buf,int idx); int fAddBlankFCS(byte[] buf,int idx);
+=======
+    long InitializationCounter{get;set;} int SecuritysuitByte{get;set;} byte nCMDByte{get;}
+    int  fAdd7E(byte[] buf,int idx); int fAddHDLCFrameTag(byte[] buf,int idx);
+    int  fAddServerSAP(byte[] buf,int idx,int srv,int mac); int fAddClientSAP(byte[] buf,int idx,int cli);
+    void fIncSend(); int fAddCmdByte(byte[] buf,int idx); int fAddBlankFCS(byte[] buf,int idx);
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
     void ffillLength(byte[] buf,int idx);
     void fGenerateFCS(byte[] buf,int start,int end); void fFillFCS(byte[] buf,int p1,int p2);
     int  FillWriteParameters(byte[] buf,int idx,List<byte> data);
@@ -17,8 +24,11 @@ public interface IHdlcFrameService
     bool IrDACheckBCC(byte[] buf); bool IrDACheckSyncWord(byte[] buf);
     bool IrDACheckCommandID(byte[] buf,byte cmd);
     bool IrDACheckBCC_1P(byte[] buf,int len); bool IrDACheckSyncWord_1P(byte[] buf,int len);
+<<<<<<< HEAD
     
     // Block transfer methods
     byte[] CreateGetRequest(byte[] obisCode);
     byte[] CreateGetNextRequest(uint blockIndex);
+=======
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
 }

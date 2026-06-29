@@ -1,0 +1,6 @@
+<Project>
+  <PropertyGroup>
+    <NETCoreAppRuntimeVersion>9.0.0</NETCoreAppRuntimeVersion>
+    <UseNETCoreAppRuntime>true</UseNETCoreAppRuntime>
+  </PropertyGroup>
+</Project>

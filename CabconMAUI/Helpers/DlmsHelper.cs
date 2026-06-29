@@ -34,7 +34,10 @@ public static class DlmsHelper
         public static readonly byte[] LoadProfileInstant       ={0x01,0x00,0x63,0x00,0x00,0xFF};
         public static readonly byte[] TamperProfile            ={0x00,0x00,0x62,0x00,0x00,0xFF};
         public static readonly byte[] DailyProfile             ={0x01,0x00,0x62,0x01,0x00,0xFF};
+<<<<<<< HEAD
         public static readonly byte[] ConnectControlObject     ={0x00,0x00,0x96,0x03,0x0A,0xFF}; // 0.0.96.3.10.255 Relay Control
+=======
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
     }
 
     public static string[]? DLMSDataFormator(byte[] buf,int idx,bool ascii)
@@ -45,6 +48,7 @@ public static class DlmsHelper
             switch(dt){
                 case 0x09: case 0x0A:{
                     int len=buf[idx+1];
+<<<<<<< HEAD
                     int nextIdx = idx + 2 + len;
                     if (!ascii && len == 12 && dt == 0x09)
                     {
@@ -82,6 +86,22 @@ public static class DlmsHelper
                 case 0x01:return new[]{$"Array[{buf[idx+1]}]", (idx+2).ToString()};
                 case 0x02:return new[]{$"Structure[{buf[idx+1]}]", (idx+2).ToString()};
                 default:return new[]{$"Type:0x{dt:X2}", (idx+1).ToString()};
+=======
+                    if(ascii){string s=System.Text.Encoding.ASCII.GetString(buf,idx+2,len).Trim('\0');return new[]{s};}
+                    else{string h=BitConverter.ToString(buf,idx+2,len).Replace("-","");return new[]{h};}
+                }
+                case 0x06:{if(idx+5>buf.Length)return null;uint v=(uint)((buf[idx+1]<<24)|(buf[idx+2]<<16)|(buf[idx+3]<<8)|buf[idx+4]);return new[]{v.ToString()};}
+                case 0x05:{if(idx+5>buf.Length)return null;int v=(buf[idx+1]<<24)|(buf[idx+2]<<16)|(buf[idx+3]<<8)|buf[idx+4];return new[]{v.ToString()};}
+                case 0x12:{if(idx+3>buf.Length)return null;ushort v=(ushort)((buf[idx+1]<<8)|buf[idx+2]);return new[]{v.ToString()};}
+                case 0x10:{if(idx+3>buf.Length)return null;short v=(short)((buf[idx+1]<<8)|buf[idx+2]);return new[]{v.ToString()};}
+                case 0x11:return new[]{buf[idx+1].ToString()};
+                case 0x0F:return new[]{((sbyte)buf[idx+1]).ToString()};
+                case 0x16:return new[]{buf[idx+1].ToString()};
+                case 0x0C:{if(idx+13>buf.Length)return null;int yr=(buf[idx+1]<<8)|buf[idx+2];int mo=buf[idx+3];int dy=buf[idx+4];int hr=buf[idx+6];int mn=buf[idx+7];int sc=buf[idx+8];return new[]{$"{dy:D2}-{mo:D2}-{yr} {hr:D2}:{mn:D2}:{sc:D2}"};}
+                case 0x01:return new[]{$"Array[{buf[idx+1]}]"};
+                case 0x02:return new[]{$"Structure[{buf[idx+1]}]"};
+                default:return new[]{$"Type:0x{dt:X2}"};
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
             }
         }catch{return null;}
     }

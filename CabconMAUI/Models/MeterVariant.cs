@@ -4,6 +4,7 @@ public class MeterVariant
     public int           Id   { get; set; }
     public string        Name { get; set; } = string.Empty;
     public MeterTypeInfo Type { get; set; }
+<<<<<<< HEAD
     
     /// <summary>
     /// Determines if this variant uses DLMS (Smart) or IEC (Non-Smart) protocol
@@ -16,6 +17,8 @@ public class MeterVariant
                         || Type is MeterTypeInfo.SAPPHIRE
                         || Type is MeterTypeInfo.SAPPHIRE_S2;
     
+=======
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
     public override string ToString() => Name;
     public static IReadOnlyList<MeterVariant> VisibleVariants => new List<MeterVariant>
     {
@@ -61,10 +64,13 @@ public class MeterVariant
         {"SPS201",(int)MeterTypeInfo.SAPPHIRE_S2},{"SPS202",(int)MeterTypeInfo.SAPPHIRE_S2},
         {"CC",(int)MeterTypeInfo.MicroStar_DLMS},
     };
+<<<<<<< HEAD
 
     public static MeterVariant? FindByMode(int meterMode) =>
         AllVariants.FirstOrDefault(variant => (int)variant.Type == meterMode);
 
     public static string GetNameByMode(int meterMode) =>
         FindByMode(meterMode)?.Name ?? string.Empty;
+=======
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
 }

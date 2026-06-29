@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 150">
   <text x="10" y="100" font-family="Arial, Helvetica, sans-serif" font-weight="900" font-size="95" fill="#001844" letter-spacing="-1">CABCON</text>
   
@@ -10,3 +11,6 @@
 
   <text x="115" y="145" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#5A5A5C">Powering Generations</text>
 </svg>
+=======
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text x="50" y="70" font-size="64" text-anchor="middle" fill="white">&#x26A1;</text></svg>
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023

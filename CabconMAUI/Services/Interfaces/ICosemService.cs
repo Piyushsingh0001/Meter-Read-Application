@@ -2,8 +2,12 @@ namespace CabconMAUI.Services.Interfaces;
 public interface ICosemService
 {
     int nBlockIndex{get;set;} int nBlockNumber{get;set;} int nTotalPacketSize{get;set;}
+<<<<<<< HEAD
     int nMaxBufferSize{get;set;} string DedKeystr{get;set;} string LastError{get;set;}
     List<byte> BlockBuffer { get; }
+=======
+    int nMaxBufferSize{get;set;} string DedKeystr{get;set;}
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
     int  fAddLLCByte(byte[] buf,int idx);
     int  GetQueryReadByClassOBIS(byte[] buf,int idx,byte att,byte[] obis,byte cls);
     int  GetQueryWriteToMeter(List<byte> data,byte[] buf,int idx,byte att,byte[] obis,byte cls,byte dt,byte dl,byte[] rt);

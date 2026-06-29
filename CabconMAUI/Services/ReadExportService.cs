@@ -1,7 +1,10 @@
 using System.Text;
 using System.Text.Json;
 using System.Xml.Serialization;
+<<<<<<< HEAD
 using Microsoft.Maui.Storage;
+=======
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
 using CabconMAUI.Models;
 using CabconMAUI.Services.Interfaces;
 
@@ -20,6 +23,7 @@ public sealed class ReadExportService : IReadExportService
 
         if (format == ExportFormat.Csv)
         {
+<<<<<<< HEAD
             var content = GenerateCsvContent(data);
             await File.WriteAllTextAsync(path, content);
         }
@@ -135,6 +139,35 @@ public sealed class ReadExportService : IReadExportService
         sb.AppendLine("</MeterReadExport>");
         
         return sb.ToString();
+=======
+            var sb = new StringBuilder();
+            sb.AppendLine("Key,Value");
+            foreach (var kv in data.Values)
+            {
+                var key = EscapeCsv(kv.Key);
+                var value = EscapeCsv(kv.Value);
+                sb.AppendLine($"{key},{value}");
+            }
+
+            await File.WriteAllTextAsync(path, sb.ToString());
+            return path;
+        }
+
+        var dto = new ExportEnvelope
+        {
+            Source = data.Source,
+            Message = data.Message,
+            IsSuccess = data.IsSuccess,
+            Items = data.Values.Select(kv => new ExportItem { Key = kv.Key, Value = kv.Value }).ToList(),
+            RawHex = Convert.ToHexString(data.RawBuffer)
+        };
+
+        await using var stream = File.Create(path);
+        var serializer = new XmlSerializer(typeof(ExportEnvelope));
+        serializer.Serialize(stream, dto);
+        await stream.FlushAsync();
+        return path;
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
     }
 
     static string EscapeCsv(string text)
@@ -146,6 +179,7 @@ public sealed class ReadExportService : IReadExportService
         return text;
     }
 
+<<<<<<< HEAD
     static string EscapeXml(string text)
     {
         if (string.IsNullOrEmpty(text)) return text;
@@ -157,6 +191,8 @@ public sealed class ReadExportService : IReadExportService
                  .Replace("'", "&apos;");
     }
 
+=======
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
     public sealed class ExportEnvelope
     {
         public bool IsSuccess { get; set; }

@@ -21,6 +21,7 @@ public class RelayControlService : IRelayControlService
     {
         try
         {
+<<<<<<< HEAD
             StatusUpdated?.Invoke(
                 this,
                 new StatusEventArgs("Reading relay status...", false));
@@ -73,6 +74,44 @@ public class RelayControlService : IRelayControlService
             return false;
         }
     }
+=======
+            StatusUpdated?.Invoke(this, new StatusEventArgs("Reading relay status...", false));
+            
+            // Read the current state of the Connect Control Object
+            bool success = await _dlms.ReadByteFromMeterAsync(
+                DlmsHelper.ObisCode.ConnectControlObject, 
+                0x02, // Class ID for Register
+                0x02  // Attribute ID for value
+            );
+
+            if (!success)
+            {
+                StatusUpdated?.Invoke(this, new StatusEventArgs("Failed to read relay status.", true));
+                return false;
+            }
+
+            // Parse the response - 0 = disconnected, 1 = connected
+            var formatted = _dlms.DLMSDataFormatorLabView(_serial.ReceiveBuffer, 18, false);
+            if (formatted?.Length > 0)
+            {
+                bool isRelayConnected = formatted[0] == "1";
+                StatusUpdated?.Invoke(this, new StatusEventArgs(
+                    $"Relay status: {(isRelayConnected ? "Connected" : "Disconnected")}", 
+                    false));
+                return isRelayConnected;
+            }
+
+            StatusUpdated?.Invoke(this, new StatusEventArgs("Unable to parse relay status response.", true));
+            return false;
+        }
+        catch (Exception ex)
+        {
+            StatusUpdated?.Invoke(this, new StatusEventArgs($"Error reading relay status: {ex.Message}", true));
+            return false;
+        }
+    }
+
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
     public async Task<bool> ConnectRelayAsync()
     {
         var result = await SetRelayStateAsync(true);

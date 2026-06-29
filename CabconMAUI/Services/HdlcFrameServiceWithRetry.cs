@@ -15,19 +15,26 @@ public class HdlcFrameServiceWithRetry : IHdlcFrameServiceWithRetry
         set => _baseService.InitializationCounter = value; 
     }
 
+<<<<<<< HEAD
     public string LastSnrmTx => _baseService.LastSnrmTx;
 
+=======
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
     public int SecuritysuitByte 
     { 
         get => _baseService.SecuritysuitByte; 
         set => _baseService.SecuritysuitByte = value; 
     }
 
+<<<<<<< HEAD
     public byte nCMDByte 
     {
         get => _baseService.nCMDByte;
         set => _baseService.nCMDByte = value;
     }
+=======
+    public byte nCMDByte => _baseService.nCMDByte;
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
 
     public HdlcFrameServiceWithRetry(IHdlcFrameService baseService, ISerialPortService serial)
     {
@@ -210,7 +217,10 @@ public class HdlcFrameServiceWithRetry : IHdlcFrameServiceWithRetry
     public int fAddHDLCFrameTag(byte[] b, int i) => _baseService.fAddHDLCFrameTag(b, i);
     public int fAddServerSAP(byte[] b, int i, int srv, int mac) => _baseService.fAddServerSAP(b, i, srv, mac);
     public int fAddClientSAP(byte[] b, int i, int cli) => _baseService.fAddClientSAP(b, i, cli);
+<<<<<<< HEAD
     public void fSetInitialI() => _baseService.fSetInitialI();
+=======
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
     public void fIncSend() => _baseService.fIncSend();
     public int fAddCmdByte(byte[] b, int i) => _baseService.fAddCmdByte(b, i);
     public int fAddBlankFCS(byte[] b, int i) => _baseService.fAddBlankFCS(b, i);

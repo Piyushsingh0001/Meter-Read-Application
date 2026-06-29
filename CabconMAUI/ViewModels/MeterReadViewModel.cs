@@ -2,9 +2,13 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CabconMAUI.Helpers;
 using CabconMAUI.Models;
+<<<<<<< HEAD
 using CabconMAUI.Services;
 using CabconMAUI.Services.Interfaces;
 using System.Collections.ObjectModel;
+=======
+using CabconMAUI.Services.Interfaces;
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
 namespace CabconMAUI.ViewModels;
 public partial class MeterReadViewModel : BaseViewModel
 {
@@ -12,18 +16,26 @@ public partial class MeterReadViewModel : BaseViewModel
     readonly IMeterCommunicationFacade _meterFacade;
     readonly IReadExportService _exportService;
     readonly ISerialPortService _serial;
+<<<<<<< HEAD
     readonly IMeterReadBackgroundService _backgroundService;
     readonly MeterCommandRepository _commandRepository;
     readonly ICosemDataParser _dataParser;
     readonly IStatusLogger _logger;
     MeterReadResult? _lastRead;
     [ObservableProperty][NotifyPropertyChangedFor(nameof(ConnectButtonText))][NotifyPropertyChangedFor(nameof(ConnectionStatusColor))][NotifyCanExecuteChangedFor(nameof(ConnectCommand))][NotifyCanExecuteChangedFor(nameof(ReadMeterCommand))][NotifyCanExecuteChangedFor(nameof(DisconnectCommand))][NotifyCanExecuteChangedFor(nameof(StartBackgroundReadAllCommand))][NotifyCanExecuteChangedFor(nameof(StopBackgroundReadAllCommand))] private bool _isConnected;
+=======
+    MeterReadResult? _lastRead;
+    [ObservableProperty][NotifyPropertyChangedFor(nameof(ConnectButtonText))][NotifyPropertyChangedFor(nameof(ConnectionStatusColor))][NotifyCanExecuteChangedFor(nameof(ConnectCommand))][NotifyCanExecuteChangedFor(nameof(ReadMeterCommand))][NotifyCanExecuteChangedFor(nameof(DisconnectCommand))] private bool _isConnected;
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
     public string ConnectButtonText=>IsConnected?"Connected ✓":"Connect";
     public string ConnectionStatusColor=>IsConnected?"#1E8449":"#C0392B";
     [ObservableProperty] private string _selectedPort="USB Serial";
     [ObservableProperty] private string _selectedProtocol="1-Phase Smart / DLMS";
     [ObservableProperty] private string _selectedTransport="Serial";
+<<<<<<< HEAD
     [ObservableProperty] private MeterVariant? _selectedVariant;
+=======
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
     public IReadOnlyList<string> PortOptions=>new[]{"USB Serial","Bluetooth","IrDA"};
     public IReadOnlyList<string> ProtocolOptions=>new[]{"1-Phase Smart / DLMS","3-Phase Smart / DLMS","IEC / Non-DLMS"};
     public IReadOnlyList<string> TransportOptions=>new[]{"Serial","Bluetooth","IrDA"};
@@ -56,11 +68,15 @@ public partial class MeterReadViewModel : BaseViewModel
     [ObservableProperty] private bool _readCompleteMode = true;
     [ObservableProperty] private bool _readByDateRangeMode;
     [ObservableProperty] private bool _readByEntryRangeMode;
+<<<<<<< HEAD
     [ObservableProperty][NotifyCanExecuteChangedFor(nameof(StartBackgroundReadAllCommand))][NotifyCanExecuteChangedFor(nameof(StopBackgroundReadAllCommand))] private bool _backgroundReadInProgress;
+=======
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
     [ObservableProperty] private DateTime _rangeFrom=DateTime.Now.AddDays(-1);
     [ObservableProperty] private DateTime _rangeTo=DateTime.Now;
     [ObservableProperty] private int _entryFrom=1;
     [ObservableProperty] private int _entryTo=10;
+<<<<<<< HEAD
     
     private string _statusLog = string.Empty;
     public string StatusLog 
@@ -72,6 +88,9 @@ public partial class MeterReadViewModel : BaseViewModel
     [ObservableProperty] private ObservableCollection<MeterReadDisplayRow> _meterResults = new();
     
     public MeterReadViewModel(IDlmsService d,ISettingsService s,INavigationService n,ISerialPortService ser,IMeterCommunicationFacade meterFacade,IReadExportService exportService,IMeterReadBackgroundService backgroundService,ICosemDataParser dataParser,IStatusLogger logger){_dlms=d;_set=s;_nav=n;_serial=ser;_meterFacade=meterFacade;_exportService=exportService;_backgroundService=backgroundService;_dataParser=dataParser;_logger=logger;_commandRepository=new MeterCommandRepository();_dlms.StatusUpdated+=(o,e)=>{StatusMessage=e.Message;IsError=e.IsError;_logger.Log($"[DLMS] {e.Message}");};_backgroundService.StatusUpdated+=(o,e)=>{StatusMessage=e.Message;IsError=e.IsError;_logger.Log($"[BG] {e.Message}");};_backgroundService.ReadCompleted+=(o,result)=>{ProcessBackgroundReadResult(result);};_logger.OnMessageLogged+=(msg)=>StatusLog+=msg+Environment.NewLine;}
+=======
+    public MeterReadViewModel(IDlmsService d,ISettingsService s,INavigationService n,ISerialPortService ser,IMeterCommunicationFacade meterFacade,IReadExportService exportService){_dlms=d;_set=s;_nav=n;_serial=ser;_meterFacade=meterFacade;_exportService=exportService;_dlms.StatusUpdated+=(o,e)=>{StatusMessage=e.Message;IsError=e.IsError;};}
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
 
     [RelayCommand(CanExecute=nameof(CanConnect))]
     async Task ConnectAsync(){if(IsBusy)return;IsBusy=true;ClearStatus();try{var req=new MeterConnectRequest{ProtocolFamily=GetProtocol(),TransportMode=GetTransport(),PortName=SelectedPort};bool ok=await _meterFacade.ConnectToMeterAsync(req);IsConnected=ok;if(!ok)SetStatus("Connection failed. Check settings and cable.",true);}catch(Exception ex){SetStatus($"Connect error: {ex.Message}",true);}finally{IsBusy=false;}}
@@ -161,6 +180,7 @@ public partial class MeterReadViewModel : BaseViewModel
     async Task ReadAllAsync() => await ExecuteFeatureReadAsync(MeterReadFeature.ReadAll);
 
     [RelayCommand]
+<<<<<<< HEAD
     async Task ReadAllFromXmlAsync()
     {
         if (!IsConnected) 
@@ -365,6 +385,8 @@ public partial class MeterReadViewModel : BaseViewModel
     bool CanStopBackgroundRead() => BackgroundReadInProgress;
 
     [RelayCommand]
+=======
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
     async Task ReadSelectedAsync()
     {
         if (InstantaneousSelected) await ExecuteFeatureReadAsync(MeterReadFeature.Instantaneous);
@@ -398,6 +420,7 @@ public partial class MeterReadViewModel : BaseViewModel
         SetStatus($"XML exported: {path}");
     }
 
+<<<<<<< HEAD
     [RelayCommand]
     async Task ExecuteReadData()
     {
@@ -428,6 +451,8 @@ public partial class MeterReadViewModel : BaseViewModel
         }
     }
 
+=======
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
     async Task ExecuteFeatureReadAsync(MeterReadFeature feature)
     {
         if (!IsConnected) { SetStatus("Connect meter first.", true); return; }
@@ -494,6 +519,7 @@ public partial class MeterReadViewModel : BaseViewModel
         _ => MeterTransportMode.Serial
     };
 
+<<<<<<< HEAD
     async Task<bool> EnsureConnectedAsync()
     {
         if (IsConnected)
@@ -518,6 +544,8 @@ public partial class MeterReadViewModel : BaseViewModel
         return ok;
     }
 
+=======
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
     partial void OnSelectAllFeaturesChanged(bool value)
     {
         InstantaneousSelected = value;
@@ -548,6 +576,7 @@ public partial class MeterReadViewModel : BaseViewModel
         ReadCompleteMode = false;
         ReadByDateRangeMode = false;
     }
+<<<<<<< HEAD
     void ProcessBackgroundReadResult(MeterReadResult result)
     {
         BackgroundReadInProgress = false;
@@ -580,5 +609,7 @@ public partial class MeterReadViewModel : BaseViewModel
         SetStatus("Background read-all completed successfully.");
     }
 
+=======
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
     void Reset(){MeterNumber=MeterType=MeterSignature=EnergyImport=EnergyExport=VoltageR=VoltageY=VoltageB=CurrentR=CurrentY=CurrentB=PowerFactor=Frequency=ActivePower=ReactivePower=Timestamp="--";}
 }

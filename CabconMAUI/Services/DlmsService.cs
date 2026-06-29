@@ -34,7 +34,10 @@ public class DlmsService : IDlmsService
         }
         IsMeterConnected=false;MeterInfoValue=string.Empty;
         Raise("  Physical Layer Communication...",false);
+<<<<<<< HEAD
         Raise($"[Endpoint] {_ser.EndpointDetails}", false);
+=======
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
         if(!await PhysicalLayerConnectAsync()){Raise("Physical Layer Connection Failed!",true);return false;}
         Raise("HDLC Layer Communication...",false);
         if(!await HDLCLayerConnectAsync()){Raise("HDLC Layer Connection Failed/ Busy !",true);return false;}
@@ -45,9 +48,15 @@ public class DlmsService : IDlmsService
                 _set.SetCipheredSecurityResponse(_llsPwd,_hlsPwd,_tmpKey);
                 if(!await PhysicalLayerConnectAsync()){Raise("Physical Layer Connection Failed!",true);return false;}
                 if(!await HDLCLayerConnectAsync()){Raise("HDLC Layer Connection Failed/ Busy !",true);return false;}
+<<<<<<< HEAD
                 if(!await AssociationStablishAsync()){Raise($"Unable To Establish Association! Details: {_cosem.LastError}",true);return false;}
                 _encKey=_tmpKey;
             }else{Raise($"Unable To Establish Association! Details: {_cosem.LastError}",true);return false;}
+=======
+                if(!await AssociationStablishAsync()){Raise("Unable To Establish Association!",true);return false;}
+                _encKey=_tmpKey;
+            }else{Raise("Unable To Establish Association!",true);return false;}
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
         }
         if(!string.IsNullOrEmpty(_cosem.DedKeystr))_hdlc.InitializationCounter=0;
         Raise("Checking Meter Type Info...",false);
@@ -56,6 +65,7 @@ public class DlmsService : IDlmsService
         Raise("Data Transferring Please Wait...",false);
         return true;
     }
+<<<<<<< HEAD
     //public async Task<bool> PhysicalLayerConnectAsync()=>await Task.Run(()=>{try{_ser.SetSerialPortSettings(_set.SerialPort,_set.CommandBaudRate,"None","8","1",_set.CommandTimeOut,_set.IntercharacterDelay);return _ser.OpenPort();}catch{return false;}});
     public async Task<bool> PhysicalLayerConnectAsync()
     {
@@ -136,6 +146,11 @@ public class DlmsService : IDlmsService
             }
         });
     }
+=======
+    public async Task<bool> PhysicalLayerConnectAsync()=>await Task.Run(()=>{try{_ser.SetSerialPortSettings(_set.SerialPort,_set.CommandBaudRate,"None","8","1",_set.CommandTimeOut,_set.IntercharacterDelay);return _ser.OpenPort();}catch{return false;}});
+    public void PhysicalLayerDisconnect(){try{_ser.ClosePort();}catch{}}
+    public async Task<bool> HDLCLayerConnectAsync()=>await Task.Run(()=>{try{return _hdlc.fSendSNRM(_set.ServerSAP,_set.ServerLowerMacAddress,_set.ClientSAP,_set.CosemBufferSize,_set.CosemBufferSize,_set.WindowSize,_set.WindowSize);}catch{return false;}});
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
     public async Task<bool> AssociationStablishAsync()=>await Task.Run(()=>{try{if(_set.ApplicationContext==(byte)ApplicationContext.LogicalModeWithCiphering){AESstr="Cyphering";return _cosem.fSendAARQ_Cyphered(_set.ServerSAP,_set.ServerLowerMacAddress,_set.ClientSAP,_set.SecurityMechanism,_set.Password,_set.HLSKey,_set.HLSPWD,_set.ConformanceBlock,_set.PDUSize,_set.ClientSystemTitle,_set.Securitysuit,_set.GlobalEncryptionKey,_set.AuthenticationKey,_set.DedicatedKey);}else return _cosem.fSendAARQ(_set.ServerSAP,_set.ServerLowerMacAddress,_set.ClientSAP,_set.SecurityMechanism,_set.Password,_set.HLSKey,_set.HLSPWD,_set.ConformanceBlock,_set.PDUSize,_set.ApplicationContext);}catch{return false;}});
     public async Task<bool> ReadAssociationForInvocationCounterAsync(){
         byte osm=_set.GetSecurityMachanism();string ocs=_set.GetClientSAP();byte oac=_set.GetApplicationContext();
@@ -160,7 +175,11 @@ public class DlmsService : IDlmsService
     public async Task<int> ReadAllTamperBlockFromMeterAsync(byte[] obis,byte cls,byte att,byte acc,List<byte> desc)=>_set.ApplicationContext==(byte)ApplicationContext.LogicalModeWithCiphering?await ReadDataBlockCommandCypheredAsync(obis,cls,att,acc,desc):await ReadDataBlockCommandAsync(obis,cls,att,acc,desc);
     public async Task<int> ReadDataCommandAsync(byte[] obis,byte cls,byte att)=>await Task.Run(()=>{try{BuildGetFrame(obis,cls,att);if(!_ser.fSendDataToPort(_cmd,_idx))return(int)ProgrammingCode.CosemConnectionFailed;_hdlc.fIncRecieve();if(!fCheckHDLCResponse(_ser.ReceiveBuffer))return(int)ProgrammingCode.CosemConnectionFailed;int r=_cosem.fCheckCOSEMResponseForGet(_ser.ReceiveBuffer);return r switch{0x01=>(int)ProgrammingCode.Success,0x0E=>(int)ProgrammingCode.DataUnavailable,0x02=>(int)ProgrammingCode.AccessDenied,0x03=>(int)ProgrammingCode.AccessDenied,_=>(int)ProgrammingCode.CosemConnectionFailed};}catch{return(int)ProgrammingCode.CosemConnectionFailed;}});
     public async Task<int> ReadDataCommandCypheredAsync(byte[] obis,byte cls,byte att)=>await Task.Run(()=>{try{BuildGetFrameCiphered(obis,cls,att);if(!_ser.fSendDataToPort(_cmd,_idx))return(int)ProgrammingCode.CosemConnectionFailed;int ivI=17;if(_ser.ReceiveBuffer[15]==0x81)ivI++;else if(_ser.ReceiveBuffer[15]==0x82)ivI+=2;byte[] gek=AesGcmCryptoService.HexToBytes(_set.GlobalEncryptionKey);byte[] ak=AesGcmCryptoService.HexToBytes(_set.AuthenticationKey);byte[] st=System.Text.Encoding.ASCII.GetBytes(_set.ClientSystemTitle);byte[] pt=_crypto.GetPlainTextFromCiphered(_ser.ReceiveBuffer,ivI,gek,ak,st);_hdlc.fIncRecieve();if(!fCheckHDLCResponse(_ser.ReceiveBuffer))return(int)ProgrammingCode.CosemConnectionFailed;if(pt.Length>0)Buffer.BlockCopy(pt,0,_ser.ReceiveBuffer,14,pt.Length);int r=_cosem.fCheckCOSEMResponseForGet(_ser.ReceiveBuffer);return r switch{0x01=>(int)ProgrammingCode.Success,0x0E=>(int)ProgrammingCode.DataUnavailable,0x02=>(int)ProgrammingCode.AccessDenied,_=>(int)ProgrammingCode.CosemConnectionFailed};}catch{return(int)ProgrammingCode.CosemConnectionFailed;}});
+<<<<<<< HEAD
     public async Task<int> ReadDataBlockCommandAsync(byte[] obis,byte cls,byte att,byte acc,List<byte> desc)=>await Task.Run(()=>{try{_cosem.BlockBuffer.Clear();_cosem.nBlockIndex=0;_cosem.nBlockNumber=0;_idx=0;BuildGetFrame(obis,cls,att,acc,desc);if(!_ser.fSendDataToPort(_cmd,_idx))return(int)ProgrammingCode.CosemConnectionFailed;_hdlc.fIncRecieve();if(!fCheckHDLCResponse(_ser.ReceiveBuffer))return(int)ProgrammingCode.CosemConnectionFailed;Raise($"Raw RX: {BitConverter.ToString(_ser.ReceiveBuffer,0,_ser.BufferIndex)}", false);int ret=_cosem.fCheckCOSEMResponse(_ser.ReceiveBuffer);Raise($"COSEM Block Ret: {ret}, Buf Size: {_cosem.BlockBuffer.Count}", false);if(ret==0x01)return(int)ProgrammingCode.Success;if(ret==0x05)return(int)ProgrammingCode.AccessDenied;if(ret==0x07)return(int)ProgrammingCode.DataUnavailable;if(ret!=0x02&&ret!=0xC5)return(int)ProgrammingCode.CosemConnectionFailed;while(true){_idx=0;BuildBlockNextFrame();_hdlc.fIncRecieve();if(!_ser.fSendDataToPort(_cmd,_idx))return(int)ProgrammingCode.CosemConnectionFailed;if(!fCheckHDLCResponse(_ser.ReceiveBuffer))return(int)ProgrammingCode.CosemConnectionFailed;Raise($"Raw RX Next: {BitConverter.ToString(_ser.ReceiveBuffer,0,_ser.BufferIndex)}", false);ret=_cosem.fCheckCOSEMResponse(_ser.ReceiveBuffer);Raise($"COSEM Next Block Ret: {ret}, Buf Size: {_cosem.BlockBuffer.Count}", false);if(ret==0x01)break;if(ret==0x02)continue;if(ret==0xC5){if(IsLastBlockReceived())break;continue;}return(int)ProgrammingCode.CosemConnectionFailed;}return(int)ProgrammingCode.Success;}catch(Exception e){Raise($"COSEM Error: {e.Message}", true);return(int)ProgrammingCode.CosemConnectionFailed;}});
+=======
+    public async Task<int> ReadDataBlockCommandAsync(byte[] obis,byte cls,byte att,byte acc,List<byte> desc)=>await Task.Run(()=>{try{_cosem.nBlockIndex=0;_cosem.nBlockNumber=0;_idx=0;BuildGetFrame(obis,cls,att,acc,desc);if(!_ser.fSendDataToPort(_cmd,_idx))return(int)ProgrammingCode.CosemConnectionFailed;_hdlc.fIncRecieve();if(!fCheckHDLCResponse(_ser.ReceiveBuffer))return(int)ProgrammingCode.CosemConnectionFailed;int ret=_cosem.fCheckCOSEMResponse(_ser.ReceiveBuffer);if(ret==0x01)return(int)ProgrammingCode.Success;if(ret==0x05)return(int)ProgrammingCode.AccessDenied;if(ret==0x07)return(int)ProgrammingCode.DataUnavailable;if(ret!=0x02)return(int)ProgrammingCode.CosemConnectionFailed;while(true){_idx=0;BuildBlockNextFrame();_hdlc.fIncRecieve();if(!_ser.fSendDataToPort(_cmd,_idx))return(int)ProgrammingCode.CosemConnectionFailed;if(!fCheckHDLCResponse(_ser.ReceiveBuffer))return(int)ProgrammingCode.CosemConnectionFailed;ret=_cosem.fCheckCOSEMResponse(_ser.ReceiveBuffer);if(ret==0x01)break;if(ret==0x02)continue;return(int)ProgrammingCode.CosemConnectionFailed;}return(int)ProgrammingCode.Success;}catch{return(int)ProgrammingCode.CosemConnectionFailed;}});
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
     public async Task<int> ReadDataBlockCommandCypheredAsync(byte[] obis,byte cls,byte att,byte acc,List<byte> desc)=>await ReadDataBlockCommandAsync(obis,cls,att,acc,desc);
     public async Task<bool> WriteDataToMeterAsync(byte att,byte[] obis,byte cls,byte dt,byte dl,List<byte> data,byte[] rt){int r=await Task.Run(()=>WriteParam(att,obis,cls,dt,dl,data,rt));GetWriteResponseCode=r;return r==(int)ProgrammingCode.Success;}
     int WriteParam(byte att,byte[] obis,byte cls,byte dt,byte dl,List<byte> data,byte[] rt){try{_idx=0;_idx=_hdlc.fAdd7E(_cmd,_idx);_idx=_hdlc.fAddHDLCFrameTag(_cmd,_idx);_idx=_hdlc.fAddServerSAP(_cmd,_idx,_set.ServerSAP,_set.ServerLowerMacAddress);_idx=_hdlc.fAddClientSAP(_cmd,_idx,_set.ClientSAP);_hdlc.fIncSend();_idx=_hdlc.fAddCmdByte(_cmd,_idx);_idx=_hdlc.fAddBlankFCS(_cmd,_idx);_idx=_cosem.fAddLLCByte(_cmd,_idx);_idx=_cosem.GetQueryWriteToMeter(data,_cmd,_idx,att,obis,cls,dt,dl,rt);_idx=_hdlc.FillWriteParameters(_cmd,_idx,data);_idx=_hdlc.fAddBlankFCS(_cmd,_idx);_hdlc.ffillLength(_cmd,_idx);_hdlc.fGenerateFCS(_cmd,1,8);_hdlc.fFillFCS(_cmd,9,10);_hdlc.fGenerateFCS(_cmd,1,_idx-3);_hdlc.fFillFCS(_cmd,_idx-2,_idx-1);_idx=_hdlc.fAdd7E(_cmd,_idx);if(!_ser.fSendDataToPort(_cmd,_idx))return(int)ProgrammingCode.CosemConnectionFailed;_hdlc.fIncRecieve();if(!fCheckHDLCResponse(_ser.ReceiveBuffer))return(int)ProgrammingCode.CosemConnectionFailed;int r=_cosem.fCheckCOSEMResponseForSet(_ser.ReceiveBuffer);return r==0x01?(int)ProgrammingCode.Success:r==0x02||r==0x04?(int)ProgrammingCode.AccessDenied:(int)ProgrammingCode.CosemConnectionFailed;}catch{return(int)ProgrammingCode.CosemConnectionFailed;}}
@@ -174,6 +193,7 @@ public class DlmsService : IDlmsService
     public async Task<int> ReadDataBlockCommandCypheredBytesAsync(byte[] obis,byte cls,byte att,byte acc,byte[] desc)=>await ReadDataBlockCommandCypheredAsync(obis,cls,att,acc,desc.ToList());
     public string[]? DLMSDataFormatorLabView(byte[] d,int idx,bool ascii){try{return DlmsHelper.DLMSDataFormator(d,idx,ascii);}catch{return null;}}
     public async Task<byte[]?> Read3PHDLMSCalibCoeffAsync(byte[] cmd)=>await Task.Run(()=>{try{if(!_ser.fSendDataToPort(cmd,cmd.Length))return null;if(_ser.BufferIndex<_ser.NoOfBytesToBeReceive3PHDLMSCalibCoeff)return null;byte[] r=new byte[_ser.BufferIndex+1];for(int i=0;i<_ser.BufferIndex;i++)r[i]=_ser.ReceiveBuffer[i];return r;}catch{return null;}});
+<<<<<<< HEAD
 
     public byte[] GetBlockBuffer()
     {
@@ -235,13 +255,18 @@ public class DlmsService : IDlmsService
         Array.Copy(response, dataStart, data, 0, dataLength);
         return data;
     }
+=======
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
     public List<byte> GetByteByEntryValueType(long f,long t)=>DlmsHelper.GetByteByEntryValueType(f,t);
     public List<byte> GetByteByEntryDateType(DateTime f,DateTime t)=>DlmsHelper.GetByteByEntryDateType(f,t);
     public List<string> GetMeterTypeList()=>MeterVariant.VisibleVariants.Select(v=>v.Name).ToList();
     public string GetSelectedMeterType(){var l=MeterVariant.AllVariants;int m=_set.GetMeterMode();return m>=0&&m<l.Count?l[m].Name:string.Empty;}
     public int DedicatedCommand(byte[] buf,int ni,string type,int len){if(!string.IsNullOrEmpty(_cosem.DedKeystr)&&type=="Read")buf[ni++]=0xD0;else if(string.IsNullOrEmpty(_cosem.DedKeystr)&&type=="Read")buf[ni++]=0xC8;else if(!string.IsNullOrEmpty(_cosem.DedKeystr)&&type=="Write")buf[ni++]=0xD1;else buf[ni++]=0xC9;if(len<128)buf[ni++]=0x00;else if(len<256){buf[ni++]=0x00;buf[ni++]=0x00;}else{buf[ni++]=0x00;buf[ni++]=0x00;buf[ni++]=0x00;}buf[ni]=0x00;byte sm=_set.GetSecurityMachanism();if(sm==0x01){_hdlc.SecuritysuitByte=0x20;buf[ni++]=0x20;}else buf[ni++]=(byte)_hdlc.SecuritysuitByte;buf[ni++]=(byte)((_hdlc.InitializationCounter>>24)&0xFF);buf[ni++]=(byte)((_hdlc.InitializationCounter>>16)&0xFF);buf[ni++]=(byte)((_hdlc.InitializationCounter>>8)&0xFF);buf[ni++]=(byte)(_hdlc.InitializationCounter&0xFF);return ni;}
     public bool fCheckHDLCResponse(byte[] b){try{return _hdlc.fCheckStartEndTag(b)&&_hdlc.fCheckFCS(b)&&_hdlc.fCheckServerSAP(b,_set.ClientSAP)&&_hdlc.fCheckCommand(b,_hdlc.nCMDByte);}catch{return false;}}
+<<<<<<< HEAD
     bool IsLastBlockReceived(){try{if(_ser.BufferIndex<18)return false;int infoStart=18;if(_ser.ReceiveBuffer[15]==0x81)infoStart++;else if(_ser.ReceiveBuffer[15]==0x82)infoStart+=2;if(infoStart+2>_ser.BufferIndex)return false;return (_ser.ReceiveBuffer[infoStart]&0x80)!=0;}catch{return false;}}
+=======
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
     void BuildGetFrame(byte[] obis,byte cls,byte att,byte acc=0,List<byte>? desc=null){_idx=0;_idx=_hdlc.fAdd7E(_cmd,_idx);_idx=_hdlc.fAddHDLCFrameTag(_cmd,_idx);_idx=_hdlc.fAddServerSAP(_cmd,_idx,_set.ServerSAP,_set.ServerLowerMacAddress);_idx=_hdlc.fAddClientSAP(_cmd,_idx,_set.ClientSAP);_hdlc.fIncSend();_idx=_hdlc.fAddCmdByte(_cmd,_idx);_idx=_hdlc.fAddBlankFCS(_cmd,_idx);_idx=_cosem.fAddLLCByte(_cmd,_idx);_idx=_cosem.GetQueryReadByClassOBIS(_cmd,_idx,att,obis,cls);if(acc!=0&&desc!=null)_idx=_cosem.FillCommandData(_cmd,--_idx,desc);_idx=_hdlc.fAddBlankFCS(_cmd,_idx);_hdlc.ffillLength(_cmd,_idx);_hdlc.fGenerateFCS(_cmd,1,8);_hdlc.fFillFCS(_cmd,9,10);_hdlc.fGenerateFCS(_cmd,1,_idx-3);_hdlc.fFillFCS(_cmd,_idx-2,_idx-1);_idx=_hdlc.fAdd7E(_cmd,_idx);}
     void BuildGetFrameCiphered(byte[] obis,byte cls,byte att){_idx=0;_idx=_hdlc.fAdd7E(_cmd,_idx);_idx=_hdlc.fAddHDLCFrameTag(_cmd,_idx);_idx=_hdlc.fAddServerSAP(_cmd,_idx,_set.ServerSAP,_set.ServerLowerMacAddress);_idx=_hdlc.fAddClientSAP(_cmd,_idx,_set.ClientSAP);_hdlc.fIncSend();_idx=_hdlc.fAddCmdByte(_cmd,_idx);_idx=_hdlc.fAddBlankFCS(_cmd,_idx);_idx=_cosem.fAddLLCByte(_cmd,_idx);_idx=DedicatedCommand(_cmd,_idx,"Read",0);int ci=_idx;_idx=_cosem.GetQueryReadByClassOBIS(_cmd,_idx,att,obis,cls);byte[] pt=new byte[_idx-ci];Buffer.BlockCopy(_cmd,ci,pt,0,pt.Length);_idx=ci;byte[] gek=AesGcmCryptoService.HexToBytes(_set.GlobalEncryptionKey);byte[] ak=AesGcmCryptoService.HexToBytes(_set.AuthenticationKey);byte[] st=System.Text.Encoding.ASCII.GetBytes(_set.ClientSystemTitle);byte[] enc=_crypto.CreateCipherCommand(pt,gek,ak,st,_hdlc.InitializationCounter,(byte)_set.Securitysuit);foreach(var b in enc)_cmd[_idx++]=b;_idx=_hdlc.fAddBlankFCS(_cmd,_idx);_hdlc.ffillLength(_cmd,_idx);_cmd[15]=(byte)(_idx-18);_hdlc.fGenerateFCS(_cmd,1,8);_hdlc.fFillFCS(_cmd,9,10);_hdlc.fGenerateFCS(_cmd,1,_idx-3);_hdlc.fFillFCS(_cmd,_idx-2,_idx-1);_idx=_hdlc.fAdd7E(_cmd,_idx);}
     void BuildBlockNextFrame(){_idx=0;_idx=_hdlc.fAdd7E(_cmd,_idx);_idx=_hdlc.fAddHDLCFrameTag(_cmd,_idx);_idx=_hdlc.fAddServerSAP(_cmd,_idx,_set.ServerSAP,_set.ServerLowerMacAddress);_idx=_hdlc.fAddClientSAP(_cmd,_idx,_set.ClientSAP);_hdlc.fIncSend();_idx=_hdlc.fAddCmdByte(_cmd,_idx);_idx=_hdlc.fAddBlankFCS(_cmd,_idx);_idx=_cosem.fAddLLCByte(_cmd,_idx);_idx=_cosem.fGetBlockTransferPacket(_cmd,_idx);_idx=_hdlc.fAddBlankFCS(_cmd,_idx);_hdlc.ffillLength(_cmd,_idx);_hdlc.fGenerateFCS(_cmd,1,8);_hdlc.fFillFCS(_cmd,9,10);_hdlc.fGenerateFCS(_cmd,1,_idx-3);_hdlc.fFillFCS(_cmd,_idx-2,_idx-1);_idx=_hdlc.fAdd7E(_cmd,_idx);}

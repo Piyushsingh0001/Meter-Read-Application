@@ -18,6 +18,7 @@ public class PreferencesSettingsService : ISettingsService
     public string DataBits            {get=>S(nameof(DataBits),"8");               set=>Set(nameof(DataBits),value);}
     public string Parity              {get=>S(nameof(Parity),"None");              set=>Set(nameof(Parity),value);}
     public int    CommandTimeOut      {get=>I(nameof(CommandTimeOut),3500);         set=>Set(nameof(CommandTimeOut),value);}
+<<<<<<< HEAD
     public int    IntercharacterDelay {get=>I(nameof(IntercharacterDelay),250);   set=>Set(nameof(IntercharacterDelay),value);}
     public int    InterframeTimeout   {get=>I(nameof(InterframeTimeout),1500);     set=>Set(nameof(InterframeTimeout),value);}
     public int    ServerSAP           {get=>I(nameof(ServerSAP),1);                set=>Set(nameof(ServerSAP),value);}
@@ -27,19 +28,34 @@ public class PreferencesSettingsService : ISettingsService
         get => I(nameof(ClientSAP), 32);
         set => Set(nameof(ClientSAP), value);
     }
+=======
+    public int    IntercharacterDelay {get=>I(nameof(IntercharacterDelay),2500);   set=>Set(nameof(IntercharacterDelay),value);}
+    public int    InterframeTimeout   {get=>I(nameof(InterframeTimeout),1500);     set=>Set(nameof(InterframeTimeout),value);}
+    public int    ServerSAP           {get=>I(nameof(ServerSAP),1);                set=>Set(nameof(ServerSAP),value);}
+    public int    ServerLowerMacAddress{get=>I(nameof(ServerLowerMacAddress),256); set=>Set(nameof(ServerLowerMacAddress),value);}
+    public int    ClientSAP           {get=>I(nameof(ClientSAP),64);               set=>Set(nameof(ClientSAP),value);}
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
     public int    AddressingSchem     {get=>I(nameof(AddressingSchem),2);           set=>Set(nameof(AddressingSchem),value);}
     public int    ServerPhysicalID    {get=>I(nameof(ServerPhysicalID),1);          set=>Set(nameof(ServerPhysicalID),value);}
     public int    HDLCAddressing      {get=>I(nameof(HDLCAddressing),2);            set=>Set(nameof(HDLCAddressing),value);}
     public byte   ApplicationContext  {get=>By(nameof(ApplicationContext),1);       set=>Set(nameof(ApplicationContext),(int)value);}
     public byte   SecurityMechanism   {get=>By(nameof(SecurityMechanism),1);        set=>Set(nameof(SecurityMechanism),(int)value);}
     public int    PDUSize             {get=>I(nameof(PDUSize),9999);                set=>Set(nameof(PDUSize),value);}
+<<<<<<< HEAD
     public string ConformanceBlock    {get=>"0100121A";   set=>Set(nameof(ConformanceBlock),value);}
+=======
+    public string ConformanceBlock    {get=>S(nameof(ConformanceBlock),"1CFF3F");   set=>Set(nameof(ConformanceBlock),value);}
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
     public int    DLMSVersion         {get=>I(nameof(DLMSVersion),6);               set=>Set(nameof(DLMSVersion),value);}
     public int    InformationSize     {get=>I(nameof(InformationSize),128);          set=>Set(nameof(InformationSize),value);}
     public int    WindowSize          {get=>I(nameof(WindowSize),1);                set=>Set(nameof(WindowSize),value);}
     public int    CosemBufferSize     {get=>I(nameof(CosemBufferSize),9999);        set=>Set(nameof(CosemBufferSize),value);}
     public int    DLLBufferSize       {get=>I(nameof(DLLBufferSize),9999);          set=>Set(nameof(DLLBufferSize),value);}
+<<<<<<< HEAD
     public string Password            {get=> "11111111";         set=>Set(nameof(Password),value);}
+=======
+    public string Password            {get=>S(nameof(Password),"00000000");         set=>Set(nameof(Password),value);}
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
     public string HLSKey              {get=>S(nameof(HLSKey),"93BC0FABF6C85E9E1C53D78885373DC7"); set=>Set(nameof(HLSKey),value);}
     public string HLSPWD              {get=>S(nameof(HLSPWD),"000102030405060708090A0B0C0D0E0F");  set=>Set(nameof(HLSPWD),value);}
     public string ClientSystemTitle   {get=>S(nameof(ClientSystemTitle),"12345678");set=>Set(nameof(ClientSystemTitle),value);}
@@ -57,7 +73,11 @@ public class PreferencesSettingsService : ISettingsService
     public string Billing             {get=>S(nameof(Billing),"");                   set=>Set(nameof(Billing),value);}
     public string BillingVZ           {get=>S(nameof(BillingVZ),"");                 set=>Set(nameof(BillingVZ),value);}
     public string TamperXML           {get=>S(nameof(TamperXML),"");                 set=>Set(nameof(TamperXML),value);}
+<<<<<<< HEAD
     public string CommunicationPort   {get=>S(nameof(CommunicationPort),"");  set=>Set(nameof(CommunicationPort),value);}
+=======
+    public string CommunicationPort   {get=>S(nameof(CommunicationPort),"RJ Port");  set=>Set(nameof(CommunicationPort),value);}
+>>>>>>> bf49aa6198f381896113163ead8b83e92944c023
     public string CommunicationMode   {get=>S(nameof(CommunicationMode),"Mode-E");   set=>Set(nameof(CommunicationMode),value);}
     public string ModemNumber         {get=>S(nameof(ModemNumber),"");               set=>Set(nameof(ModemNumber),value);}
     public string AppUser             {get=>S(nameof(AppUser),"dlmspt");             set=>Set(nameof(AppUser),value);}
